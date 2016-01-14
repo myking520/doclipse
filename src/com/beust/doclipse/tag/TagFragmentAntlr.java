@@ -228,9 +228,6 @@ public class TagFragmentAntlr implements ITagFragment {
     }
     
     ppp("ALL TESTS PASSED");
-//    String s = "\n   check-exists-on-method=blah\n  foo=bar  * baz\n=\n  *   ced a = b ";
-//    TagFragment tf = new TagFragment(s);
-//    ppp(s + "\n" + tf.getFragment() + " " + tf.completesOnAttribute());
   }
   
 }

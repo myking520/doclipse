@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import org.eclipse.jdt.internal.ui.JavaPlugin;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -92,7 +92,7 @@ public class DoclipsePlugin extends AbstractUIPlugin {
 	static private Map m_externalTags = new HashMap();
 	static private Map m_internalTags = new HashMap();
 	static private Map m_allTags = new HashMap();
-
+	public static  Map<IProject,DoclipseProject> projects=new HashMap<IProject,DoclipseProject>();
 	private void initTags() {
 		// Retrieve the external directory
 		String directory = Preferences.getExternalDirectory();
@@ -106,10 +106,8 @@ public class DoclipsePlugin extends AbstractUIPlugin {
 		Map intFiles = Preferences.getInternalCheckedFiles();
 		DefinitionFile[] internalFiles = Utils.readInternalFiles(intFiles);
 		setInternalTags(parseTags(internalFiles));
-
 		refreshAllTags();
 	}
-
 	private static void refreshAllTags() {
 		m_allTags = new HashMap();
 		putAll(m_allTags, m_internalTags);
@@ -121,7 +119,13 @@ public class DoclipsePlugin extends AbstractUIPlugin {
 	}
 
 	static public Map getTags() {
-		return m_allTags;
+		IProject project=DoclipseProject.getCurrentProject();
+		DoclipseProject doclipseProject=projects.get(project);
+		if(doclipseProject==null){
+			doclipseProject=new DoclipseProject(project);
+			projects.put(project, doclipseProject);
+		}
+		return m_allTags;//doclipseProject.getAllTags();
 	}
 
 	static public void setExternalTags(Map tags) {

@@ -32,7 +32,6 @@ public class Utils {
   static final private String SEPARATORS_WITH_EQUAL = "* \t\n\r=";
 
   public  static void main(String[] argv) {
-//    Map m = parseXmlDefinition("d:/t/ejbgen.xml");
   }
   
   public static void showError(Exception ex, String fileName) {

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
@@ -28,6 +29,7 @@ import com.beust.doclipse.Attribute;
 import com.beust.doclipse.AttributeCompletionProposal;
 import com.beust.doclipse.AttributeValueCompletionProposal;
 import com.beust.doclipse.DoclipsePlugin;
+import com.beust.doclipse.DoclipseProject;
 import com.beust.doclipse.Utils;
 import com.beust.doclipse.tag.ITagFragment;
 import com.beust.doclipse.tag.Tag;
@@ -47,6 +49,7 @@ public class JavaCompletionProposalComputer implements IJavaCompletionProposalCo
 	}
 
 	public JavaCompletionProposalComputer() {
+		
 	}
 
 	@Override
@@ -174,7 +177,6 @@ public class JavaCompletionProposalComputer implements IJavaCompletionProposalCo
 	}
 
 	private IDocument m_document = null;
-
 	/**
 	 * 
 	 * @param prefix
