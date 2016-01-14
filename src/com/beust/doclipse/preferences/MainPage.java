@@ -15,8 +15,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import com.beust.doclipse.Preferences;
-
 
 /**
  * Preference page for the plug-in.

@@ -22,7 +22,6 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import com.beust.doclipse.DefinitionFile;
 import com.beust.doclipse.DoclipsePlugin;
-import com.beust.doclipse.Preferences;
 import com.beust.doclipse.Utils;
 
 

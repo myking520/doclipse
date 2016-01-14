@@ -2,6 +2,8 @@ package com.beust.doclipse;
 
 import org.eclipse.jface.text.IDocument;
 
+import com.beust.doclipse.preferences.Preferences;
+
 
 /**
  * This class represents a completion proposal for an attribute value.

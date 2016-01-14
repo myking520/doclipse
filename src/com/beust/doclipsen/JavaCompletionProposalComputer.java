@@ -28,11 +28,11 @@ import com.beust.doclipse.Attribute;
 import com.beust.doclipse.AttributeCompletionProposal;
 import com.beust.doclipse.AttributeValueCompletionProposal;
 import com.beust.doclipse.DoclipsePlugin;
-import com.beust.doclipse.ITagFragment;
-import com.beust.doclipse.Tag;
-import com.beust.doclipse.TagCompletionProposal;
-import com.beust.doclipse.TagFragmentFactory;
 import com.beust.doclipse.Utils;
+import com.beust.doclipse.tag.ITagFragment;
+import com.beust.doclipse.tag.Tag;
+import com.beust.doclipse.tag.TagCompletionProposal;
+import com.beust.doclipse.tag.TagFragmentFactory;
 
 /**
  * 

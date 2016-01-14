@@ -1,4 +1,4 @@
-package com.beust.doclipse;
+package com.beust.doclipse.preferences;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.eclipse.jface.preference.IPreferenceStore;
+
+import com.beust.doclipse.DoclipsePlugin;
 
 
 /**
@@ -57,24 +59,6 @@ public class Preferences {
     saveInternalCheckedFiles(internalFiles);
     saveExternalCheckedFiles(null);
   }
-  
-  /**
-   * Initialize defaults if it's the first time this plug-in is run.
-   */
-//  public static void saveDefaults() {
-//    if (Utils.isEmptyString(getPrefs().getString(INTERNAL_CHECKED_FILES))) {
-//      String[] checkedFiles = {
-//        "ejbgen.xml",
-//        "hibernate.xml",
-//      };
-//      Map internalFiles = new HashMap();
-//      for (int i = 0; i < checkedFiles.length; i++) {
-//        internalFiles.put(checkedFiles[i], checkedFiles[i]);
-//      }
-//      saveInternalCheckedFiles(internalFiles);
-//      saveExternalCheckedFiles(null);
-//    }
-//  }
 
  /**
    * @return The external directory from the IPreferenceStore

@@ -1,4 +1,4 @@
-package com.beust.doclipse;
+package com.beust.doclipse.tag;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -22,6 +22,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
+import com.beust.doclipse.tag.Tag;
+
 
 /**
  * This class represents a DefinitionFile

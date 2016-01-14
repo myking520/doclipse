@@ -1,4 +1,4 @@
-package com.beust.doclipse;
+package com.beust.doclipse.tag;
 
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +13,12 @@ import org.eclipse.jface.text.contentassist.ICompletionProposalExtension2;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
+
+import com.beust.doclipse.Attribute;
+import com.beust.doclipse.DoclipseCompletionProposal;
+import com.beust.doclipse.DoclipsePlugin;
+import com.beust.doclipse.Utils;
+import com.beust.doclipse.preferences.Preferences;
 
 
 /**

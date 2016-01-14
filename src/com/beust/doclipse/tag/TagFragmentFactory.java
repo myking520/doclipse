@@ -1,4 +1,4 @@
-package com.beust.doclipse;
+package com.beust.doclipse.tag;
 
 
 /**
