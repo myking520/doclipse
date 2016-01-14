@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doclipse>
+    <description>Struts tags</description>
+    <!-- Apache struts -->
+    <tag name="@struts.action" target="class">
+        <attribute name="name" required="true"/>
+        <attribute name="path" required="true"/>
+        <attribute name="scope" required="true"/>
+        <attribute name="input" required="true"/>
+        <attribute name="roles"/>
+        <attribute name="validate" required="true"/>
+        <attribute name="parameter" required="true"/>
+    </tag>
+    <tag name="@struts.action-exception" target="class">
+        <attribute name="key" required="true"/>
+        <attribute name="type" required="true"/>
+        <attribute name="className"/>
+        <attribute name="handler"/>
+        <attribute name="path"/>
+        <attribute name="scope"/>
+    </tag>
+    <tag name="@struts.action-forward" target="class">
+        <attribute name="name" required="true"/>
+        <attribute name="path" required="true"/>
+    </tag>
+    <tag name="@struts.form" target="class">
+        <attribute name="name" required="true"/>
+        <attribute name="extends"/>
+        <attribute name="implements"/>
+        <attribute name="include-pk"/>
+        <attribute name="include-all"/>
+    </tag>
+    <tag name="@struts.form-field" target="method">
+        <attribute name="form-name"/>
+    </tag>
+    <tag name="@struts.validator" target="method">
+        <attribute name="type"/>
+        <attribute name="msgkey"/>
+        <attribute name="msgvalue"/>
+        <attribute name="page"/>
+        <attribute name="arg0value"/>
+        <attribute name="arg0resource"/>
+        <attribute name="arg1value"/>
+        <attribute name="arg1resource"/>
+        <attribute name="arg2value"/>
+        <attribute name="arg2resource"/>
+        <attribute name="arg3value"/>
+        <attribute name="arg3resource"/>
+    </tag>
+    <tag name="@struts.validator-args" target="method">
+        <attribute name="arg0value"/>
+        <attribute name="arg0resource"/>
+        <attribute name="arg1value"/>
+        <attribute name="arg1resource"/>
+        <attribute name="arg2value"/>
+        <attribute name="arg2resource"/>
+        <attribute name="arg3value"/>
+        <attribute name="arg3resource"/>
+    </tag>
+    <tag name="@struts.validator-var" target="method">
+        <attribute name="name" required="true"/>
+        <attribute name="value" required="true"/>
+    </tag>
+</doclipse>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@mvcsoft.entity" doc="Sets various configuration options that apply to the entity as a whole">
+<attribute name="table" required="true" doc="The name of the table to which the entity is persisted"/>
+<attribute name="cache" required="true" doc="Sets how entity data is synchronized with the database. Valid choices are CommitOptionA and CommitOptionBC"/>
+<attribute name="insert" required="true" doc="Determines when a new entity is inserted into the database. Valid choices are AfterCreate, AfterPostCreate, and AtTransactionCompletion"/>
+<attribute name="delete" required="true" doc="Determines when an entity is deleted from the database. Valid choices are AtRemove and AtTransactionCompletion"/>
+<attribute name="locking-strategy" required="true" doc="Sets the locking strategy for concurrent entity access. Valid choices are None, Pessimistic, Counter, Timestamp, or FieldComparison"/>
+<attribute name="lock-col-name" required="true" doc="Sets the database column name for the implementation of the locking strategies Counter and Timestamp"/>
+<attribute name="lock-col-sql-type" required="true" doc="Sets the database column type for the implementation of the locking strategies Counter and Timestamp"/>
+<attribute name="data-expires" required="true" doc="Specifies a time-out value for CommitOptionA and ReadOnly caches. The default is no expiration."/>
+</tag>
+<tag target="class" name="@mvcsoft.uuid-key" doc="Configures the MVCSoft Persistence Manager to provide a &quot;universally unique identifier&quot; value (of type String or BigInteger) for a specified primary key field. The components of this UUID are specified by indicating the source of a value (e.g. counter, ip address, class hash code) and the number of bytes for that value. See the MVCSoft documentation for more information">
+<attribute name="key-field" required="true" doc="The name of the primary key field that should be configured with a UUID value when the entity is created, or the special string &quot;Unknown Key&quot; for the case of an unknown primary key"/>
+<attribute name="field-type" required="true" doc="The type of UUID created. Valid values are String and BigInteger"/>
+<attribute name="timestamp" required="true" doc="The number of bytes from a timestamp that should be included in the UUID"/>
+<attribute name="ipaddress" required="true" doc="The number of bytes from the IP address that should be included in the UUID"/>
+<attribute name="classhash" required="true" doc="The number of bytes from a hash of the container class that should be included in the UUID"/>
+<attribute name="classstarttime" required="true" doc="The number of bytes from the container start time that should be included in the UUID"/>
+<attribute name="counter" required="true" doc="The number of bytes from a counter that should be included in the UUID"/>
+</tag>
+<tag target="class" name="@mvcsoft.high-low-key" doc="Configures the MVCSoft Persistence Manager to automatically and efficiently provide a sequence value for a specified primary key field. (This strategy is also known as &quot;sequence blocks.&quot;) This strategy requires a database table to hold the value for the next block of sequence numbers. See the MVCSoft documentation for more information">
+<attribute name="key-field" required="true" doc="The name of the primary key field that should be configured with a sequence value when the entity is created, or the special string &quot;Unknown Key&quot; for the case of an unknown primary key"/>
+<attribute name="sequence-name" required="true" doc="The name that identifies a particular sequence. (Sequences may be reused across entity bean types if desired.)"/>
+<attribute name="non-transactional-pool-name" required="true" doc="The JNDI name of a DataSource that will provide a Connection that does not participate in the current transaction"/>
+<attribute name="chunk-size" required="true" doc="The number of sequences that are retrieved in a single database access. Setting this to a high value reduces database i/o (at the negligible cost of potentially &quot;wasted&quot; sequence numbers)."/>
+<attribute name="retry-count" required="true" doc="Sequence numbers are retrieved using optimistic concurrency. This value determines the number of retries in case of an optimistic rollback"/>
+<attribute name="table-name" required="true" doc="The name of the database table in which sequence values are stored"/>
+<attribute name="sequence-name-column" required="true" doc="The column name for the column that holds the &quot;sequence name&quot; information"/>
+<attribute name="sequence-name-sql-type" required="true" doc="The sql type for the column that holds the &quot;sequence name&quot; information"/>
+<attribute name="value-column" required="true" doc="The column name for the column that holds the last used sequence number"/>
+<attribute name="value-sql-type" required="true" doc="The sql type for the column that holds the last used sequence number"/>
+</tag>
+<tag target="class" name="@mvcsoft.unknown-key" doc="Configures the MVCSoft Persistence Manager for the case of the unknown primary key. You must also specify a uuid-key configuration or a high-low-key configuration to provide a value for the unknown primary key at runtime">
+<attribute name="java-type" required="true" doc="The Java class that will be used to represent the unknown primary key at runtime. This should be compatible with the UUID or high-low strategy you choose for generating the value of this key"/>
+<attribute name="col-name" required="true" doc="The column name of the key in the entity database table"/>
+<attribute name="jdbc-type" required="true" doc="The JDBC type of the unknown key. This should be a constant from the java.sql.Types class"/>
+<attribute name="sql-type" required="true" doc="The sql type for the columnof the key in the entity database table"/>
+</tag>
+<tag target="class" name="@mvcsoft.fault-group" doc="Configures fault groups, which are named groups of fields that are loaded as a unit for an EJB-QL query or &quot;on-demand.&quot; For example: @mvcsoft:fault-group name=&quot;sample_fault_group&quot; fields=&quot;id,date,product,value&quot; It is possible to have fault groups that extend to related information. You can specify an unlimited number of semi-colon-separated &quot;nested&quot; fault groups by navigating through the cmr fields. An example of this for a fault group that includes information from related customer, order, and line item beans is: @mvcsoft:fault-group name=&quot;custgroup&quot; fields=&quot;custName&quot; nested=&quot;orders:shipAddress,billAddress;orders.lineItems:prodId,quantity,price&quot; You can load nested fault groups without any related fields. Just the ids will be retrieved by the MVCSoft runtime. This is valuable in several situations, for example where the related data already exists in the cache. You are still required to use the syntax with the colon, but you are not required to list fields. For example: @mvcsoft:fault-group name=&quot;custgroup&quot; fields=&quot;custName&quot; nested=&quot;orders:;orders.lineItems:&quot;">
+<attribute name="name" required="true" doc="The name of the fault group"/>
+<attribute name="fields" required="true" doc="A comma-separated list of fields in the entity that are members of the named fault group"/>
+<attribute name="nested" required="true" doc="A semi-colon-separated list of related fields in the form cmr1.cmr2.cmr3:field1,field2,field3"/>
+</tag>
+<tag target="class" name="@mvcsoft.query" doc="Configures finder and ejbSelect methods for: (1) the fields that should be &quot;eagerly loaded&quot; within the transaction; (2) whether or not the transaction data should be flushed before executing; and (3) the sort order of the returned results.">
+<attribute name="name" required="true" doc="The name of the finder or ejbSelect method"/>
+<attribute name="fault-group" required="true" doc="The name of the fault group that indicates which fields should be loaded when the query is executed"/>
+<attribute name="should-flush" required="true" doc="The EJB 2.0 specification mandates that changes within a transaction be visible to queries issued within that transaction. The MVCSoft Persistence Manager meets this requirement by flushing all pending changes to the database before issuing the query. It may be that the results of a particular query will never depend on these changes, in which case you can set should-flush to false"/>
+<attribute name="sort-order" required="true" doc="A comma-separated list of fields in the entity by which to sort the query. Optionally, asc or desc may be specified after the field name to indicate the direction of the sort. There cannot be any spaces between fields on which to sort. In other words, sort-order=&quot;id, value desc&quot; will not work, but sort-order=&quot;id,value desc&quot; will"/>
+<attribute name="lightweight" doc="Whether or not the returned interfaces from an ejbSelect query are &quot;lightweight interfaces&quot; that bypass the J2EE stack. Note that finder methods cannot be configured to return lightweight values."/>
+</tag>
+<tag target="method" name="@mvcsoft.col-name" doc="The column name for the field in the table where this bean will be persisted">
+<attribute name="type" required="true" doc="Define the name of the column for the field"/>
+</tag>
+<tag target="method" name="@mvcsoft.sql-type" doc="The SQL type for the column where this field will be persisted">
+<attribute name="type" required="true" doc="Define the name of the sql type for the field. Example varchar(10)"/>
+</tag>
+<tag target="method" name="@mvcsoft.jdbc-type" doc="The JDBC type for the column where this field will be persisted. See the javadoc for &quot;java.sql.Types&quot; for a list of valid types">
+<attribute name="type" required="true" doc="The jdbc type of the field. Example VARCHAR"/>
+</tag>
+<tag target="method" name="@mvcsoft.exclude-from-optimistic-lock" doc="Indicates that the field should not be used in field-based comparisons for optimistic locking">
+<attribute name="value" required="true" doc=""/>
+</tag>
+<tag target="method" name="@mvcsoft.relation" doc="Configures the persistent storage of an EJB 2.0 relationship specified by the @ejb:relation tag. There are two basic mechanisms for persistent storage of relationships: a relationship table, which can be used for any relationship cardinality (and must be used with many-many relationships); and foreign keys in the entity table, which can be used for one-one, one-many, and many-one relationships. An example of configuring a relationship using foreign keys is: @mvcsoft.relation map-style=&quot;foreign-key&quot; role-with-key=&quot;ChildrenForParent&quot; key-aliases=&quot;id=parentid, id2=parentid2,id3=parentid3&quot; relationship-in-pk=&quot;true&quot;. An example of configuring a relationship using a relationship table is: @mvcsoft.relation map-style=&quot;table&quot; table-name=&quot;TestRelationship&quot; key-aliases=&quot;ParentHasChildren:id=parentid,id2=parentid2,id3=parentid3;ChildrenInParent:id=childid,id2=childid2,id3=childid3&quot;">
+<attribute name="map-style" required="true" doc="Valid values are foreign-key or table"/>
+<attribute name="role-with-key" required="true" doc="For foreign-key mapped relationships only. Indicates the &quot;side&quot; of the relationship where the foreign keys are located. The source entity of that role will have those keys in its table. (In a one-one relationship, either role can be chosen. In a one-many relationship, the entity in the &quot;many&quot; role, e.g. OrderInLineItem, must have the keys.)"/>
+<attribute name="key-aliases" required="true" doc="Specifies the names of the database columns that persistently store a relationship. These names are mapped to entity primary key fields by a simple comma-separated list in the format key=alias,key=alias. For a table-mapped relationship, both participants can have aliases, so the format is role1:key=alias,key=alias;role2:key=alias,key=alias."/>
+<attribute name="relationship-in-pk" required="true" doc="For foreign-key mapped relationships only. Indicates that the foreign keys for the relationship are also components of the primary key for the entity"/>
+</tag>
+<tag target="method" name="@mvcsoft.lightweight" doc="Indicates that a cmr field should return lightweight local interfaces.">
+<attribute name="value" required="true" doc=""/>
+</tag>
+<tag target="method" name="@mvcsoft.wrap" doc="Indicates that the method is a wrapper for a query. (Wrapper methods allow the bean developer to efficiently retrieve subsets of query results.) Example: @mvcsoft.wrap query-name=&quot;findAll&quot;">
+<attribute name="query-name" required="true" doc="Define the name of the associated finder or ejbSelect query"/>
+</tag>
+</doclipse>

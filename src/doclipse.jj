@@ -1,0 +1,109 @@
+options {
+  DEBUG_PARSER = true ;
+  DEBUG_TOKEN_MANAGER = true ;
+  LOOKAHEAD = 3 ;
+  FORCE_LA_CHECK = true ;
+  NODE_PACKAGE = "com.beust.doclipse.parser" ;
+  STATIC = false ;
+}
+
+PARSER_BEGIN(DoclipseParser)
+
+package com.beust.doclipse.parser;
+
+import java.io.StringReader;
+
+/**
+* Defines a parser for the attribute grammar in order to
+* determine what we are trying to complete on.  Can be
+* either:
+* - Tag name
+* - attribute name
+* - attribute value
+*/
+  public class DoclipseParser {
+    static public boolean completeOnTagName = true;
+    static public boolean completeOnAttributeName = false;
+    static public boolean completeOnAttributeValue = false;
+    static public Token fragment;
+    
+	  static public void main(String[] args)  
+	    throws ParseException
+	  {
+	    String s = "@ej a";
+	    StringReader sr = new StringReader(s);
+	      DoclipseParser parser = new DoclipseParser(sr);
+	       parser.Start();
+	       System.out.println("Parsing successful @" + fragment.toString() + "@"
+	       + " " + completeOnTagName
+	       + " " + completeOnAttributeName
+	       + " " + completeOnAttributeValue);
+	       sr = new StringReader(s);
+	      parser = new DoclipseParser(sr );
+	       parser.Start();
+	       System.out.println("Parsing successful @" + fragment.toString() + "@"
+	       + " " + completeOnTagName
+	       + " " + completeOnAttributeName
+	       + " " + completeOnAttributeValue);
+	    }
+	  }
+
+PARSER_END(DoclipseParser)
+
+
+SKIP : /* WHITE SPACE */
+{
+  " " | "\t" | "\n" | "\r" | "\f" | "*"
+}
+
+TOKEN : /* LITERALS */
+{
+   < TAG : "@" (["a"-"z","A"-"Z", "_"] (["a"-"z","A"-"Z","0"-"9","_", "-"])* | ":" | "." )+  >
+|  <  IDENTIFIER : ["a"-"z","A"-"Z", "_"] (["a"-"z","A"-"Z","0"-"9","_", "-"])* >
+}
+
+void Start() :
+{}
+{
+  (fragment = <TAG>) (CompleteAssignment())* (PartialAssignment())* {
+  }
+}
+
+void CompleteAssignment() :
+{}
+{
+  <IDENTIFIER> "=" (fragment = Value()) { 
+    System.out.println("COMPLETE"); 
+     completeOnTagName = false;
+     completeOnAttributeName = true;
+     completeOnAttributeValue = false;
+  }
+}
+
+void PartialAssignment() :
+{}
+{
+   (fragment = <IDENTIFIER>)  {
+     System.out.println("PARTIAL "); 
+     completeOnTagName = false;
+     completeOnAttributeName = true;
+     completeOnAttributeValue = false;
+   }
+  |
+  LOOKAHEAD(1)
+  (fragment = <IDENTIFIER>) "=" { 
+    System.out.println("PARTIAL EQUAL"); 
+     completeOnTagName = false;
+     completeOnAttributeName = false;
+     completeOnAttributeValue = true;
+  }
+}
+
+
+Token Value() :
+{ Token result = null; }
+{
+  result = <IDENTIFIER> { return result; }
+  | "\"" (result = <IDENTIFIER>) "\"" { return result; }
+}
+

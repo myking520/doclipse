@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@webwork.action" doc="Define an action for this class">
+<attribute name="name" required="true" doc="Action name."/>
+<attribute name="success" doc="Use the specified resource if SUCCESS is returned"/>
+<attribute name="error" doc="Use the specified resource if ERROR is returned"/>
+<attribute name="input" doc="Use the specified resource if INPUT is returned"/>
+<attribute name="views" doc="Provide a comma-separated list of actions views in the RETURN_VALUE=RESOURCE format used by views.properties"/>
+</tag>
+<tag target="method" name="@webwork.command" doc="Define a CommandDriven action using this method. Your action must fulfill the CommandDriven requirements (like implementing CommandDriven.) See http://wiki.opensymphony.com/space/Using+CommandDriven+Actions">
+<attribute name="name" required="true" doc="Command action name. Will create an action named 'action.command', where 'action' is the contents of the 'name' parameter in @webwork.action and 'command' is the contents of the 'name' parameter of this tag."/>
+<attribute name="success" doc="Use the specified resource if SUCCESS is returned by this CommandDriven action"/>
+<attribute name="error" doc="Use the specified resource if ERROR is returned by this CommandDriven action"/>
+<attribute name="input" doc="Use the specified resource if INPUT is returned by this CommandDriven action"/>
+<attribute name="views" doc="Provide a comma-separated list of actions views in the RETURN_VALUE=RESOURCE format used by views.properties to specify additional properties for this CommandDriven action"/>
+</tag>
+</doclipse>

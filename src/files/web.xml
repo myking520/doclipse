@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@web.filter" doc="Declares the class as a Filter class, with the specified name, display-name, icon and description. Applicable to Servlet 2.3 only">
+<attribute name="name" required="true" doc="The name for the filter. Unique within the application"/>
+<attribute name="display-name" doc="The display name of the filter"/>
+<attribute name="icon" doc="The icon for the filter"/>
+<attribute name="description" doc="A description for the filter"/>
+</tag>
+<tag target="class" name="@web.filter-init-param" doc="Declares init parameters for the Filter with the specified parameter name, value and description. Applicable to Servlet 2.3 only.">
+<attribute name="name" required="true" doc="The name of the init parameter"/>
+<attribute name="value" doc="The value for the parameter"/>
+<attribute name="description" doc="An optional description of the parameter"/>
+</tag>
+<tag target="class" name="@web.filter-mapping" doc="Defines the mapping for the Filter. Either url-pattern or servlet-name should be specified. Applicable to Servlet 2.3 only">
+<attribute name="url-pattern" doc="The url pattern the filter should match"/>
+<attribute name="servlet-name" doc="The servlet name for the filter"/>
+</tag>
+<tag target="class" name="@web.servlet" doc="Declares the class as a Servlet class, with the specified name, display-name, icon and description">
+<attribute name="name" required="true" doc="The name of the servlet - unique within the application"/>
+<attribute name="display-name" doc="The display name of the servlet"/>
+<attribute name="icon" doc="The icon for the servlet"/>
+<attribute name="description" doc="A description for the servlet"/>
+<attribute name="load-on-startup" doc="Integer indicating order in which the servlet should be loaded."/>
+<attribute name="run-as" doc="Specifies the run-as identity (the name of a security role) to be used for the execution of the web application."/>
+</tag>
+<tag target="class" name="@web.servlet-init-param" doc="Declares init parameters for the Servlet with the specified parameter name, value and description">
+<attribute name="name" required="true" doc="The name of the init parameter"/>
+<attribute name="value" doc="The value for the parameter"/>
+<attribute name="description" doc="An optional description of the parameter"/>
+</tag>
+<tag target="class" name="@web.servlet-mapping" doc="Defines the mapping for the Servlet to the specified url-pattern">
+<attribute name="url-pattern" doc="The url pattern the filter should match"/>
+</tag>
+<tag target="class" name="@web.listener" doc="Declares the class as a Listener class"/>
+<tag target="class" name="@web.security-role-ref" doc="Defines a security role reference with the name role-name to a security role link named role-link">
+<attribute name="role-name" required="true" doc="The name of the role reference"/>
+<attribute name="role-link" required="true" doc="The name of the role link"/>
+</tag>
+<tag target="class" name="@web.resource-env-ref" doc="Defines a resource environment reference with the specified name, type and description">
+<attribute name="name" required="true" doc="The name of the resource environment reference"/>
+<attribute name="type" required="true" doc="The type of the referenced resource"/>
+<attribute name="description" doc="An optional description of the resource reference"/>
+</tag>
+<tag target="class" name="@web.resource-ref" doc="Defines a resource reference with the specified name, type, description, authentication (auth) and scope">
+<attribute name="name" required="true" doc="The name of the resource reference"/>
+<attribute name="type" required="true" doc="The type of the referenced resource"/>
+<attribute name="auth" required="true" allowed="Application,Container" doc="The authentication for the resource. &quot;Application&quot; | &quot;Container&quot;"/>
+<attribute name="description" doc="An optional description for the resource reference"/>
+<attribute name="scope" allowed="Shareable,Unshareable" doc="The scope of the resource. &quot;Shareable&quot; | &quot;Unshareable&quot;"/>
+<attribute name="jndi-name" doc="The physical jndi-name of the resource. Note: it currently is used only in 1-2 of the app server modules, but those modules will also support this consolidated standard tag soon."/>
+</tag>
+<tag target="class" name="@web.security-role" doc="Defines a security role with the specified role-name and description">
+<attribute name="role-name" doc="The role name"/>
+<attribute name="description" doc="The description of the role"/>
+</tag>
+<tag target="class" name="@web.env-entry" doc="Defines a environment entry with the specified description, name, type and value">
+<attribute name="description" doc="A description of the env-entry"/>
+<attribute name="name" required="true" doc="The name of the env-entry"/>
+<attribute name="type" required="true" doc="The type of the env-entry"/>
+<attribute name="value" doc="The value of the env-entry"/>
+</tag>
+<tag target="class" name="@web.ejb-ref" doc="Defines a remote EJB reference with the specified name, type, home interface name, remote interface name, link name, and description. The value of the link parameter must be the ejb-name of an enterprise bean in the same J2EE application unit">
+<attribute name="name" doc="The name or the ejb reference"/>
+<attribute name="type" allowed="Entity,Session" doc="The expected type of the referenced enterprise bean. Must be one of the following: Entity or Session"/>
+<attribute name="home" doc="The home interface of the referenced ejb"/>
+<attribute name="remote" doc="The remote interface of the referenced ejb"/>
+<attribute name="link" doc="The link to the EJB"/>
+<attribute name="description" doc="An optional description for the ejb-ref"/>
+</tag>
+<tag target="class" name="@web.ejb-local-ref" doc="Defines a local EJB reference with the specified name, type, home interface name, local interface name, link name, and description. The value of the link parameter must be the ejb-name of an enterprise bean in the same J2EE application unit.">
+<attribute name="name" doc="The name or the ejb reference"/>
+<attribute name="type" allowed="Entity,Session" doc="The expected type of the referenced enterprise bean. Must be one of the following: Entity or Session"/>
+<attribute name="home" doc="The home interface of the referenced ejb"/>
+<attribute name="local" doc="The local interface of the referenced ejb"/>
+<attribute name="link" doc="The link to the EJB"/>
+<attribute name="description" doc="An optional description for the ejb-ref"/>
+</tag>
+<tag target="class" name="@jsp.validator-init-param" doc="Declares init parameters for the Validator with the specified parameter name, value and description">
+<attribute name="name" required="true" doc="The name of the validator init param"/>
+<attribute name="value" required="true" doc="The value of the validator init param"/>
+<attribute name="description" doc="An optional description for the validator"/>
+</tag>
+<tag target="class" name="@jsp.tag" doc="Declares the class as a class implementing a JSP tag and specifies various properties of that tag">
+<attribute name="name" required="true" doc="The name of the JSP tag"/>
+<attribute name="tei-class" doc="The tei class for the JSP"/>
+<attribute name="body-content" allowed="tagdependent,JSP,empty" doc="The body content field for the tag."/>
+<attribute name="display-name" doc="An optional display name for the tag"/>
+<attribute name="small-icon" doc="An optional small icon for the tag"/>
+<attribute name="large-icon" doc="An optional large icon for the tag"/>
+<attribute name="description" doc="An optional description for the tag"/>
+</tag>
+<tag target="class" name="@jsp.variable" doc="Declares a JSP tag variable and information on the scripting variables defined.">
+<attribute name="name-given" doc="The variable name as a constant"/>
+<attribute name="name-from-attribute" doc="The name of an attribute whose (translation time) value will give the name of the variable. One of name-given or name-from-attribute is required"/>
+<attribute name="class" doc="Name of the class of the variable. java.lang.String is default"/>
+<attribute name="declare" doc="Whether the variable is declared or not."/>
+<attribute name="scope" allowed="NESTED,AT_BEGIN,AT_END" doc="The scope of the scripting variable defined."/>
+<attribute name="description" doc="An optional description of the variable"/>
+</tag>
+<tag target="method" name="@jsp.attribute" doc="Declares the specified field a JSP tag attribute. This tag should be placed on getter methods">
+<attribute name="required" required="true" doc="Whether the attribute is required"/>
+<attribute name="rtexprvalue" required="true" doc="Whether the attribute is a runtime attribute"/>
+<attribute name="type" required="true" doc="The type of the attribute"/>
+<attribute name="description" doc="An optional description of the attribute"/>
+</tag>
+</doclipse>

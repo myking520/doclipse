@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@resin-ejb.entity-bean" doc="Resin CMP Entity Bean. Requires @ejb.bean.">
+<attribute name="sql-table" doc="Database table for this Entity. Deprecated, in favour of @ejb.persistence table-name parameter."/>
+<attribute name="data-source" doc="Entity data source"/>
+<attribute name="cache-size" doc="Bean cache size"/>
+<attribute name="cache-timeout" doc="Bean cache timeout; default unit is seconds (s) if none specified."/>
+</tag>
+<tag target="method" name="@resin-ejb.cmp-field" doc="Specifies database column properties of a persistent field. Requires @ejb.persistent-field.">
+<attribute name="sql-column" doc="Database column name"/>
+<attribute name="sql-type" doc="SQL column type used during table generation"/>
+<attribute name="abstract-sql-type" doc="java.sql.Types column type which is matched with driver type map to determine physical column type during table generation"/>
+</tag>
+<tag target="method" name="@resin-ejb.entity-method" doc="Business method configuration; see http://caucho.com/products/resin-ejb/ejb-ref/resin-ejb-config.xtp#method">
+<attribute name="signature" doc="Java method signature or * (for general case); mandatory at class-level"/>
+<attribute name="resin-isolation" allowed="read-only,database" doc="Caching hint for Resin; valid values are 'read-only' (read-only) and 'database' (read-write)"/>
+<attribute name="query-loads-bean" allowed="true,false" doc="find or select query will load the bean rather than just the primary key; valid values are 'true', 'false'"/>
+</tag>
+<tag target="method" name="@resin-ejb.relation" doc="Database configuration for persistent relations. Requires @ejb.relation">
+<attribute name="sql-table" doc="Database table for n-m relationships (only)"/>
+<attribute name="sql-column" doc="Database column"/>
+<attribute name="order-by" doc="Persistent field name for ordering collections in 1-n relationships (only)"/>
+<attribute name="target-sql-column" doc="Database column of target in unidirectional relationship"/>
+</tag>
+<tag target="class" name="@resin-ejb.message-bean" doc="Resin Message Driven Bean. Requires @ejb.bean.">
+<attribute name="jndi-name" doc="JNDI name of the queue or topic for the bean."/>
+</tag>
+</doclipse>

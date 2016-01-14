@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@orion.bean" doc="All parameters of &lt;session-deployment/&gt;, &lt;entity-deployment/&gt; and &lt;message-driven-deployment/&gt; are placed under this class level tag.">
+<attribute name="call-timeout" doc="The time (long millis in hex) to wait for an EJB if it is busy (before throwing a RemoteException, treating it as a deadlock). 0 equals &quot;forever&quot; and is the default. Applicable to session and entity beans."/>
+<attribute name="copy-by-value" doc="Whether or not to copy (clone) all the incoming/outgoing parameters in EJB calls. Set this to 'false' if you're certain your application doesn't assume copy-by-value semantics for a speed-up. The default is 'true'. Applicable to session and entity beans"/>
+<attribute name="max-tx-retries" doc="The number of times to retry a transaction that was rolled back due to system-level failures. The default is 0, i.e. no retries. Applicable to session and entity beans."/>
+<attribute name="persistence-filename" doc="Path to file where sessions are stored across restarts. Applicable to session beans."/>
+<attribute name="timeout" doc="Inactivity timeout in seconds. If the value is zero or negative timeouts will be disabled. Applicable to session beans."/>
+<attribute name="clustering-schema" required="true" allowed="default,asynchronous-cache" doc="Despite what Orion's auto-generated docs say, this is NOT &quot;the name of the data-source used if using container-managed persistence&quot; - that's the data-source element. This parameter should be set to &quot;asynchronous-cache&quot; to cluster-enable the Entity bean."/>
+<attribute name="data-source" required="true" doc="The name of the data-source used if using container-managed persistence. Applicable to entity beans."/>
+<attribute name="exclusive-write-access" doc="Whether or not the EJB-server has exclusive write (update) access to the database backend. If it does it will speed up common bean operations and enable better caching. The default is true. Applicable to entity beans."/>
+<attribute name="instance-cache-timeout" doc="The amount of time in seconds that an entity is to be kept in the instance (assigned to an identity) state, specifying 'never' retains the entities forever. The default is 60. Applicable to entity beans."/>
+<attribute name="isolation" allowed="serializable,uncommitted,committed,repeatable_read" doc="Specifies the isolation-level for database actions. The valid values are 'serializable', 'uncommitted', 'committed', 'repeatable_read'. Applicable to entity beans."/>
+<attribute name="max-instances" doc="The number of maximum instances to be kept instantiated or pooled. The default is infinite. Applicable to entity beans."/>
+<attribute name="pool-cache-timeout" doc="The amount of time in seconds that an entity is to be kept in the &quot;pooled&quot; (unassigned) state, specifying 'never' retains the entities forever. The default is 60. Applicable to entity beans."/>
+<attribute name="table" required="true" doc="The name of the table in the database if using container-managed persistence. Applicable to entity beans."/>
+<attribute name="validity-timeout" doc="The maximum amount of time (in millis) that an entity is valid in the cache (before being reloaded). Useful for loosely coupled environments where rare updates from legacy systems occur. This attribute is only valid when exclusive-write-access=&quot;true&quot; (the default). Applicable to entity beans."/>
+<attribute name="cache-timeout" doc="The number of seconds before a cached instance can be timed out. Can be set to 'never' to never time out or to 0 (zero) to never cache. The default is 60. Applicable to message driven beans."/>
+<attribute name="connection-factory-location" required="true" doc="The JNDI location of the connection factory to use. Applicable to message driven beans."/>
+<attribute name="destination-location" required="true" doc="The JNDI location of the destination (queue/topic) to use. Applicable to message driven beans."/>
+<attribute name="max-instances" doc="The maximum number of bean instances to instantiate. The default is -1, which implies an infinite number. Applicable to message driven beans."/>
+<attribute name="min-instances" doc="The minimum number of bean instances to instantiate. The set amount will be instantiated at startup, and there will always be at least the set amount of instances active. The default is 0 (none). Applicable to message driven beans."/>
+</tag>
+<tag target="method" name="@orion.field-persistence-manager-property" doc="If @orion.persistence field-persistence-manager specified and there's some properties for the persistence manager, specify it as one or more @orion.field-persistence-manager-property tags for the persistent field.">
+<attribute name="name" required="true" doc="The name of the property."/>
+<attribute name="value" required="true" doc="The value of the property."/>
+</tag>
+<tag target="method" name="@orion.persistence" doc="Used to specify orion specific persistence mechanisms, such as persisting primitive collections">
+<attribute name="persistence-name" doc="The name of the column for single column fields, or the name of the second column in the table specified in table-name."/>
+<attribute name="table-name" doc="The name of the second table to use if the field is a collection"/>
+</tag>
+</doclipse>

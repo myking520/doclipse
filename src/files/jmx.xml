@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@jmx.mbean" doc="The jmx.mbean tag identifies the class as an mbean. It can be used to generate the interface for a standard mbean and the jboss specific xmbean xml descriptor and service.xml file format.">
+<attribute name="extends" doc="Specifies the superclass for the standard mbean interface."/>
+<attribute name="name" doc="Specifies the object name for mlet or it can be used as a default in an extension template."/>
+<attribute name="description" doc="Specifies a description for the mbean that can be used in mbean infos."/>
+<attribute name="persistPolicy" allowed="OnUpdate,NoMoreOftenThan,Never,OnTimer" doc="Specifies the persistence policy for this mbean "/>
+<attribute name="persistPeriod" doc="Specifies when the mbean state will be saved. "/>
+<attribute name="persistLocation" doc="Specifies the location for the mbean's state to be saved."/>
+<attribute name="persistName" doc="Specifies the name to identify the mbeans saved state with."/>
+<attribute name="persistence-manager" doc="Specifies the fully qualified class name of a persistence manager for this mbean (JBoss specific)."/>
+<attribute name="currencyTimeLimit" doc="Specifies how long the mbeans state may be considered valid."/>
+<attribute name="state-action-on-update" doc="Specifies what the jboss state management should do when an attribute is updated on a started mbean. (jboss specific)."/>
+<attribute name="descriptor" doc="Specifies an additional custom descriptor for the mbean that can be used in mbean infos. To make this work as an xdoclet parameter, you need to escape the double quotes: descriptor=&quot;name=\&quot;name\&quot; value=\&quot;value\&quot;&quot;"/>
+</tag>
+<tag target="class" name="@jmx.mlet-entry" doc="The jmx.mlet-entry tag allows you to specify entries for a generated mlet.">
+<attribute name="archive" doc="Specifies the ARCHIVE property for an mlet configuration."/>
+<attribute name="codebase" doc="Specifies the path to the package for the mbean class."/>
+</tag>
+<tag target="method" name="@jmx.managed-operation" doc="Defines a jmx managed operation. This method will be included in a standard mbean interface and marked as a managed operation in xmbean metadata. jmx.managed-parameter tags must be used to describe the parameters.">
+<attribute name="impact" allowed="ACTION,INFO,ACTION_INFO" doc="Specifies the impact of the operation."/>
+<attribute name="description" doc="Specifies a description for the managed operation that can be used in mbean infos."/>
+</tag>
+<tag target="method" name="@jmx.managed-attribute" doc="Defines a jmx managed attribute. This method will be included in a standard mbean interface and an attribute based on its name will be included as a managed atribute in xmbean metadata. This must be included on any getter or setter you want exposed in a standard mbean. For xmbeans, the methods with these tags will be identified as the getMethod and setMethod for the attribute.">
+<attribute name="access" allowed="read-only,write-only,read-write" doc="Specifies the access to the managed-attribute: read-only, write-only or read-write."/>
+<attribute name="description" doc="Specifies a description for the managed attribute that can be used in mbean infos."/>
+<attribute name="persistPolicy" allowed="OnUpdate,NoMoreOftenThan,Never,OnTimer" doc="Specifies the persistence policy for this mbean"/>
+<attribute name="persistPeriod" doc="Specifies when the mbean state will be saved."/>
+<attribute name="persistLocation" doc="Specifies the location for the mbean's state to be saved."/>
+<attribute name="persistName" doc="Specifies the name to identify the mbeans saved state with. "/>
+<attribute name="currencyTimeLimit" doc="Specifies how long the mbeans state may be considered valid."/>
+<attribute name="state-action-on-update" doc="Specifies what the jboss state management should do when an attribute is updated on a started mbean. (jboss specific)."/>
+<attribute name="value" doc="Specifies the (initial) value for the managed attribute. This is used in the jboss *-service.xml file and the xmbean descriptor. In both cases the result is the value is set as the initial value of the newly deployed mbean."/>
+<attribute name="descriptor" doc="Specifies an additional custom descriptor for the mbean that can be used in mbean infos. This should be of the form name=&quot;name&quot; value=&quot;value&quot;. To make this work as an xdoclet parameter, you need to escape the double quotes: descriptor=&quot;name=\&quot;name\&quot; value=\&quot;value\&quot;&quot;"/>
+</tag>
+<tag target="constructor" name="@jmx.managed-constructor" doc="Defines a jmx managed constructor.">
+<attribute name="description" doc="Specifies a description for the constructor."/>
+<attribute name="servicefile" doc="If we are generating a JBoss *-service.xml file, if the * matches the parameter value this constructor will be used with the managed-parameter values provided."/>
+</tag>
+<tag target="class" name="@jmx.notification" doc="Defines a jmx notification.">
+<attribute name="description" doc="Specifies the description for the notification."/>
+<attribute name="name" required="true" doc="Specifies the name for the notification."/>
+<attribute name="persistPolicy" allowed="OnUpdate,NoMoreOftenThan,Never,OnTimer" doc="Specifies the persistence policy for this mbean"/>
+<attribute name="persistPeriod" doc="Specifies when the mbean state will be saved. Not sure how this applies to notifications."/>
+<attribute name="persistLocation" doc="Specifies the location for the mbean's state to be saved. Not sure how this applies to notifications."/>
+<attribute name="persistName" doc="Specifies the name to identify the mbeans saved state with. Not sure how this applies to notifications."/>
+<attribute name="currencyTimeLimit" doc="Specifies how long the mbeans state may be considered valid. Not sure how this applies to notifications."/>
+<attribute name="descriptor" doc="Specifies an additional custom descriptor for the mbean that can be used in mbean infos. This should be of the form name=&quot;name&quot; value=&quot;value&quot;. To make this work as an xdoclet parameter, you need to escape the double quotes: descriptor=&quot;name=\&quot;name\&quot; value=\&quot;value\&quot;&quot;"/>
+</tag>
+<tag target="constructor, method" name="@jmx.managed-parameter" doc="Defines an argument for a managed operation or managed constructor. NOTE: this tag is somewhat defective in that some of the info (type) can be determined automatically and there is no check that the number of parameters or their types specified actually match the method. You should expect the usage of this tag to change without notice.">
+<attribute name="name" required="true" doc="Specifies a name for the operation or constructor argument. This can be different from the name used in java code."/>
+<attribute name="description" doc="Specifies a description for the operation or constructor argument."/>
+<attribute name="type" required="true" doc="The type of the argument. This should be determined from the method signature."/>
+<attribute name="value" doc="A string representation of the value for the managed argument. Only useful for constructor arguments."/>
+</tag>
+</doclipse>

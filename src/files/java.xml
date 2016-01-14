@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@javabean.class" doc="Used to specify class related information of JavaBean BeanInfo">
+<attribute name="name" required="true" doc="Name of the JavaBean (typically the unqualified className)"/>
+<attribute name="class" doc="Class name of real bean"/>
+<attribute name="displayName" doc="The name displayed for the JavaBean"/>
+<attribute name="shortDescription" doc="A short description about the JavaBean"/>
+<attribute name="defaultProperty" doc="The default property of the JavaBean"/>
+<attribute name="expert" allowed="true,false" doc="Is the JavaBean used in expert mode ?"/>
+<attribute name="hidden" allowed="true,false" doc="Is the JavaBean hidden ?"/>
+<attribute name="preferred" allowed="true,false" doc="Is the JavaBean preferred ?"/>
+<attribute name="customizer" doc="Fully qualified class name of the JavaBean customizer"/>
+<attribute name="stopClass" doc="Fully qualified class name of the JavaBean ancestor used to stop introspection for additionnal informations"/>
+</tag>
+<tag target="class" name="@javabean.icons" doc="Defines the icons used for the visual aspect of the JavaBean.">
+<attribute name="mono16" doc="Absolute or relative resource name for the monochrome icon of 16x16 pixels"/>
+<attribute name="color16" doc="Absolute or relative resource name for the color icon of 16x16 pixels"/>
+<attribute name="mono32" doc="Absolute or relative resource name for the monochrome icon of 32x32 pixels"/>
+<attribute name="color32" doc="Absolute or relative resource name for the color icon of 32x32 pixels"/>
+</tag>
+<tag target="class" name="@javabean.attribute" doc="Defines the attributes of the JavaBean (propertyorder, etc).">
+<attribute name="name" required="true" doc="Name of the attribute"/>
+<attribute name="value" required="true" doc="Value of the attribute"/>
+<attribute name="rtexpr" allowed="true,false" doc="Is the value a Java expression?"/>
+</tag>
+<tag target="method" name="@javabean.property" doc="Defines the JavaBean property found by introspection">
+<attribute name="displayName" doc="The name displayed for the property"/>
+<attribute name="shortDescription" doc="A short description about the property"/>
+<attribute name="expert" allowed="true,false" doc="Is the property used in expert mode ?"/>
+<attribute name="hidden" allowed="true,false" doc="Is the property hidden ?"/>
+<attribute name="preferred" allowed="true,false" doc="Is the property preferred ?"/>
+<attribute name="bound" allowed="true,false" doc="Is the property bound ?"/>
+<attribute name="constrained" allowed="true,false" doc="Is the property constrained ?"/>
+<attribute name="propertyEditor" doc="Fully qualified class name of the PropertyEditor used to edit the property"/>
+<attribute name="readOnly" allowed="true,false" doc="Is the JavaBean property read-only ?"/>
+</tag>
+<tag target="method" name="@javabean.method" doc="Defines the JavaBean method found by introspection">
+<attribute name="name" required="true" doc="Name of the method"/>
+<attribute name="displayName" doc="The name displayed for the method"/>
+<attribute name="shortDescription" doc="A short description about the method"/>
+<attribute name="expert" allowed="true,false" doc="Is the method used in expert mode ?"/>
+<attribute name="hidden" allowed="true,false" doc="Is the method hidden ?"/>
+<attribute name="preferred" allowed="true,false" doc="Is the method preferred ?"/>
+</tag>
+<tag target="method" name="@javabean.param" doc="Defines for each JavaBean method its parameters">
+<attribute name="name" required="true" doc="Name of the parameter"/>
+<attribute name="displayName" doc="The name displayed for the parameter"/>
+<attribute name="shortDescription" doc="A short description about the parameter"/>
+<attribute name="propertyEditor" doc="Fully qualified class name of the PropertyEditor used to edit the parameter"/>
+</tag>
+</doclipse>

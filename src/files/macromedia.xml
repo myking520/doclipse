@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@jrun.always-dirty" doc="The always-dirty element can be used to force synchronization with the data source at the ends of transactions even when there has been no change to the entity bean's fields">
+<attribute name="value" required="true" doc=""/>
+</tag>
+<tag target="class" name="@jrun.cluster-home" doc="The cluster-home element denotes whether the EJBHome should be clustered for this bean. If clustering is enabled in jrun.xml, this value is true by default. You can use this element to override this behavior on a bean-by-bean basis">
+<attribute name="value" required="true" doc=""/>
+</tag>
+<tag target="class" name="@jrun.cluster-object" doc="The cluster-object element denotes whether the EJBObject should be clustered for this bean. If clustering is enabled in jrun.xml, this value is true by default. You can use this element to override this behavior on a bean-by-bean basis">
+<attribute name="value" required="true" doc=""/>
+</tag>
+<tag target="class" name="@jrun.commit-option" doc="The commit-option element specifies the the commit option from Section 10.5.9 and 12.1.9 of the EJB 2.0 specification">
+<attribute name="value" required="true" doc="A or B or C"/>
+</tag>
+<tag target="class" name="@jrun.ejb-local-ref" doc="The ejb-local-ref element describes a mapping between the ejb-ref-name that the bean developer provides and its JNDI name. The deployer provides the actual JNDI name">
+<attribute name="ejb-ref-name" required="true" doc="The ejb-ref-name element gives the name of an EJB from the ejb-jar.xml file. The bean developer this information"/>
+<attribute name="jndi-name" required="true" doc="The jndi-name element gives the JNDI name where the bean or resource will be bound"/>
+</tag>
+<tag target="class" name="@jrun.ejb-ref" doc="The ejb-ref element describes a mapping between the ejb-ref-name that the bean developer provides and its JNDI name. The deployer provides the actual JNDI name">
+<attribute name="ejb-ref-name" required="true" doc="The ejb-ref-name element gives the name of an EJB from the ejb-jar.xml file. The bean developer this information"/>
+<attribute name="jndi-name" required="true" doc="The jndi-name element gives the JNDI name where the bean or resource will be bound"/>
+</tag>
+<tag target="class" name="@jrun.instance-pool" doc="The instance-pool element contains the maximum and minimum size parameters for StatelessSessionBean instance pools">
+<attribute name="maximum-size" required="true" doc="The maximum-size element specifies the maximum size for StatelessSessionBean instance pools"/>
+<attribute name="minimum-size" required="true" doc="The minimum-size element specifies the minimum size for StatelessSessionBean instance pools"/>
+</tag>
+<tag target="class" name="@jrun.jdbc-mappings" doc="The jdbc-mappings element holds information specific to JRun and not declared in the ejb-jar.xml file about the CMP mappings for an entity bean. jdbc-mappings are used to specify the SQL used to create, load, store, find and remove entity beans">
+<attribute name="create-table" required="true" doc="Whether JRun will attempt to create database tables"/>
+<attribute name="delete-table" required="true" doc="Whether JRun will attempt to delete database tables"/>
+</tag>
+<tag target="class" name="@jrun.jndi-name" doc="The jndi-name element gives the JNDI name where the bean or resource will be bound">
+<attribute name="jndi-name" required="true" doc=""/>
+</tag>
+<tag target="class" name="@jrun.message-driven-destination" doc="The message-driven-destination element provides the destination that the Message driven container uses">
+<attribute name="name" required="true" doc="The name element defines the parameter name"/>
+</tag>
+<tag target="class" name="@jrun.message-driven-subscription" doc="The message-driven-destination element provides the destination that the Message driven container uses">
+<attribute name="client-id" required="true" doc="The client-id element provides client id for DurableSubscription setup and sign on"/>
+</tag>
+<tag target="class" name="@jrun.resource-env-ref" doc="The resource-env-ref element describes a mapping between the resource-env-name that the bean developer provides and its JNDI name. The deployer provides the actual JNDI name">
+<attribute name="resource-env-ref-name" required="true" doc="The resource-env-ref-name element gives the name of a resource env from EJB view. The bean developer provides this information"/>
+<attribute name="jndi-name" required="true" doc="The jndi-name element gives the JNDI name where the bean or resource will be bound"/>
+<attribute name="mdb-destination" required="true" doc="The mdb-destination element specifies a message-driven bean destination"/>
+</tag>
+<tag target="class" name="@jrun.resource-ref" doc="The resource-ref element describes a mapping between the resource name that the bean developer provides and its JNDI name. The deployer provides the actual JNDI name">
+<attribute name="resource-ref-name" required="true" doc="The res-ref-name element gives the name of a resource from EJB view. The bean developer provides this information"/>
+<attribute name="jndi-name" required="true" doc="The jndi-name element gives the JNDI name where the bean or resource will be bound"/>
+<attribute name="user" required="true" doc="The user element assigns a user identity to be used with a specified resource"/>
+<attribute name="password" required="true" doc="The password element provides user credentials to be used with user element to identify and authenticate a specified resource"/>
+</tag>
+<tag target="class" name="@jrun.timeout" doc="The timeout element specifies the timeout value, in seconds, of a stateful session bean. The bean will be passivated if left idle for this duration">
+<attribute name="value" required="true" doc=""/>
+</tag>
+<tag target="class" name="@jrun.tx-domain" doc="The tx-domain-name element gives the transaction domain name in which the bean's transactions will take place">
+<attribute name="value" required="true" doc=""/>
+</tag>
+</doclipse>

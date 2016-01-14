@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+  <description>EJBGen 2.19</description>
+  <tag name="@ejbgen:automatic-key-generation" target="class">
+    <attribute name="type" doc="(Oracle|SQLServer|SQLServer2000|NamedSequenceTable) Specifies the type of the key generator." allowed="Oracle S_q_l_server S_q_l_server2000 Named_sequence_table " required="true"/>
+    <attribute name="cache-size" doc="Specifies the size of the key cache."/>
+    <attribute name="name" doc="Names the key generator."/>
+  </tag>
+  <tag name="@ejbgen:cmp-field" target="method">
+    <attribute name="read-only-in-value-object" doc="(True|False) If True, only the getter will be generated for this field in the value object." allowed="True False "/>
+    <attribute name="table-name" doc="Specifies the table(s) where this field should be mapped."/>
+    <attribute name="group-names" doc="Specifies the names of the groups to which this field belongs, separated by commas."/>
+    <attribute name="exclude-from-value-object" doc="(True|False) If True, this field will not be generated in the value object." allowed="True False "/>
+    <attribute name="ordering-number" doc="(0..n) Specifies the number where this field must appear in signatures and constructors. For this ordering to work, all CMR and CMP fields must have this attribute with a distinct numeric value."/>
+    <attribute name="column" doc="Specifies the column where this CMP field will be mapped." required="true"/>
+    <attribute name="primkey-field" doc="(True|False) Sets whether this field is part of the compound primary key." allowed="True False "/>
+    <attribute name="column-type" doc="(OracleClob|OracleBlob) Specifies the type of this column." allowed="Oracle_clob Oracle_blob "/>
+  </tag>
+  <tag name="@ejbgen:cmr-field" target="method">
+    <attribute name="read-only-in-value-object" doc="(True|False) If True, only the getter will be generated for this field in the value object." allowed="True False "/>
+    <attribute name="group-names" doc="Specifies the names of the groups to which this field belongs, separated by commas."/>
+    <attribute name="exclude-from-value-object" doc="(True|False) If True, this field will not be generated in the value object." allowed="True False "/>
+    <attribute name="ordering-number" doc="(0..n) Specifies the number where this field must appear in signatures and constructors. For this ordering to work, all CMR and CMP fields must have this attribute with a distinct numeric value."/>
+  </tag>
+  <tag name="@ejbgen:compatibility" target="class">
+    <attribute name="serialize-byte-array-to-oracle-blob" doc="(True|False) Whether a cmp-field of type byte[] mappedto a OracleBlob should be serialized" allowed="True False "/>
+  </tag>
+  <tag name="@ejbgen:create-default-dbms-tables" target="class">
+    <attribute name="value" doc="This tag is deprecated; please use @ejbgen:jar-settings."/>
+  </tag>
+  <tag name="@ejbgen:ejb-client-jar" target="class">
+    <attribute name="file-name" doc="This tag is deprecated; please use @ejbgen:jar-settings." required="true"/>
+  </tag>
+  <tag name="@ejbgen:ejb-interface" target="class">
+    <attribute name="ejb-type" doc="(javax.ejb.MessageDrivenBean|javax.ejb.EntityBean|javax.ejb.SessionBean) Specifies the type of this EJB. This tag is not normally used." required="true"/>
+  </tag>
+  <tag name="@ejbgen:ejb-local-ref" target="class">
+    <attribute name="jndi-name" doc="Specifies the JNDI name of the reference."/>
+    <attribute name="local" doc="Names the Local class of the bean."/>
+    <attribute name="type" doc="(Entity|Session) Specifies the reference type." allowed=""/>
+    <attribute name="link" doc="Names the link of the bean."/>
+    <attribute name="name" doc="Names the reference."/>
+    <attribute name="id" doc="The identity of this tag (used for tag inheritance only)."/>
+    <attribute name="home" doc="Names the Home class of the bean."/>
+  </tag>
+  <tag name="@ejbgen:ejb-ref" target="class">
+    <attribute name="jndi-name" doc="Specifies the JNDI name of the reference."/>
+    <attribute name="type" doc="(Entity|Session) Specifies the type of the reference." allowed=""/>
+    <attribute name="link" doc="Specifies the link of the bean."/>
+    <attribute name="name" doc="Names the reference."/>
+    <attribute name="id" doc="The identity of this tag (used for tag inheritance only)."/>
+    <attribute name="remote" doc="Specifies the Remote class of the bean."/>
+    <attribute name="home" doc="Specifies the Home class of the bean."/>
+  </tag>
+  <tag name="@ejbgen:entity" target="class">
+    <attribute name="table-name" doc="Names the table to which this Entity bean is mapped."/>
+    <attribute name="verify-rows" doc="(Read|Modified) Specifies the rows in a table that should be checked when optimistic concurrency is used." allowed="Read Modified "/>
+    <attribute name="clients-on-same-server" doc="(True|False) Specifies whether the clients are colocated with the EJB on the same server." allowed="True False "/>
+    <attribute name="invalidation-target" doc="Targets the ejb-name of a read-only Entity bean to be invalidated when this Container-Managed Persistence Entity EJB is modified."/>
+    <attribute name="use-caller-identity" doc="(True|False) Determines whether or not this EJB uses the callers identity." allowed="True False "/>
+    <attribute name="default-dbms-tables-ddl" doc="Specifies the DDL file name."/>
+    <attribute name="cache-between-transactions" doc="(True|False) Specifies whether to cache the persistent data of an entity bean across (between) transactions." allowed="True False "/>
+    <attribute name="check-exists-on-method" doc="(True|False) Specifies whether the container checks for the existence of a bean for each method call." allowed="True False "/>
+    <attribute name="default-transaction" doc="(NotSupported|Supports|Required|RequiresNew|Mandatory|Never) Sets the default transaction attribute to be applied to all methods that do not have a transaction attribute setting." allowed=""/>
+    <attribute name="order-database-operations" doc="(True|False) Determines whether to sort the database operations." allowed="True False "/>
+    <attribute name="optimistic-column" doc="Specifies the column that holds the timestamp for optimistic concurrency."/>
+    <attribute name="delay-database-insert-until" doc="(ejbCreate|ejbPostCreate)" allowed="Ejb_create Ejb_post_create "/>
+    <attribute name="run-as-identity-principal" doc="Gives the name of the principal in case the role maps to several principals." allowed="True False "/>
+    <attribute name="enable-call-by-reference" doc="(True|False) Specifies whether the container will call this EJB by reference." allowed="True False "/>
+    <attribute name="validate-db-schema-with" doc="(MetaData|TableQuery) Specifies the method used to validate the tables created by the EJB container." allowed="Meta_data Table_query "/>
+    <attribute name="dispatch-policy" doc="Specifies the dispatch policy queue for this bean."/>
+    <attribute name="lock-order" doc="Sets the database locking order of this bean when a transaction involves multiple beans." allowed="Access_order Value_order "/>
+    <attribute name="finders-load-bean" doc="(True|False) If set to True, the beans will immediately be loaded into the cache by the finder." allowed="True False "/>
+    <attribute name="concurrency-strategy" doc="(ReadOnly|Exclusive|Database|Optimistic) Defines the concurrency strategy for this bean." allowed=""/>
+    <attribute name="persistence-type" doc="(cmp|bmp) Sets the type of this Entity bean (default: cmp)." allowed="Cmp Bmp "/>
+    <attribute name="max-beans-in-cache" doc="Sets the maximum number of beans in cache."/>
+    <attribute name="prim-key-class-nogen" doc="(True|False) If this keyword is specified, EJBGen will not generate the primary key class (it is assumed that you are providing it)." allowed="True False "/>
+    <attribute name="initial-beans-in-free-pool" doc="Specifies the initial number of beans in the free pool."/>
+    <attribute name="verify-columns" doc="(Read|Modified|Version|Timestamp) Specifies how optimistic concurrency verifies that the columns have or have not been modified during transactions." allowed="Read Modified Version Timestamp "/>
+    <attribute name="idle-timeout-seconds" doc="Sets the maximum duration an EJB should stay in the cache, in seconds."/>
+    <attribute name="enable-batch-operations" doc="(True|False) Determines whether to perform batch operations." allowed="True False "/>
+    <attribute name="trans-timeout-seconds" doc="Sets the transaction timeout (in seconds)."/>
+    <attribute name="max-beans-in-free-pool" doc="Specifies the maximum number of beans in the free pool."/>
+    <attribute name="disable-warning" doc="A comma-separated line of warnings to disable when running ejbc."/>
+    <attribute name="read-timeout-seconds" doc="Sets the number of seconds between each ejbLoad() call on a read-only Entity bean."/>
+    <attribute name="database-type" doc="(DB2|Informix|Oracle|SQLServer|Sybase|PointBase|SQLServer2000) Specifies the database type of the underlying DBMS." allowed="D_b2 Informix Oracle S_q_l_server Sybase,_point_base S_q_l_server2000 "/>
+    <attribute name="reentrant" doc="(True|False)" allowed="True False "/>
+    <attribute name="delay-updates-until-end-of-tx" doc="(True|False) Determines whether updates will be sent after the transaction has been committed." allowed="True False "/>
+    <attribute name="home-load-algorithm" doc="(RoundRobin|Random|WeightBased|RoundRobinAffinity|RandomAffinity|WeightBasedAffinity) Specifies the algorithm to use for load-balancing between replicas of this home." allowed=""/>
+    <attribute name="ejb-name" doc="Names this Entity bean." required="true"/>
+    <attribute name="enable-dynamic-queries" doc="(True|False) Specifies whether dynamic queries are enabled." allowed="True False "/>
+    <attribute name="db-is-shared" doc="(True|False)" allowed="True False "/>
+    <attribute name="abstract-schema-name" doc="Gives the abstract schema name for this EJB. If not specified, the ejb-name value will be used."/>
+    <attribute name="run-as" doc="Specifies the role-name for this EJB."/>
+    <attribute name="prim-key-class" doc="Names the Java class of the primary key. In case of a compound primary key, this class will be generated by EJBGen." required="true"/>
+    <attribute name="home-is-clusterable" doc="(True|False) Determines whether this bean can be deployed from multiple servers in a cluster." allowed="True False "/>
+    <attribute name="instance-lock-order" doc="(AccessOrder|ValueOrder) The locking order for this Entity bean." allowed="Access_order Value_order "/>
+    <attribute name="use-select-for-update" doc="(True|False) If true, causes SELECT ... FOR UPDATE to be used whenever the bean is loaded from the database." allowed="True False "/>
+    <attribute name="data-source-name" doc="Names the DataSource declared in config.xml."/>
+    <attribute name="home-call-router-class-name" doc="Names the class to be used for routing home method calls."/>
+  </tag>
+  <tag name="@ejbgen:entity-cache-ref" target="class">
+    <attribute name="concurrency-strategy" doc="(ReadOnly|Exclusive|Database) Defines the concurrency strategy for this bean." allowed="" required="true"/>
+    <attribute name="estimated-bean-size" doc="Specifies the estimated average size of the instances of an entity bean, in bytes."/>
+    <attribute name="cache-between-transactions" doc="(True|False) Sets whether to cache the persistent data of an entity bean across (between) transactions." allowed="True False "/>
+    <attribute name="name" doc="Names the cache." required="true"/>
+  </tag>
+  <tag name="@ejbgen:env-entry" target="class">
+    <attribute name="value" doc="Specifies the value for this environment entry." required="true"/>
+    <attribute name="type" doc="(java.lang.Boolean|java.lang.String|java.lang.Character|java.lang.Integer|java.lang.Double|java.lang.Byte|java.lang.Short|java.lang.Long|java.lang.Float) Specifies the Java type for this environment entry (must be fully qualified, even if the type is java.lang)." required="true"/>
+    <attribute name="name" doc="Names this environment entry." required="true"/>
+  </tag>
+  <tag name="@ejbgen:file-generation" target="class">
+    <attribute name="pk-class" doc="(True|False) Whether to generate the primary key class for this EJB." allowed="True False "/>
+    <attribute name="remote-class-name" doc="The name of the remote class to be generated."/>
+    <attribute name="remote-package" doc="The package for the remote interface."/>
+    <attribute name="value-class" doc="(True|False) Whether to generate the value class for this EJB." allowed="True False "/>
+    <attribute name="value-class-name" doc="The name of the value class to be generated."/>
+    <attribute name="local-class-name" doc="The name of the local class to be generated."/>
+    <attribute name="local-package" doc="The package for the local interface."/>
+    <attribute name="remote-home" doc="(True|False) Whether to generate the remote home interface for this EJB." allowed="True False "/>
+    <attribute name="local-home-package" doc="The package for the local home interface."/>
+    <attribute name="remote-home-package" doc="The package for the remote home interface."/>
+    <attribute name="remote-class" doc="(True|False) Whether to generate the remote interface for this EJB." allowed="True False "/>
+    <attribute name="local-home-name" doc="The name of the local home class to be generated."/>
+    <attribute name="local-home" doc="(True|False) Whether to generate the local home interface for this EJB." allowed="True False "/>
+    <attribute name="local-class" doc="(True|False) Whether to generate the local interface for this EJB." allowed="True False "/>
+    <attribute name="remote-home-name" doc="The name of the remote home class to be generated."/>
+  </tag>
+  <tag name="@ejbgen:finder" target="class">
+    <attribute name="isolation-level" doc="(TransactionSerializable|TransactionReadCommitted|TransactionReadUncommitted|TransactionRepeatableRead) Specifies the type of transaction isolation for this method." allowed=""/>
+    <attribute name="transaction-attribute" doc="(NotSupported|Supports|Required|RequiresNew|Mandatory|Never) Specifies the transaction attribute for this local method. If not specified, the default transaction attribute will be used. Methods with this tag will be generated on the Local class." allowed=""/>
+    <attribute name="generate-on" doc="(Local|Remote) Determines which Home this finder will be generated on. If unspecified, it will be generated on both." allowed="Local Remote "/>
+    <attribute name="comment" doc="Defines a comment that will be reproduced above the generated finder Java method."/>
+    <attribute name="id" doc="The identity of this tag (used for tag inheritance only)."/>
+    <attribute name="caching-name" doc="Specifies the name of an eager relationship caching."/>
+    <attribute name="group-name" doc="Names the group for the WebLogic Server query."/>
+    <attribute name="max-elements" doc="Specifies the maximum number of elements that should be returned by a multi-valued query."/>
+    <attribute name="signature" doc="Specifies exactly the signature to be generated on the Home class. EJBGen will add the conformant exceptions, but you must specify the fully qualified type of each parameter, even if it belongs to java.lang."/>
+    <attribute name="sql-select-distinct" doc="(True|False) Determines whether the generated SQL SELECT will contain a DISTINCT qualifier." allowed="True False "/>
+    <attribute name="include-updates" doc="(True|False) Determines whether updates made during the current transaction must be reflected in the result of a query." allowed="True False "/>
+    <attribute name="ejb-ql" doc="Specifies the EJB QL request as it will appear in the deployment descriptor."/>
+    <attribute name="weblogic-ejb-ql" doc="Specifies the Weblogic Server EJB QL request as it will appear in the deployment descriptor. Note: if this request is needed, enclose both EJB-QL and Weblogic Server EJB-QL within double quotes."/>
+  </tag>
+  <tag name="@ejbgen:foreign-jms-provider" target="class">
+    <attribute name="connection-factory-jndi-name" doc="Specifies the connection factory JNDI name."/>
+    <attribute name="provider-url" doc="Specifies the provider URL."/>
+    <attribute name="initial-context-factory" doc="Specifies the initial JNDI context factory."/>
+  </tag>
+  <tag name="@ejbgen:jar-settings" target="class">
+    <attribute name="create-tables" doc="Whether to create tables." allowed="True False "/>
+    <attribute name="ejb-client-jar" doc="Specifies the name of the client JAR to be generated. If multiple EJBs have this tag, only one of the specified JAR files will be included in the deployment descriptor."/>
+    <attribute name="enable-bean-class-redeploy" doc="(True|False) Determines whether this EJB can be redeployed without redeploying the entire module." allowed="True False "/>
+    <attribute name="disable-warning" doc="A comma-separated line of warnings to disable when running ejbc."/>
+  </tag>
+  <tag name="@ejbgen:jndi-name" target="class">
+    <attribute name="local" doc="Specifies the local JNDI name of this EJB. If a local JNDI name is not specified, no local interfaces will be generated."/>
+    <attribute name="remote" doc="Specifies the remote JNDI name of this EJB. If a remote JNDI name is not specified, no remote interfaces will be generated."/>
+  </tag>
+  <tag name="@ejbgen:local-home-method" target="method">
+    <attribute name="ordering-number" doc="(0..n) Specifies the number where this method must appear in the generated class."/>
+    <attribute name="isolation-level" doc="(TransactionSerializable|TransactionReadCommitted|TransactionReadUncommitted|TransactionRepeatableRead) Specifies the type of transaction isolation for this method." allowed=""/>
+    <attribute name="transaction-attribute" doc="(NotSupported|Supports|Required|RequiresNew|Mandatory|Never) Specifies the transaction attribute for this local method. If not specified, the default transaction attribute will be used. Methods with this tag will be generated on the Local class." allowed=""/>
+    <attribute name="roles" doc="Defines a comma-separated list of roles that are allowed to invoke this method."/>
+    <attribute name="is-idempotent" doc="(True|False) Sets whether this method is idempotent." allowed="True False "/>
+  </tag>
+  <tag name="@ejbgen:local-method" target="method">
+    <attribute name="ordering-number" doc="(0..n) Specifies the number where this method must appear in the generated class."/>
+    <attribute name="isolation-level" doc="(TransactionSerializable|TransactionReadCommitted|TransactionReadUncommitted|TransactionRepeatableRead) Specifies the type of transaction isolation for this method." allowed=""/>
+    <attribute name="transaction-attribute" doc="(NotSupported|Supports|Required|RequiresNew|Mandatory|Never) Specifies the transaction attribute for this local method. If not specified, the default transaction attribute will be used. Methods with this tag will be generated on the Local class." allowed=""/>
+    <attribute name="roles" doc="Defines a comma-separated list of roles that are allowed to invoke this method."/>
+    <attribute name="is-idempotent" doc="(True|False) Specifies whether this method is idempotent." allowed="True False "/>
+  </tag>
+  <tag name="@ejbgen:message-driven" target="class">
+    <attribute name="message-selector" doc="Specifies the JMS message selector of this Message-Driven bean."/>
+    <attribute name="durable" doc="(True|False) If the destination-type is Topic, setting this attribute to True will make the subscription durable." allowed="True False "/>
+    <attribute name="initial-beans-in-free-pool" doc="Specifies the initial number of beans in the free pool."/>
+    <attribute name="clients-on-same-server" doc="(True|False) Specifies whether the clients are colocated with the EJB on the same server." allowed="True False "/>
+    <attribute name="jms-polling-interval-seconds" doc="The number of seconds between each attempt to reconnect to the JMS destination."/>
+    <attribute name="remove-as-principal-name" doc="Names the principal to be used when ejbRemove would otherwise run with an anonymous principal."/>
+    <attribute name="destination-jndi-name" doc="Gives the JNDI name of the destination of this Message-Driven bean." required="true"/>
+    <attribute name="transaction-type" doc="(Bean|Container) Specifies where the transactions for this EJB are managed." allowed="Bean Container "/>
+    <attribute name="trans-timeout-seconds" doc="Specifies the transaction timeout (in seconds)."/>
+    <attribute name="use-caller-identity" doc="(True|False) Specifies whether this EJB uses callers identity." allowed="True False "/>
+    <attribute name="max-beans-in-free-pool" doc="Specifies the maximum number of beans in the free pool."/>
+    <attribute name="default-transaction" doc="(NotSupported|Required) Specifies the transaction attribute to be applied to all methods that do not have a specific transaction attribute setting." allowed="Not_supported Required "/>
+    <attribute name="run-as-identity-principal" doc="Specifies the name of the principal in case the role maps to several principals."/>
+    <attribute name="dispatch-policy" doc="Specifies the dispatch policy queue for this bean."/>
+    <attribute name="passivate-as-principal-name" doc="Names the principal to be used when ejbPassivate would otherwise run with an anonymous principal."/>
+    <attribute name="ejb-name" doc="Specifies the name of this Message-Driven bean." required="true"/>
+    <attribute name="acknowledge-mode" doc="(auto-acknowledge|dups-ok-acknowledge) Specifies the acknowledgement mode of this Message-Driven bean." allowed="Auto_acknowledge Dups_ok_acknowledge "/>
+    <attribute name="run-as" doc="Specifies the role-name for this EJB."/>
+    <attribute name="jms-client-id" doc="The client id of this EJB."/>
+    <attribute name="create-as-principal-name" doc="Names the principal to be used when ejbCreate would otherwise run with an anonymous principal."/>
+    <attribute name="destination-type" doc="(javax.jms.Queue|javax.jms.Topic) Specifies the destination type of the Message-Driven bean." required="true"/>
+  </tag>
+  <tag name="@ejbgen:method-isolation-level-pattern" target="class">
+    <attribute name="isolation-level" doc="(TransactionSerializable|TransactionReadCommitted|TransactionReadUncommitted|TransactionRepeatableRead) Specifies the isolation level for the methods specified in the pattern tag." allowed="" required="true"/>
+    <attribute name="pattern" doc="Specifies the pattern that matches all methods that will receive this isolation level (e.g. *)." required="true"/>
+    <attribute name="id" doc="The identity of this tag (used for tag inheritance only)."/>
+  </tag>
+  <tag name="@ejbgen:method-permission-pattern" target="class">
+    <attribute name="interface" doc="(Home|Remote|LocalHome|Local) Specifies the interface to which this permission pattern applies." allowed=""/>
+    <attribute name="unchecked" doc="(True|False) Whether this pattern will apply to unchecked methods." allowed="True False "/>
+    <attribute name="pattern" doc="Specifies the pattern that matches all methods that will receive this method permission (e.g. *)." required="true"/>
+    <attribute name="roles" doc="Specifies the roles for the methods specified in the pattern tag, separated by a comma."/>
+    <attribute name="id" doc="The identity of this tag (used for tag inheritance only)."/>
+    <attribute name="itf" doc="(Home|Remote|LocalHome|Local) Specifies the interface to which this permission pattern applies." allowed=""/>
+  </tag>
+  <tag name="@ejbgen:relation" target="class">
+    <attribute name="joint-table" doc="Only needed in a Many-Many relationship. Must be the name of an existing table that will be used to hold the joint table containing the relationships. If you are using a compound primary key, specify a set of corresponding foreign keys separated by a comma."/>
+    <attribute name="multiplicity" doc="(one|many) Sets the multiplicity of the relationship." allowed="One Many " required="true"/>
+    <attribute name="fk-column" doc="Needed only in a relationship having at least one One side. The non-One side EJB must declare the column that it will use to store the primary key of its counterpart."/>
+    <attribute name="primary-key-table" doc="The name of a DBMS table that contains a primary-key."/>
+    <attribute name="foreign-key-table" doc="The name of a DBMS table that contains a foreign-key."/>
+    <attribute name="role-name" doc="The name of this role (such as ParentHasChildren). If no role name is given, EJBGen will generate one for you. You must specify a role-name in order to inherit relations."/>
+    <attribute name="db-cascade-delete" doc="(True|False) Determines whether a cascade delete will use the built-in cascade delete facilities of the underlying DBMS." allowed="True False "/>
+    <attribute name="cmr-field" doc="Specifies the CMR field where this relationship will be kept. This field is optional. If it not present, the relationship is unidirectional. If it is present, the attribute fk-column must be specified as well."/>
+    <attribute name="cascade-delete" doc="(True|False)" allowed="True False "/>
+    <attribute name="target-ejb" doc="Specifies the EJB name of the target of this relationship, which is used to generate the role name. If not supplied, a unique string will be generated."/>
+    <attribute name="name" doc="Specifies the name of the relationship. Use the same name on both ends of a relationship (note that this constraint applies to unidirectional relationships as well)." required="true"/>
+    <attribute name="id" doc="The identity of this tag (used for tag inheritance only)."/>
+  </tag>
+  <tag name="@ejbgen:relationship-caching-element" target="class">
+    <attribute name="caching-name" doc="Specifies the name of an eager relationship caching." required="true"/>
+    <attribute name="group-name" doc="Specifies the name of the group to be loaded for the CMR field."/>
+    <attribute name="parent-id" doc="Specifies the parent ID of this element."/>
+    <attribute name="cmr-field" doc="Provides a comma-separated list of CMR field names." required="true"/>
+    <attribute name="id" doc="The identity of this tag (used for tag inheritance only)."/>
+  </tag>
+  <tag name="@ejbgen:remote-home-method" target="method">
+    <attribute name="ordering-number" doc="(0..n) Specifies the number where this method must appear in the generated class."/>
+    <attribute name="isolation-level" doc="(TransactionSerializable|TransactionReadCommitted|TransactionReadUncommitted|TransactionRepeatableRead) Specifies the type of transaction isolation for this method." allowed=""/>
+    <attribute name="transaction-attribute" doc="(NotSupported|Supports|Required|RequiresNew|Mandatory|Never) Specifies the transaction attribute for this remote method. If not specified, the default transaction attribute will be used. Methods with this tag will be generated on the Remote class." allowed=""/>
+    <attribute name="roles" doc="Specifies a comma-separated list of roles that are allowed to invoke this method."/>
+    <attribute name="is-idempotent" doc="(True|False) Specifies whether this method is idempotent." allowed="True False "/>
+  </tag>
+  <tag name="@ejbgen:remote-method" target="method">
+    <attribute name="ordering-number" doc="(0..n) Specifies the number where this method must appear in the generated class."/>
+    <attribute name="isolation-level" doc="(TransactionSerializable|TransactionReadCommitted|TransactionReadUncommitted|TransactionRepeatableRead) Specifies the type of transaction isolation for this method." allowed=""/>
+    <attribute name="transaction-attribute" doc="(NotSupported|Supports|Required|RequiresNew|Mandatory|Never) Specifies the transaction attribute for this remote method. If not specified, the default transaction attribute will be used. Methods with this tag will be generated on the Remote class." allowed=""/>
+    <attribute name="roles" doc="Defines a comma-separated list of roles that are allowed to invoke this method."/>
+    <attribute name="is-idempotent" doc="(True|False) Determines whether this method is idempotent." allowed="True False "/>
+  </tag>
+  <tag name="@ejbgen:resource-env-ref" target="class">
+    <attribute name="jndi-name" doc="Gives the JNDI name of the resource."/>
+    <attribute name="type" doc="Specifies the type of the environment resource references (e.g., javax.jms.Queue)." required="true"/>
+    <attribute name="name" doc="Names the resource environment reference." required="true"/>
+    <attribute name="id" doc="The identity of this tag (used for tag inheritance only)."/>
+  </tag>
+  <tag name="@ejbgen:resource-ref" target="class">
+    <attribute name="jndi-name" doc="Specifies the JNDI name of the resource." required="true"/>
+    <attribute name="type" doc="Specifies the type of the resource (e.g., javax.sql.DataSource)." required="true"/>
+    <attribute name="auth" doc="(Application|Container)" allowed="Application Container " required="true"/>
+    <attribute name="sharing-scope" doc="(Shareable|Unshareable)" allowed="Shareable Unshareable "/>
+    <attribute name="name" doc="Names the resource." required="true"/>
+    <attribute name="id" doc="The identity of this tag (used for tag inheritance only)."/>
+  </tag>
+  <tag name="@ejbgen:role-mapping" target="class">
+    <attribute name="global-role" doc="(True|False) True if this role is global."/>
+    <attribute name="role-name" doc="Specifies the name of the role." required="true"/>
+    <attribute name="externally-defined" doc="(True|False) Trus if this role is defined externally." allowed="True False "/>
+    <attribute name="principals" doc="Specifies the names of the principals in this role (separated by commas)."/>
+    <attribute name="id" doc="The identity of this tag (used for tag inheritance only)."/>
+  </tag>
+  <tag name="@ejbgen:security-role-ref" target="class">
+    <attribute name="role-name" doc="Specifies the name of the security role." required="true"/>
+    <attribute name="id" doc="The identity of this tag (used for tag inheritance only)."/>
+    <attribute name="role-link" doc="References a defined security role."/>
+  </tag>
+  <tag name="@ejbgen:select" target="method">
+    <attribute name="caching-name" doc="Specifies the name of an eager relationship caching."/>
+    <attribute name="max-elements" doc="Specifies the maximum number of elements that should be returned by a multi-valued query."/>
+    <attribute name="group-name" doc="Names the group for the WebLogic Server query."/>
+    <attribute name="sql-select-distinct" doc="(True|False) Determines whether the generated SQL SELECT will contain a DISTINCT qualifier." allowed="True False "/>
+    <attribute name="ordering-number" doc="(0..n) Specifies the number where this method must appear in the generated class."/>
+    <attribute name="include-updates" doc="(True|False) Determines whether updates made during the current transaction must be reflected in the result of a query." allowed="True False "/>
+    <attribute name="ejb-ql" doc="Specifies the EJB-QL that defines this select method. The method name must start with ejbSelect."/>
+    <attribute name="weblogic-ejb-ql" doc="Specifies the Weblogic Server EJB-QL request as it will appear in the deployment descriptor. Note: if this request is needed, enclose both EJB-QL and Weblogic Server EJB-QL within double quotes."/>
+    <attribute name="result-type-mapping" doc="(Remote|Local) Specifies whether the returned objects are mapped to EJBLocalObject or EJBObject." allowed="Local Remote "/>
+  </tag>
+  <tag name="@ejbgen:service-ref" target="class">
+    <attribute name="wsdl-uri" doc="Location of the WSDL file." required="true"/>
+    <attribute name="package-name" doc="Package name for the clientgen generated classes/interfaces."/>
+    <attribute name="jaxrpc-mapping-file" doc="Name of the jax-rpc mapping file. If not provided, clientgen will choose a name."/>
+    <attribute name="handler-chain-uri" doc="The location of the XML file that contains the handler chain information."/>
+    <attribute name="name" doc="Name of this service in the WSDL fi." required="true"/>
+  </tag>
+  <tag name="@ejbgen:session" target="class">
+    <attribute name="is-clusterable" doc="(True|False) Sets whether this bean is clusterable." allowed="True False "/>
+    <attribute name="replication-type" doc="(InMemory|None) Specifies how to replicate stateful session beans in a cluster." allowed="In_memory None "/>
+    <attribute name="clients-on-same-server" doc="(True|False) Specifies whether the clients are colocated with the EJB on the same server." allowed="True False "/>
+    <attribute name="service-endpoint" doc="The fully-qualified name of the enterprise beans web service endpoint interface."/>
+    <attribute name="use-caller-identity" doc="(True|False) Specifies whether this EJB uses callers identity." allowed="True False "/>
+    <attribute name="persistent-store-dir" doc="Specifies the directory in which to store the passivated beans."/>
+    <attribute name="call-router-class-name" doc="Gives class name to be used for routing home method calls."/>
+    <attribute name="methods-are-idempotent" doc="(True|False) Specifies whether the methods for this stateless session bean are idempotent or not." allowed="True False "/>
+    <attribute name="default-transaction" doc="(NotSupported|Supports|Required|RequiresNew|Mandatory|Never) Specifies the transaction attribute to be applied to all methods that do not have a specific transaction attribute setting." allowed=""/>
+    <attribute name="run-as-identity-principal" doc="Specifies the name of the principal when the role maps to several principals." allowed="True False "/>
+    <attribute name="enable-call-by-reference" doc="(True|False) Specifies whether the container will call this EJB by reference." allowed="True False "/>
+    <attribute name="dispatch-policy" doc="Specifies the dispatch policy queue for this bean."/>
+    <attribute name="passivate-as-principal-name" doc="Names the principal to be used when ejbPassivate would otherwise run with an anonymous principal." allowed="True False "/>
+    <attribute name="max-beans-in-cache" doc="Specifies the maximum number of beans in the cache."/>
+    <attribute name="initial-beans-in-free-pool" doc="Specifies the initial number of beans in the free pool."/>
+    <attribute name="allow-remove-during-transaction" doc="(True|False) Specifies whether remove() can be invoked during a transaction." allowed="True False "/>
+    <attribute name="idle-timeout-seconds" doc="Specifies the maximum duration an EJB remains cached."/>
+    <attribute name="type" doc="(Stateless|Stateful) Specifies the type of the Session bean. If this attribute is not specified, EJBGen will guess the right type by looking at the ejbCreate() methods on your class." allowed="Stateless Stateful "/>
+    <attribute name="remove-as-principal-name" doc="Names the principal to be used when ejbRemove would otherwise run with an anonymous principal." allowed="True False "/>
+    <attribute name="trans-timeout-seconds" doc="Specifies the transaction timeout (in seconds)."/>
+    <attribute name="transaction-type" doc="(Bean|Container) Specifies who manages the transactions for this EJB." allowed="Bean Container "/>
+    <attribute name="allow-concurrent-calls" doc="(True|False) Specifies whether to allow concurrent calls on that EJB." allowed="True False "/>
+    <attribute name="max-beans-in-free-pool" doc="Specifies the maximum number of beans in the free pool."/>
+    <attribute name="session-timeout-seconds" doc="Specifies the number of seconds an EJB stays alive before being passivated."/>
+    <attribute name="bean-load-algorithm" doc="Specifies the algorithm to be used for load-balancing among replicas of this bean."/>
+    <attribute name="cache-type" doc="(NRU|LRU) Specifies the type of the cache for this stateful Session bean." allowed="N_r_u L_r_u "/>
+    <attribute name="home-load-algorithm" doc="(RoundRobin|Random|WeightBased|RoundRobinAffinity|RandomAffinity|WeightBasedAffinity) Specifies the algorithm to use for load-balancing between replicas of this home." allowed=""/>
+    <attribute name="ejb-name" doc="Names this Session bean." required="true"/>
+    <attribute name="run-as" doc="Specifies the role-name for this EJB."/>
+    <attribute name="home-is-clusterable" doc="(True|False) Specifies whether this bean can be deployed from multiple servers in a cluster." allowed="True False "/>
+    <attribute name="home-call-router-class-name" doc="Names class to be used for routing home method calls."/>
+    <attribute name="create-as-principal-name" doc="Names the principal to be used when ejbCreate would otherwise run with an anonymous principal." allowed="True False "/>
+  </tag>
+  <tag name="@ejbgen:value-object" target="class">
+    <attribute name="reference" doc="(Local|Value) Specifies what objects the value object class should reference when accessing other EJBs." allowed="Local Value "/>
+  </tag>
+  <tag name="@ejbgen:value-object-field" target="method">
+    <attribute name="ordering-number" doc="(0..n) Specifies the number where this field must appear in signatures and constructors. For this ordering to work, all container-managed fields must have this attribute with a distinct numeric value."/>
+  </tag>
+</doclipse>

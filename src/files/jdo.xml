@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@jdo.persistence-capable" doc="The jdo.persistence-capable tag provides information about the JDO persistent bean. Its presence determines if your class will be included in the generated jdo metadata.">
+<attribute name="identity-type" required="true" allowed="application,datastore,nondurable" doc="Specifies whether objects are uniquely identified by a jdo-implementation provided abstract identifier (datastore identity), accessible fields in the object (application identity), or not at all (nondurable identity)."/>
+<attribute name="objectid-class" doc="The fully-qualified class name for the application identity object id. Use only with application identity."/>
+<attribute name="requires-extent" doc="Specifies whether the jdo implementation must provide an extent for this class."/>
+<attribute name="persistence-capable-superclass" doc="Fully-qualified class name of the PersistenceCapable super class, if any."/>
+</tag>
+<tag target="class" name="@sql.table" doc="Defines the mapping to a relational database. To use if the JDO bean is to be persisted on a relational database.">
+<attribute name="table-name" doc="Name of the table to map to."/>
+</tag>
+<tag target="field" name="@jdo.field" doc="Defines a JDO persistent field. The jdo.field tag can be used on any persistent field or to specify non-default properties. Many jdo implementation require explicit listing of collection-valued fields.">
+<attribute name="persistence-modifier" allowed="persistent,transactional,none" doc="Specifies if the field is persistent, transactional or none of these."/>
+<attribute name="primary-key" doc="Specifies whether or not this field is part of the primary key for application identity."/>
+<attribute name="null-value" allowed="exception,default,none" doc="Specifies the treatment (exception, default, or none) of null values for persistent fields during storage in the data store."/>
+<attribute name="default-fetch-group" doc="Specifies whether this field is managed as a group with other fields. It defaults to &quot;true&quot; for non-key fields of primitive types, java.util.Date, and fields of java.lang, java.math types specified above."/>
+<attribute name="embedded" doc="Specifies whether the field should be stored if possible as part of the instance instead of as its own instance in the datastore. It defaults to &quot;true&quot; for fields of primitive types, java.util.Date, and fields of java.lang, java.math, and array types specified above. This attribute is only a hint to the implementation. A compliant implementation is permitted to support these types as first class instances in the datastore. A portable application should not depend on the embedded treatment of persistent fields."/>
+<attribute name="collection-type" allowed="collection,map,array" doc="The collection-type property specifies the type (collection, map, or array) of a collection valued field and provides details about the elements and their storage. "/>
+<attribute name="element-type" doc="The element-type property specifies the fully qualified java class name of the element of a collection or array-valued persistent field."/>
+<attribute name="embedded-element" doc="The embedded-element property specifies whether the elements of a collection or array-valued persistent field should be stored embedded or as first class objects."/>
+<attribute name="key-type" doc="The key-type property specifies the fully qualified java class name of the keys of map-valued persistent field."/>
+<attribute name="embedded-key" doc="The embedded-key property specifies whether the keys of a map-valued persistent field should be stored embedded or as first class objects."/>
+<attribute name="value-type" doc="The value-type property specifies the fully qualified java class name of the values of map-valued persistent field."/>
+<attribute name="embedded-value" doc="The embedded-value property specifies whether the values of a map-valued persistent field should be stored embedded or as first class objects."/>
+</tag>
+<tag target="field" name="@sql.field" doc="Defines the mapping of a field to a relational database. To use if the JDO bean is to be persisted on a relational database. Usually only one @jdo.mapping tag is required for a basic persistent field, except for fields that link to a persistence-capable class, where there are as many @jdo.mapping tags as there are foreign keys to this class, and for fields that represent a 1:n relationship where no @jdo.mapping tag is required, and finally for fields that represent a n:m relationship where there are as many @jdo.mapping tags as there are foreign keys from the relation table to the table for this class.">
+<attribute name="table-name" doc="(Experimental) For basic fields part of an inheritance mapping onto multiple tables, the name of the table that the field is mapped to."/>
+<attribute name="column-name" required="true" doc="Name of the column to map the field to. For fields representing a n:m relationship, name of one of the foreign key column in the relation table pointing to the table for this class."/>
+<attribute name="related-field" doc="Name of the field in this class matching the foreign key in the relation table."/>
+</tag>
+<tag target="field" name="@sql.relation" doc="Further defines the mapping of a field of type Collection.">
+<attribute name="style" required="true" allowed="foreign-key,relation-table" doc="The style of the mapping between this class and the objects contained in the collection. For 1:n relationships, the style is 'foreign-key'. For n:m relationships, the style is 'relation-table'"/>
+<attribute name="table-name" doc="Name of the relation table when style is 'relation-table'"/>
+<attribute name="related-field" doc="Name of the field in the class contained in the collection refering to this class. For a 1:n relationship, this is a field of the same type as this class, for a n:m relationship, it is a field of type Collection containing elements of the same type as this class."/>
+</tag>
+</doclipse>

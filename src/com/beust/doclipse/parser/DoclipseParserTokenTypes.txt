@@ -1,0 +1,8 @@
+// $ANTLR 2.7.3: src/doclipse.g -> DoclipseParserTokenTypes.txt$
+DoclipseParser    // output token vocab name
+TAG=4
+IDENTIFIER=5
+EQ=6
+"\""=7
+DQ=8
+WS=9

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doclipse>
+    <description>AXIS tags</description>
+    <!-- Apache axis -->
+    <tag name="@axis.service" target="class">
+        <attribute name="name" required="true"/>
+        <attribute name="scope" required="true"/>
+        <attribute name="provider"/>
+        <attribute name="include-all"/>
+    </tag>
+    <tag name="@axis.method" target="method">
+    </tag>
+</doclipse>

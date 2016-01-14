@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@mock.generate" doc="Specifies that the class should have a mock class created for it">
+<attribute name="className" doc="The name of the class to create"/>
+</tag>
+</doclipse>

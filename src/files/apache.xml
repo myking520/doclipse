@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@axis.service" doc="Declares the class an Axis SOAP service.">
+<attribute name="name" required="true" doc="Define the service's name."/>
+<attribute name="scope" required="true" allowed="Request,Session,Application" doc="Define the service scope."/>
+<attribute name="provider" doc="Specifies the provider type."/>
+<attribute name="include-all" doc="If set to true, all methods will be exposed, without regard to whether or not they are tagged with @axis.method. "/>
+</tag>
+<tag target="method" name="@axis.method" doc="Declares the method a SOAP service method. Does not have any parameters. Note: By default &quot;create&quot; methods of session bean is used, no need to explicitly specify a method as axis.method."/>
+<tag target="class" name="@soap.service" doc="Declares the class a SOAP service.">
+<attribute name="scope" required="true" allowed="Page,Request,Session,Application" doc="Define the service scope."/>
+<attribute name="provider" doc="Specifies the provider class name. There's special support for EJB beans, so if you do not specify the provider parameter, Apache Soap tries to assign the correct provider name to the service based on the type of the EJB bean. The provider name for the EJB is taken from statelessSessionEjbProvider or statefulSessionEjbProvider or entityEjbProvider configuration parameters based on the EJBean type."/>
+<attribute name="urn" doc="The URN for the service."/>
+<attribute name="type" allowed="message" doc="Sets the service type. The only valid value is &quot;message&quot;."/>
+<attribute name="checkMustUnderstands" doc="Declares whether or not the server is to throw a Fault if there are SOAP headers in the request which are marked as &quot;MustUnderstand&quot;."/>
+</tag>
+<tag target="method" name="@soap.method" doc="Declares the method a SOAP service method. Does not have any parameters. Note: By default &quot;create&quot; methods of session bean is used, no need to explicitly specify a method as soap.method. All methods declared in remote interface of an EJB are automatically exposed to SOAP clients by default."/>
+<tag target="class" name="@struts.form" doc="Defines a form bean and its attributes.">
+<attribute name="name" required="true" doc="Define a unique name for the form."/>
+<attribute name="extends" doc="Define which class the generated form must extend."/>
+<attribute name="implements" doc="Define which interface the generated form must implement."/>
+<attribute name="include-pk" doc="Whether to include pk field in form. Default is true. If set to false, individual pk fields can still be included."/>
+<attribute name="include-all" doc="Whether to include all persistent fields in form. Default is false."/>
+</tag>
+<tag target="method" name="@struts.form-field" doc="Include property in specific struts form">
+<attribute name="form-name" doc=""/>
+</tag>
+<tag target="class" name="@struts.action" doc="Defines the action class and its attributes">
+<attribute name="name" required="true" doc="The name of the action. Must be unique within the bounds of the Struts application"/>
+<attribute name="path" required="true" doc="The path that the action will match."/>
+<attribute name="scope" required="true" allowed="request,session,application" doc="Define the scope of the action. &quot;request&quot; | &quot;session&quot; | &quot;application&quot;"/>
+<attribute name="input" required="true" doc="The path to the input for the Action"/>
+<attribute name="roles" doc="Comma-delimited list of security role names that are allowed access to this ActionMapping object. Since Struts 1.1."/>
+<attribute name="validate" required="true" doc="The validation flag for the action"/>
+<attribute name="parameter" required="true" doc="The optional parameter for the action"/>
+</tag>
+<tag target="class" name="@struts.action-forward" doc="Defines local forwards for a Struts action class">
+<attribute name="name" required="true" doc="The name of the forward"/>
+<attribute name="path" required="true" doc="The path of the forward"/>
+</tag>
+<tag target="class" name="@struts.action-exception" doc="Defines the action specific exception handling">
+<attribute name="key" required="true" doc="The key to use with this handler's message resource bundle that will retrieve the error message template for this exception."/>
+<attribute name="type" required="true" doc="Fully qualified Java class name of the exception type to register with this handler."/>
+<attribute name="className" doc="The configuration bean for this ExceptionHandler object. If specified, className must be a subclass of the default configuration bean."/>
+<attribute name="handler" doc="Fully qualified Java class name for this exception handler."/>
+<attribute name="path" doc="The module-relative URI to the resource that will complete the request/response if this exception occurs."/>
+<attribute name="scope" doc="The context (&quot;request&quot; or &quot;session&quot;) that is used to access the ActionError object [org.apache.struts.action.ActionError] for this exception."/>
+</tag>
+<tag target="method" name="@struts.validator" doc="Defines Struts Validator for current setter field.">
+<attribute name="type" required="true" doc="Validator type, such as &quot;required&quot;"/>
+<attribute name="msgkey" doc="Override key for the validator error message"/>
+<attribute name="msgvalue" doc="Explicitly define a validator error message"/>
+<attribute name="page" doc="Only fields with a &quot;page&quot; attribute value that is equal to or less than the page property on the form JavaBean are processed."/>
+<attribute name="arg0value" doc="Value of argument index 0"/>
+<attribute name="arg0resource" doc="Resource key of argument index 0"/>
+<attribute name="arg1value" doc="Value of argument index 1"/>
+<attribute name="arg1resource" doc="Resource key of argument index 1"/>
+<attribute name="arg2value" doc="Value of argument index 2"/>
+<attribute name="arg2resource" doc="Resource key of argument index 2"/>
+<attribute name="arg3value" doc="Value of argument index 3"/>
+<attribute name="arg3resource" doc="Resource key of argument index 3"/>
+</tag>
+<tag target="method" name="@struts.validator-args" doc="Defines arguments for current setter field.">
+<attribute name="arg0value" doc="Value of argument index 0"/>
+<attribute name="arg0resource" doc="Resource key of argument index 0"/>
+<attribute name="arg1value" doc="Value of argument index 1"/>
+<attribute name="arg1resource" doc="Resource key of argument index 1"/>
+<attribute name="arg2value" doc="Value of argument index 2"/>
+<attribute name="arg2resource" doc="Resource key of argument index 2"/>
+<attribute name="arg3value" doc="Value of argument index 3"/>
+<attribute name="arg3resource" doc="Resource key of argument index 3"/>
+</tag>
+<tag target="method" name="@struts.validator-var" doc="Defines Struts Validator variable">
+<attribute name="name" required="true" doc="Variable name"/>
+<attribute name="value" required="true" doc="Variable value"/>
+</tag>
+</doclipse>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@jonas.bean" doc="The jonas.bean element declares the JOnAS specific information for an enterprise bean.">
+<attribute name="ejb-name" required="true" doc="The enterprise bean's name specified in the standard EJB deployment descriptor."/>
+<attribute name="jndi-name" doc="The JNDI name of the enterprise bean's home. Concerns only the Entity and Session beans. Mandatory if version &lt; 2.5, but optional for Session beans for 2.5 onwards."/>
+</tag>
+<tag target="class" name="@jonas.resource" doc="The jonas.resource element declares the JOnAS specific information for an external resource referenced by a bean.">
+<attribute name="res-ref-name" required="true" doc="The name of the resource reference specified in the standard EJB deployment descriptor."/>
+<attribute name="jndi-name" required="true" doc="The JNDI name of the resource."/>
+</tag>
+<tag target="class" name="@jonas.resource-env" doc="The jonas.resource-env element declares the JOnAS specific information for an external resource environment referenced by a bean.">
+<attribute name="resource-env-ref-name" required="true" doc="The name of the resource environment reference specified in the standard EJB deployment descriptor."/>
+<attribute name="jndi-name" required="true" doc="The JNDI name of the resource environment."/>
+</tag>
+<tag target="class" name="@jonas.ejb-ref" doc="The jonas.ejb-ref element declares the JOnAS specific information for a reference to another enterprise bean's home.">
+<attribute name="ejb-ref-name" required="true" doc="The name of the ejb reference specified in the standard EJB deployment descriptor."/>
+<attribute name="jndi-name" required="true" doc="The JNDI name of the ejb."/>
+</tag>
+<tag target="class" name="@jonas.session-timeout" doc="The jonas.session-timeout element specifies the value of timeout in seconds for expiration of session instances.">
+<attribute name="session-timeout" required="true" doc="The value of timeout in seconds for expiration of session instances."/>
+</tag>
+<tag target="class" name="@jonas.is-modified-method-name" doc="The jonas.is-modified-method-name element specifies the name of the is-modified method of an entity.">
+<attribute name="is-modified-method-name" required="true" doc="The name of the is-modified method of an entity."/>
+</tag>
+<tag target="class" name="@jonas.shared" doc="The jonas.shared element specifies if the bean state can be accessed outside JOnAS. This tag has only been present since version 2.4.">
+<attribute name="shared" required="true" doc="True if the bean state can be accessed outside JOnAS. The default is False."/>
+</tag>
+<tag target="class" name="@jonas.passivation-timeout" doc="The jonas.passivation-timeout element specifies the value of timeout in seconds for passivation of entity instances when no transaction are used.">
+<attribute name="passivation-timeout" required="true" doc="The value of timeout in seconds for passivation of entity instances when no transaction are used."/>
+</tag>
+<tag target="class" name="@jonas.max-cache-size" doc="The jonas.max-cache-size element defines the max number of instances that can be hold in memory. The default value is infinite. This tag has only been present since version 2.4.">
+<attribute name="max-cache-size" required="true" doc="The max number of instances that can be hold in memory. The default value is infinite."/>
+</tag>
+<tag target="class" name="@jonas.min-pool-size" doc="The jonas.min-pool-size element specify the number of instances that will be created to populate the pool when the bean is loaded for the first time. The default value is 0. This tag has only been present since version 2.4.">
+<attribute name="min-pool-size" required="true" doc="The number of instances that will be created to populate the pool when the bean is loaded for the first time. The default value is 0."/>
+</tag>
+<tag target="class" name="@jonas.jdbc-mapping" doc="The jonas.jdbc-mapping element declares the mapping of an entity with container-managed persistence to the underlying database.">
+<attribute name="jndi-name" required="true" doc="The JNDI name of the datasource."/>
+<attribute name="automatic-pk" doc="True or False for use automatic generation of primary key."/>
+<attribute name="jdbc-table-name" required="true" doc="The name of the relational table."/>
+</tag>
+<tag target="method" name="@jonas.cmp-field-jdbc-mapping" doc="The jonas.cmp-field-jdbc-mapping element declares the mapping of a container-managed field of an entity to a column of a relational table.">
+<attribute name="field-name" required="true" doc="The field's name."/>
+<attribute name="jdbc-field-name" required="true" doc="The column name of the relational table."/>
+</tag>
+<tag target="class" name="@jonas.finder-method-jdbc-mapping" doc="The jonas.finder-method-jdbc-mapping element declares the SQL WHERE clause associated to a finder method of a container-managed persistence entity.">
+<attribute name="method-name" required="true" doc="The method's name."/>
+<attribute name="method-params" doc="Identifies a single method among multiple methods with an overloaded method name."/>
+<attribute name="jdbc-where-clause" required="true" doc="The SQL WHERE clause."/>
+</tag>
+<tag target="class" name="@jonas.message-driven-destination" doc="The jonas.jonas-message-driven-destination element declares the JOnAS specific information for a the message driven bean destination.">
+<attribute name="jndi-name" required="true" doc="The JNDI name of the message driven destination."/>
+</tag>
+</doclipse>

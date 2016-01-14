@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@pramati.bean" doc="Please give a usage description">
+<attribute name="is-secure" doc="Please give a description"/>
+<attribute name="low-activity-interval" doc="Please give a description"/>
+<attribute name="max-pool-size" doc="Please give a description"/>
+<attribute name="min-pool-size" doc="Please give a description"/>
+<attribute name="run-as-principal" doc="Please give a description"/>
+<attribute name="session-timeout" doc="Please give a description"/>
+</tag>
+<tag target="class" name="@pramati.destination-mapping" doc="Please give a usage description">
+<attribute name="conn-factory" doc="Please give a description"/>
+<attribute name="destination-link" doc="Please give a description"/>
+</tag>
+<tag target="class" name="@pramati.ejb-local-ref" doc="Please give a usage description">
+<attribute name="ejb-link" doc="Please give a description"/>
+<attribute name="ejb-ref-name" doc="Please give a description"/>
+</tag>
+<tag target="class" name="@pramati.ejb-ref" doc="Please give a usage description">
+<attribute name="ejb-link" doc="Please give a description"/>
+<attribute name="ejb-ref-name" doc="Please give a description"/>
+</tag>
+<tag target="class" name="@pramati.resource-env-ref" doc="Please give a usage description">
+<attribute name="resource-env-ref-link" doc="Please give a description"/>
+<attribute name="resource-env-ref-name" doc="Please give a description"/>
+<attribute name="resource-env-ref-type" doc="Please give a description"/>
+</tag>
+<tag target="class" name="@pramati.resource-mapping" doc="Please give a usage description">
+<attribute name="resource-link" doc="Please give a description"/>
+<attribute name="resource-name" doc="Please give a description"/>
+<attribute name="resource-type" doc="Please give a description"/>
+</tag>
+<tag target="class" name="@pramati.server-session" doc="Please give a usage description">
+<attribute name="max-messages" doc="Please give a description"/>
+<attribute name="max-pool-size" doc="Please give a description"/>
+<attribute name="min-pool-size" doc="Please give a description"/>
+</tag>
+<tag target="class" name="@pramati.thread-pool" doc="Please give a usage description">
+<attribute name="max-pool-size" doc="Please give a description"/>
+<attribute name="min-pool-size" doc="Please give a description"/>
+</tag>
+<tag target="class" name="@pramati.persistence" doc="Please give a usage description">
+<attribute name="exclusion-type" doc="Please give a description"/>
+</tag>
+</doclipse>

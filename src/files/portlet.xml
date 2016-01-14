@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@portlet.portlet" doc="Defines a portlet class.">
+<attribute name="display-name" doc="The portlet's description."/>
+<attribute name="display-name" doc="The portlet's display-name. The display-name contains a short name that is intended to be displayed by tools. The display name need not be unique."/>
+<attribute name="expiration-cache" doc="The time (in seconds) after which the portlet output expires. -1 indicates that the output never expires."/>
+<attribute name="name" required="true" doc="The canonical name of the portlet. Must be unique within the portlet application."/>
+</tag>
+<tag target="class" name="@portlet.portlet-info" doc="Defines additional portlet information.">
+<attribute name="title" doc="Static title for the portlet."/>
+<attribute name="keywords" doc="Comma-separate list of keywords associated with this portlet."/>
+<attribute name="short-title" doc="Short version of the portlet's static title."/>
+</tag>
+<tag target="class" name="@portlet.portlet-init-param" doc="Defines a portlet initialization parameter.">
+<attribute name="description" doc="The init parameter's description."/>
+<attribute name="name" required="true" doc="The name of the initialization parameter."/>
+<attribute name="value" required="true" doc="The value of the initialization parameter."/>
+</tag>
+<tag target="class" name="@portlet.preference" doc="Defines portlet preference. A preference is configuration data for the portlet that the portlet user is allowed to set when customizing their portal.">
+<attribute name="read-only" doc="If &quot;true&quot;, the preference cannot be modified by the user."/>
+<attribute name="name" required="true" doc="The name of the preference."/>
+<attribute name="value" required="true" doc="The initial value of the preference. This value can be overridden when each user customizes their portlet."/>
+</tag>
+<tag target="class" name="@portlet.preferences-validator" doc="Declares the portlet's preferences validator.">
+<attribute name="class" required="true" doc="The fully qualified class name of the preferences validator. "/>
+</tag>
+<tag target="class" name="@portlet.security-role-ref" doc="Declares a security role reference for the portlet.">
+<attribute name="description" doc="The description of the security role reference."/>
+<attribute name="role-link" required="true" doc="The description of the security role reference."/>
+<attribute name="role-name" required="true" doc="The description of the security role reference."/>
+</tag>
+<tag target="class" name="@portlet.supports" doc="Defines what portlet modes (edit,help,view) are supported for a particular mime-type.">
+<attribute name="mime-type" required="true" doc="The mime-type for which mode-support is being defined."/>
+<attribute name="modes" required="true" doc="A comma-separated list of modes supported by the specified mime-type."/>
+</tag>
+</doclipse>

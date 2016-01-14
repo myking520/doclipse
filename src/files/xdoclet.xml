@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@xdoclet.taghandler" doc="Class tag to put on Tags Handler classes">
+<attribute name="namespace" required="true" doc="Define the namespace (without XDt) for the tags handler. Example : PkTagsHandler have namespace=&quot;EjbPk&quot; and the templates will look like &lt;XDtEjbPk:xxx/&gt;"/>
+</tag>
+<tag target="class" name="@xdoclet.merge-file" doc="Class tag to document a subtask's templates' merge points.">
+<attribute name="file" required="true" doc="The filename pattern of the merge file. This will either be a simple filename (e.g. assembly-descriptor.xml) or a filename pattern (e.g. ejb-env-entries-{0}.xml) and should match the &quot;file&quot; parameter of the &lt;XDtMerge:merge/&gt; template tag."/>
+<attribute name="relates-to" doc="The generated file to which a given merge point relates. Helps to clarify things if a given subtask generates a number of types of file (e.g. a deployment descriptor and a CMP mapping file)"/>
+<attribute name="description" required="true" doc="A description of what the merge point is used for, and what the merge file should contain."/>
+</tag>
+<tag target="method" name="@doc.tag" doc="Indicates that the method implements a template tag.">
+<attribute name="type" required="true" allowed="block,content" doc="Specifies whether it is a content or block type tag."/>
+</tag>
+<tag target="method" name="@doc.param" doc="Describes a parameter of the template tag.">
+<attribute name="name" doc="The name of the parameter."/>
+<attribute name="optional" doc="Whether the parameter is optional. Default is true."/>
+<attribute name="values" doc="Comma-separated list of possible values the parameter can take."/>
+<attribute name="description" required="true" doc="A description of the parameter."/>
+</tag>
+<tag target="field" name="@msg.message" doc="Place this tag on static final string fields initialised with property key">
+<attribute name="msg" required="true" doc="message itself"/>
+<attribute name="language" doc="Language code i.e &quot;de&quot;, &quot;en&quot;, &quot;fr&quot;"/>
+<attribute name="country" doc="Country code i.e. &quot;DE&quot;, &quot;US&quot;, &quot;UK&quot;"/>
+<attribute name="variant" doc="variant - have no example at this time. Somebody please provide it."/>
+</tag>
+<tag target="class" name="@msg.bundle" doc="Use on class level to customize generation of message bundles and translator classes."/>
+</doclipse>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doclipse>
+    <description>SOAP tags</description>
+    <!-- Apache SOAP -->
+    <tag name="@soap.service" target="class">
+        <attribute name="scope" required="true"/>
+        <attribute name="provider"/>
+        <attribute name="include-all"/>
+        <attribute name="urn"/>
+        <attribute name="type"/>
+        <attribute name="checkMustUnderstands"/>
+    </tag>
+    <tag name="@soap.method" target="method">
+    </tag>
+</doclipse>

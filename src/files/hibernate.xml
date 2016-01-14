@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+<tag target="class" name="@hibernate.class" doc="Declare a persistent class">
+<attribute name="table" doc="The name of its database table"/>
+<attribute name="discriminator-value" doc="A value that distinguishes the particular subclass"/>
+<attribute name="mutable" allowed="true,false" doc="Specifies that instances of the class are (not) mutable"/>
+<attribute name="dynamic-update" doc="Specifies that only changed columns should appear in the SQL UPDATE"/>
+<attribute name="dynamic-insert" doc="Specifies that null columns should not appear in the SQL INSERT"/>
+<attribute name="select-before-update" doc="Specifies that an SQL update should never be performed unless the object is actually modified"/>
+<attribute name="polymorphism" allowed="explicit,implicit" doc="Enable &quot;explicit&quot; polymorphism"/>
+<attribute name="schema" doc="Override the schema name specified by the root hibernate-mapping element"/>
+<attribute name="proxy" doc="Specifies an interface to use for CGLIB proxies"/>
+<attribute name="where" doc="the where clause to use when loading elements for this class"/>
+</tag>
+<tag target="class" name="@hibernate.subclass" doc="Declare the current class as subclass">
+<attribute name="discriminator-value" doc="A value that distinguishes the particular subclass"/>
+<attribute name="proxy" doc="Specifies an interface to use for CGLIB proxies"/>
+<attribute name="dynamic-update" doc="Specifies that only changed columns should appear in the SQL UPDATE"/>
+<attribute name="dynamic-insert" doc="Specifies that null columns should not appear in the SQL INSERT"/>
+</tag>
+<tag target="class" name="@hibernate.discriminator" doc="Defines a discriminator">
+<attribute name="column" required="true" doc="The name of the mapped database table column"/>
+<attribute name="type" doc="The Hibernate type"/>
+<attribute name="length" doc="The length of the mapped database table column"/>
+</tag>
+<tag target="class" name="@hibernate.joined-subclass" doc="Declare the current class as joined subclass">
+<attribute name="proxy" doc="Specifies an interface to use for CGLIB proxies"/>
+<attribute name="dynamic-update" doc="Specifies that only changed columns should appear in the SQL UPDATE"/>
+<attribute name="dynamic-insert" doc="Specifies that null columns should not appear in the SQL INSERT"/>
+<attribute name="schema" doc="Override the schema name specified by the root hibernate-mapping element"/>
+</tag>
+<tag target="class" name="@hibernate.joined-subclass-key" doc="Declares a joined-subclass key">
+<attribute name="column" required="true" doc="The name of the mapped database table column"/>
+</tag>
+<tag target="class" name="@hibernate.cache" doc="Enables caching">
+<attribute name="usage" required="true" allowed="read-write,nonstrict-read-write,read-only,transactional" doc="Defines the cache semantics"/>
+</tag>
+<tag target="class" name="@hibernate.jcs-cache" doc="Enables caching (deprecated)">
+<attribute name="usage" required="true" allowed="read-write,nonstrict-read-write,read-only,transactional" doc="Defines the cache semantics. nonstrict-read-write only applies to version 2.0 and later."/>
+</tag>
+<tag target="class" name="@hibernate.query" doc="Declare a named query for class">
+<attribute name="name" required="true" doc="Name of this query"/>
+<attribute name="query" required="true" doc="Query contents"/>
+</tag>
+<tag target="method" name="@hibernate.id" doc="Declares an identifier property">
+<attribute name="column" doc="The name of the mapped database table column"/>
+<attribute name="type" doc="The Hibernate type"/>
+<attribute name="length" doc="The length of the mapped database table column"/>
+<attribute name="unsaved-value" doc="A value that distinguishes transient instances with existing persistent state from new transient instances"/>
+<attribute name="generator-class" required="true" allowed="uuid.hex,uuid.string,increment,assigned,native,identity,sequence,hilo,seqhilo,foreign" doc="The key generator class"/>
+</tag>
+<tag target="method" name="@hibernate.generator-param" doc="Specifies an id generator parameter value">
+<attribute name="name" required="true" doc="The name of the parameter"/>
+<attribute name="value" required="true" doc="The parameter value"/>
+</tag>
+<tag target="method" name="@hibernate.property" doc="Defines a property">
+<attribute name="column" doc="The name of the mapped database table column"/>
+<attribute name="type" doc="The Hibernate type"/>
+<attribute name="length" doc="The length of the mapped database table column"/>
+<attribute name="not-null" doc="If the column is not nullable"/>
+<attribute name="unique" doc="If the column is unique"/>
+<attribute name="insert" doc="Should the column appear in the SQL INSERT"/>
+<attribute name="update" doc="Should the column appear in the SQL UPDATE"/>
+</tag>
+<tag target="method" name="@hibernate.component" doc="Declares a component">
+<attribute name="class" doc="A fully qualified class name"/>
+<attribute name="prefix" doc="When multiple Java fields are of the same component datatype, use this to specify a descriminating column-name-prefix"/>
+</tag>
+<tag target="method" name="@hibernate.version" doc="Declares a version property">
+<attribute name="column" doc="The name of a column holding the version number"/>
+<attribute name="type" allowed="integer,short,long,timestamp,calendar" doc="The Hibernate type"/>
+<attribute name="access" allowed="field,property,ClassName" doc="The strategy Hibernate should use for accessing the property value."/>
+<attribute name="unsaved-value" allowed="null,negative,undefined" doc="A version property value that indicates that an instance is newly instantiated (unsaved), distinguishing it from transient instances that were saved or loaded in a previous session (undefined specifies that the identifier property value should be used)."/>
+</tag>
+<tag target="method" name="@hibernate.timestamp" doc="Declares a timestamp property">
+<attribute name="column" doc="The name of an column holding the timestamp"/>
+</tag>
+<tag target="method" name="@hibernate.many-to-one" doc="Declares a many-to-one association">
+<attribute name="column" doc="The name of the mapped database table column"/>
+<attribute name="class" doc="The name of the associated class"/>
+<attribute name="cascade" allowed="all,none,save-update,delete" doc="Specifies which operations should be cascaded from the parent object to the associated object"/>
+<attribute name="not-null" doc="If the column is not nullable"/>
+<attribute name="unique" doc="If the column is unique"/>
+<attribute name="outer-join" allowed="true,false,auto" doc="Enable outer-join fetching"/>
+<attribute name="insert" doc="Should the column appear in the SQL INSERT"/>
+<attribute name="update" doc="Should the column appear in the SQL UPDATE"/>
+<attribute name="property-ref" doc="The name of a property of the associated class that is joined to this foreign key. If not specified, the primary key of the associated class is used."/>
+<attribute name="foreign-key" doc="The name of the foreign key constraint to associate with this association."/>
+</tag>
+<tag target="method" name="@hibernate.one-to-one" doc="Declares a one-to-one association">
+<attribute name="class" doc="The name of the associated class"/>
+<attribute name="property-ref" doc="bi-directional reference to one-to-one table that holds the foreign key"/>
+<attribute name="constrained" doc="Is there a foreign key constraint"/>
+<attribute name="cascade" allowed="all,none,save-update,delete" doc="Specifies which operations should be cascaded from the parent object to the associated object"/>
+<attribute name="outer-join" allowed="true,false,auto" doc="Enable outer-join fetching for this association when hibernate.use_outer_join is set"/>
+<attribute name="foreign-key" doc="The name of the foreign key constraint to associate with this association."/>
+</tag>
+<tag target="method" name="@hibernate.column" doc="Customize column mapping">
+<attribute name="name" required="true" doc="The column name"/>
+<attribute name="length" doc="The column length"/>
+<attribute name="unique" doc="Is the column unique"/>
+<attribute name="not-null" doc="Is the column nullable"/>
+<attribute name="index" doc="The name of an index"/>
+<attribute name="unique-key" doc="The name of a unique constraint"/>
+<attribute name="sql-type" doc="The SQL column type"/>
+<attribute name="formula" doc="An SQL expression that defines the value for a computed property. Computed properties do not have a column mapping of their own."/>
+</tag>
+<tag target="method" name="@hibernate.set" doc="Defines a set">
+<attribute name="inverse" doc="If inverse collection"/>
+<attribute name="table" doc="Defaults to role name: the name of the collection table (not used for one-to-many associations)"/>
+<attribute name="schema" doc="The name of a table schema to override the schema declared"/>
+<attribute name="lazy" doc="Enable lazy initialization"/>
+<attribute name="cascade" allowed="all,none,save-update,delete" doc="Specifies which operations should be cascaded from the parent object to the associated object"/>
+<attribute name="sort" doc="Specify a sorted collection with natural sort order or a given comparator class"/>
+<attribute name="order-by" doc="Specify table columns that define the iteration order"/>
+<attribute name="where" doc="An SQL WHERE condition"/>
+</tag>
+<tag target="method" name="@hibernate.bag" doc="Defines a bag">
+<attribute name="inverse" doc="If inverse collection"/>
+<attribute name="table" doc="The name of the collection table (not used for one-to-many associations)"/>
+<attribute name="schema" doc="The name of a table schema to override the schema declared"/>
+<attribute name="lazy" doc="Enable lazy initialization"/>
+<attribute name="cascade" allowed="all,none,save-update,delete" doc="Specifies which operations should be cascaded from the parent object to the associated object"/>
+<attribute name="order-by" doc="Specify table columns that define the iteration order"/>
+<attribute name="where" doc="An SQL WHERE condition"/>
+</tag>
+<tag target="method" name="@hibernate.list" doc="Defines a List">
+<attribute name="table" doc="The name of the collection table (not used for one-to-many associations)"/>
+<attribute name="schema" doc="The name of a table schema to override the schema declared"/>
+<attribute name="lazy" doc="Enable lazy initialization"/>
+<attribute name="cascade" allowed="all,none,save-update,delete" doc="Specifies which operations should be cascaded from the parent object to the associated objects"/>
+<attribute name="where" doc="An SQL WHERE condition"/>
+</tag>
+<tag target="method" name="@hibernate.map" doc="Defines a map">
+<attribute name="table" doc="The name of the collection table (not used for one-to-many associations)"/>
+<attribute name="schema" doc="The name of a table schema to override the schema declared"/>
+<attribute name="lazy" doc="Enable lazy initialization"/>
+<attribute name="cascade" allowed="all,save-update,delete,none" doc="Specifies which operations should be cascaded from the parent object to the associated object"/>
+<attribute name="sort" doc="Specify a sorted collection with natural sort order or a given comparator class"/>
+<attribute name="order-by" doc="Specify table columns that define the iteration order"/>
+<attribute name="where" doc="An SQL WHERE condition"/>
+</tag>
+<tag target="method" name="@hibernate.array" doc="Defines an array">
+<attribute name="table" doc="The name of the collection table (not used for one-to-many associations)"/>
+<attribute name="schema" doc="The name of a table schema to override the schema declared"/>
+<attribute name="cascade" allowed="all,none,save-update,delete" doc="Specifies which operations should be cascaded from the parent object to the associated object"/>
+<attribute name="where" doc="An SQL WHERE condition"/>
+</tag>
+<tag target="method" name="@hibernate.primitive-array" doc="Defines a primitive-array">
+<attribute name="table" doc="The name of the collection table (not used for one-to-many associations)"/>
+<attribute name="schema" doc="The name of a table schema to override the schema declared"/>
+<attribute name="cascade" allowed="all,none,save-update,delete" doc="Specifies which operations should be cascaded from the parent object to the associated object"/>
+<attribute name="where" doc="An SQL WHERE condition"/>
+</tag>
+<tag target="method" name="@hibernate.collection-key" doc="Declares a collection key">
+<attribute name="column" required="true" doc="The name of the mapped database table column"/>
+</tag>
+<tag target="method" name="@hibernate.collection-key-column" doc="Defines a column for a collection key">
+<attribute name="name" required="true" doc="The column name"/>
+<attribute name="length" doc="The column length"/>
+<attribute name="unique" doc="Is the column unique"/>
+<attribute name="not-null" doc="Is the column nullable"/>
+<attribute name="index" doc="The name of an index"/>
+<attribute name="unique-key" doc="The name of a unique constraint"/>
+<attribute name="sql-type" doc="The SQL column type"/>
+</tag>
+<tag target="method" name="@hibernate.collection-index" doc="Declares a collection index. This will be used as index for the arrays, sotring field for the lists or keys in the map">
+<attribute name="column" required="true" doc="The name of the mapped database table column"/>
+<attribute name="type" doc="The Hibernate type"/>
+<attribute name="length" doc="The length of the mapped database table column"/>
+</tag>
+<tag target="method" name="@hibernate.index-many-to-many" doc="Declares many-to-many collection index. Will be used as map key for ternary associations. Shall be entity?">
+<attribute name="column" required="true" doc="The name of the mapped database table column"/>
+<attribute name="class" required="true" doc="Entity to be used as key in the ternary association maps"/>
+<attribute name="foreign-key" doc="The name of the foreign key constraint to associate with this association."/>
+</tag>
+<tag target="method" name="@hibernate.collection-element" doc="Declares a collection element">
+<attribute name="column" required="true" doc="The name of the mapped database table column"/>
+<attribute name="type" required="true" doc="The Hibernate type"/>
+<attribute name="length" doc="The length of the mapped database table column"/>
+<attribute name="not-null" doc="Is the column nullable"/>
+<attribute name="unique" doc="Is the column unique"/>
+</tag>
+<tag target="method" name="@hibernate.collection-composite-element" doc="Declares a composite collection element">
+<attribute name="class" required="true" doc="The name of the element class"/>
+</tag>
+<tag target="method" name="@hibernate.collection-many-to-many" doc="Declares a many-to-many relationship">
+<attribute name="column" required="true" doc="The name of the mapped database table column"/>
+<attribute name="class" doc="Fully qualified class name"/>
+<attribute name="outer-join" allowed="true,false,auto" doc="Enable outer-join fetching"/>
+</tag>
+<tag target="method" name="@hibernate.collection-one-to-many" doc="Declares a one-to-many relationship">
+<attribute name="class" doc="Fully qualified class name of the associated class"/>
+</tag>
+<tag target="method" name="@hibernate.collection-cache" doc="Enables caching">
+<attribute name="usage" required="true" allowed="read-write,nonstrict-read-write,read-only,transactional" doc="Defines the cache semantics"/>
+</tag>
+<tag target="method" name="@hibernate.collection-jcs-cache" doc="Enables caching (deprecated)">
+<attribute name="usage" required="true" allowed="read-write,nonstrict-read-write,read-only,transactional" doc="Defines the cache semantics"/>
+</tag>
+</doclipse>
