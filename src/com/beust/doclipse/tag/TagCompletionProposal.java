@@ -18,7 +18,6 @@ import com.beust.doclipse.Attribute;
 import com.beust.doclipse.DoclipseCompletionProposal;
 import com.beust.doclipse.DoclipsePlugin;
 import com.beust.doclipse.Utils;
-import com.beust.doclipse.preferences.Preferences;
 
 
 /**
@@ -49,7 +48,7 @@ public class TagCompletionProposal
   public void apply(IDocument document) {
     try {
       StringBuffer completion = new StringBuffer(getName());
-      Tag tag = DoclipsePlugin.getTag(getName());
+      Tag tag = DoclipsePlugin.getDoclipseProject().getTag(getName());
       
       assert null != tag : "Didn't find tag " + getName();
       
@@ -62,7 +61,7 @@ public class TagCompletionProposal
         Attribute a = (Attribute) it.next();
         // TODO:  use the indent preference instead of hardcoding
         // two spaces
-        String eq = Preferences.insertSpacesAroundEqual() ? " = " : "=";  
+        String eq = DoclipsePlugin.getDoclipseProject().insertSpacesAroundEqual() ? " = " : "=";  
         completion.append("\n *   " + a.getName() + eq);
       }
       document.replace(m_offset, m_length, completion.toString()); 

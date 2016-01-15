@@ -11,22 +11,13 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import com.beust.doclipse.preferences.Preferences;
 import com.beust.doclipse.tag.Tag;
 
 /**
- *@
- * The main plugin class to be used in the desktop.
+ * @ The main plugin class to be used in the desktop.
  */
 public class DoclipsePlugin extends AbstractUIPlugin {
-	/**
-	*
-	*/
-
-	protected void initializeDefaultPreferences(IPreferenceStore store) {
-		Preferences.initializeDefaultPreferences(store);
-	}
-
+	public static Map<IProject, DoclipseProject> projects = new HashMap<IProject, DoclipseProject>();
 	// The shared instance.
 	private static DoclipsePlugin plugin;
 	// Resource bundle.
@@ -51,7 +42,6 @@ public class DoclipsePlugin extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		initTags();
 	}
 
 	/**
@@ -88,84 +78,22 @@ public class DoclipsePlugin extends AbstractUIPlugin {
 		return resourceBundle;
 	}
 
-	//////////////////
 
-	static private Map m_externalTags = new HashMap();
-	static private Map m_internalTags = new HashMap();
-	static private Map m_allTags = new HashMap();
-	public static  Map<IProject,DoclipseProject> projects=new HashMap<IProject,DoclipseProject>();
-	private void initTags() {
-		// Retrieve the external directory
-		String directory = Preferences.getExternalDirectory();
-
-		// Retrieve the external checked files from the IPreferenceStore
-		Map extFiles = Preferences.getExternalCheckedFiles();
-		DefinitionFile[] files = Utils.readDirectory(directory, extFiles);
-		setExternalTags(parseTags(files));
-
-		// Retrieve the internal checked files from the IPreferenceStore
-		Map intFiles = Preferences.getInternalCheckedFiles();
-		DefinitionFile[] internalFiles = Utils.readInternalFiles(intFiles);
-		setInternalTags(parseTags(internalFiles));
-		refreshAllTags();
-	}
-	private static void refreshAllTags() {
-		m_allTags = new HashMap();
-		putAll(m_allTags, m_internalTags);
-		putAll(m_allTags, m_externalTags);
-	}
-
-	private static void putAll(Map to, Map from) {
-		to.putAll(from);
-	}
-
-	static public Map getTags() {
-		IProject project=DoclipseProject.getCurrentProject();
-		DoclipseProject doclipseProject=projects.get(project);
-		if(doclipseProject==null){
-			doclipseProject=new DoclipseProject(project);
+	public static DoclipseProject getDoclipseProject(IProject project) {
+		DoclipseProject doclipseProject = projects.get(project);
+		if (doclipseProject == null) {
+			doclipseProject = new DoclipseProject(project);
 			projects.put(project, doclipseProject);
 		}
-		return doclipseProject.getAllTags();
+		return doclipseProject;
 	}
 
-	static public void setExternalTags(Map tags) {
-		m_externalTags = tags;
-		refreshAllTags();
+	public static DoclipseProject getDoclipseProject() {
+		IProject project = DoclipseProject.getCurrentProject();
+		return getDoclipseProject(project);
 	}
+	
 
-	static private void setInternalTags(Map tags) {
-		putAll(m_internalTags, tags);
-	}
 
-	static public Tag getTag(String tagName) {
-		return (Tag) m_allTags.get(tagName);
-	}
 
-	/**
-	 * @return
-	 */
-	public static Map parseTags(DefinitionFile[] files) {
-		Map result = new HashMap();
-		for (int i = 0; i < files.length; i++) {
-			Map tags = files[i].getTags();
-			for (Iterator it = tags.keySet().iterator(); it.hasNext();) {
-				String name = (String) it.next();
-				Tag tag = (Tag) tags.get(name);
-				result.put(name, tag);
-			}
-		}
-		return result;
-	}
-	/**
-	 * @param definitionFiles
-	 */
-	public static void updateExternalTags(DefinitionFile[] definitionFiles) {
-		m_externalTags = parseTags(definitionFiles);
-		refreshAllTags();
-	}
-	public static void updateInternalTags(DefinitionFile[] definitionFiles) {
-		setInternalTags(parseTags(definitionFiles));
-		refreshAllTags();
-	}
 }

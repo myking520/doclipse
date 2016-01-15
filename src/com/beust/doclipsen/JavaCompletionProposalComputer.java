@@ -55,7 +55,7 @@ public class JavaCompletionProposalComputer implements IJavaCompletionProposalCo
 	@Override
 	public List<ICompletionProposal> computeCompletionProposals(ContentAssistInvocationContext context,
 			IProgressMonitor monitor) {
-		Map tags = DoclipsePlugin.getTags();
+		Map tags = DoclipsePlugin.getDoclipseProject().getAllTags();
 		List vResult = new ArrayList();
 		int offset = context.getInvocationOffset();
 		JavadocContentAssistInvocationContext javadoc = (JavadocContentAssistInvocationContext) context;
@@ -161,7 +161,7 @@ public class JavaCompletionProposalComputer implements IJavaCompletionProposalCo
 	public List<IContextInformation> computeContextInformation(ContentAssistInvocationContext context,
 			IProgressMonitor monitor) {
 		List<IContextInformation> result = new ArrayList<IContextInformation>();
-		Map tags = DoclipsePlugin.getTags();
+		Map tags = DoclipsePlugin.getDoclipseProject().getAllTags();
 
 		int i = 0;
 		for (Iterator it = tags.values().iterator(); it.hasNext();) {

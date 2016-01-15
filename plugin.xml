@@ -42,6 +42,9 @@
    <javaCompletionProposalComputer
       class="com.beust.doclipsen.JavaCompletionProposalComputer"
       activate="true">
+      <partition
+            type="__java_javadoc">
+      </partition>
    </javaCompletionProposalComputer>
  </extension>
 </plugin>

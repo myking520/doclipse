@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.internal.ui.packageview.PackageFragmentRootContainer;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorInput;
@@ -48,6 +49,10 @@ public class DoclipseProject {
 	private Map allTags = new HashMap();
 	private IProject project;
 	private Preferences preferences;
+
+	public Preferences getPreferences() {
+		return preferences;
+	}
 
 	public DoclipseProject(IProject project) {
 		super();
@@ -117,8 +122,10 @@ public class DoclipseProject {
 	}
 
 	private void initProjectPreferences() {
-		String checkedFiles = "ejbgen.xml hibernate.xml";
-		String[] checkedFilesArray = { "ejbgen.xml", "hibernate.xml", };
+		String checkedFiles = "";
+//		String checkedFiles = "ejbgen.xml hibernate.xml";
+		String[] checkedFilesArray = { };
+//		String[] checkedFilesArray = { "ejbgen.xml", "hibernate.xml", };
 		this.preferences.put(SPACES_AROUND_EQUAL_SIGNS, "True");
 		this.preferences.put(SURROUND_WITH_DOUBLE_QUOTES, "True");
 		this.preferences.put(INTERNAL_CHECKED_FILES, checkedFiles);
@@ -155,13 +162,14 @@ public class DoclipseProject {
 		ProjectPreferences preferences = (ProjectPreferences) eclipsePreferences.node(ProjectScope.SCOPE);
 		preferences = (ProjectPreferences) preferences.node(project.getName());
 		try {
-			if(!preferences.nodeExists(DoclipsePlugin.class.getName())){
-				this.preferences=(ProjectPreferences) preferences.node(DoclipsePlugin.class.getName());
+			if (!preferences.nodeExists(DoclipsePlugin.class.getName())) {
+				this.preferences = (ProjectPreferences) preferences.node(DoclipsePlugin.class.getName());
 				this.initProjectPreferences();
 				this.preferences.flush();
-			};
+			} else {
+				this.preferences = (ProjectPreferences) preferences.node(DoclipsePlugin.class.getName());
+			}
 		} catch (BackingStoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -193,4 +201,70 @@ public class DoclipseProject {
 
 		return result;
 	}
+
+	public boolean surroundWithDoubleQuotes() {
+		boolean result = this.preferences.getBoolean(SURROUND_WITH_DOUBLE_QUOTES, false);
+		return result;
+	}
+
+	public boolean insertSpacesAroundEqual() {
+		boolean result = this.preferences.getBoolean(SPACES_AROUND_EQUAL_SIGNS, false);
+		return result;
+	}
+
+	public void saveSurroundWithDoubleQuotes(boolean f) {
+		preferences.putBoolean(SURROUND_WITH_DOUBLE_QUOTES, f);
+	}
+
+	public void saveInsertSpacesAroundEqual(boolean f) {
+		preferences.putBoolean(SPACES_AROUND_EQUAL_SIGNS, f);
+	}
+
+	public void updateInternalTags(DefinitionFile[] definitionFiles) {
+		setInternalTags(parseTags(definitionFiles));
+		refreshAllTags();
+	}
+
+	public void setInternalTags(Map tags) {
+		internalTags=new HashMap();
+		internalTags.putAll(tags);
+	}
+
+	public void saveInternalCheckedFiles(Map files) {
+		saveCheckedFiles(files, INTERNAL_CHECKED_FILES);
+	}
+
+	public Map getInternalCheckedFiles() {
+		return getCheckedFiles(INTERNAL_CHECKED_FILES);
+	}
+
+	public void saveExternalCheckedFiles(Map files) {
+		saveCheckedFiles(files, EXTERNAL_CHECKED_FILES);
+	}
+
+	public void saveExternalDirectory(String dir) {
+		preferences.put(EXTERNAL_DIRECTORY, dir);
+	}
+
+	public String getExternalDirectory() {
+		return preferences.get(EXTERNAL_DIRECTORY, "");
+	}
+
+	public Map getExternalCheckedFiles() {
+		return getCheckedFiles(EXTERNAL_CHECKED_FILES);
+	}
+
+	public Tag getTag(String name) {
+		return (Tag) this.allTags.get(name);
+	}
+
+	/**
+	 * @param definitionFiles
+	 */
+	public  void updateExternalTags(DefinitionFile[] definitionFiles) {
+		externalTags = parseTags(definitionFiles);
+		refreshAllTags();
+	}
+	
+
 }

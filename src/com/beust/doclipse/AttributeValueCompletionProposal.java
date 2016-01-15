@@ -2,7 +2,6 @@ package com.beust.doclipse;
 
 import org.eclipse.jface.text.IDocument;
 
-import com.beust.doclipse.preferences.Preferences;
 
 
 /**
@@ -16,7 +15,7 @@ extends DoclipseCompletionProposal
 {
     public AttributeValueCompletionProposal(String tagName, String value) {
       super(value, null /* no doc for attribute values */);
-      m_completion = Preferences.surroundWithDoubleQuotes() ? "\"" + value + "\"" : value; 
+      m_completion = DoclipsePlugin.getDoclipseProject().surroundWithDoubleQuotes() ? "\"" + value + "\"" : value; 
     }
     
     public void apply(IDocument document, char trigger, int offset) {
