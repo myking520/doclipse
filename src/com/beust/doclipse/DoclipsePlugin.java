@@ -15,6 +15,7 @@ import com.beust.doclipse.preferences.Preferences;
 import com.beust.doclipse.tag.Tag;
 
 /**
+ *@
  * The main plugin class to be used in the desktop.
  */
 public class DoclipsePlugin extends AbstractUIPlugin {
@@ -125,7 +126,7 @@ public class DoclipsePlugin extends AbstractUIPlugin {
 			doclipseProject=new DoclipseProject(project);
 			projects.put(project, doclipseProject);
 		}
-		return m_allTags;//doclipseProject.getAllTags();
+		return doclipseProject.getAllTags();
 	}
 
 	static public void setExternalTags(Map tags) {

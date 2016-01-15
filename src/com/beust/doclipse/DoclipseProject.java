@@ -5,13 +5,14 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.eclipse.core.internal.preferences.PreferencesService;
+import org.eclipse.core.internal.resources.ProjectPreferences;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.internal.ui.packageview.PackageFragmentRootContainer;
@@ -21,6 +22,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.internal.Workbench;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 
@@ -80,7 +82,7 @@ public class DoclipseProject {
 	}
 
 	/**
-	 * @return
+	 * @return 根据当前编辑器获得工程
 	 */
 	private static IProject getProjectByEditorInput() {
 		IEditorInput input = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage().getActiveEditor()
@@ -99,19 +101,19 @@ public class DoclipseProject {
 	private void initTags() {
 		try {
 			this.loadProjectPreferences();
-			 String directory = this.preferences.get(EXTERNAL_DIRECTORY, "");
-			 Map extFiles = getCheckedFiles(EXTERNAL_CHECKED_FILES);
-			 DefinitionFile[] files = Utils.readDirectory(directory, extFiles);
-			 externalTags = parseTags(files);
-			 Map intFiles = getCheckedFiles(INTERNAL_CHECKED_FILES);
-			 DefinitionFile[] internalFiles = Utils.readInternalFiles(intFiles);
-			 internalTags = (parseTags(internalFiles));
-			 refreshAllTags();
+			String directory = this.preferences.get(EXTERNAL_DIRECTORY, "");
+			Map extFiles = getCheckedFiles(EXTERNAL_CHECKED_FILES);
+			DefinitionFile[] files = Utils.readDirectory(directory, extFiles);
+			externalTags = parseTags(files);
+			Map intFiles = getCheckedFiles(INTERNAL_CHECKED_FILES);
+			DefinitionFile[] internalFiles = Utils.readInternalFiles(intFiles);
+			internalTags = (parseTags(internalFiles));
+			refreshAllTags();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
+
 	}
 
 	private void initProjectPreferences() {
@@ -124,22 +126,22 @@ public class DoclipseProject {
 		for (int i = 0; i < checkedFilesArray.length; i++) {
 			internalFiles.put(checkedFilesArray[i], checkedFilesArray[i]);
 		}
-		saveCheckedFiles(internalFiles,INTERNAL_CHECKED_FILES);
-		saveCheckedFiles(null,EXTERNAL_CHECKED_FILES);
+		saveCheckedFiles(internalFiles, INTERNAL_CHECKED_FILES);
+		saveCheckedFiles(null, EXTERNAL_CHECKED_FILES);
 	}
-	 private void saveCheckedFiles(Map files, String key) {
-	    StringBuffer sb = new StringBuffer();
-	    
-	    if (null != files) {
-	      for (Iterator it = files.values().iterator(); it.hasNext(); ) {
-	        sb.append(it.next()).append(" ");
-	      }
-	    }
-	    else {
-	      sb.append(ALL);
-	    }
+
+	private void saveCheckedFiles(Map files, String key) {
+		StringBuffer sb = new StringBuffer();
+
+		if (null != files) {
+			for (Iterator it = files.values().iterator(); it.hasNext();) {
+				sb.append(it.next()).append(" ");
+			}
+		} else {
+			sb.append(ALL);
+		}
 		this.preferences.put(key, sb.toString());
-	  }
+	}
 
 	private void refreshAllTags() {
 		Map allTags = new HashMap();
@@ -150,22 +152,14 @@ public class DoclipseProject {
 
 	private void loadProjectPreferences() {
 		IEclipsePreferences eclipsePreferences = Platform.getPreferencesService().getRootNode();
-		Preferences preferences = eclipsePreferences.node(ProjectScope.SCOPE);
-		preferences = preferences.node(this.project.getName());
-		Preferences returnp = null;
+		ProjectPreferences preferences = (ProjectPreferences) eclipsePreferences.node(ProjectScope.SCOPE);
+		preferences = (ProjectPreferences) preferences.node(project.getName());
 		try {
-			if (!preferences.nodeExists(preferences.absolutePath()+"/"+DoclipsePlugin.class.getName())) {
-				returnp = preferences.node(DoclipsePlugin.class.getName());
-				this.preferences = returnp;
-				initProjectPreferences();
-				try {
-					preferences.flush();
-				} catch (BackingStoreException e) {
-					e.printStackTrace();
-				}
-			}else{
-				this.preferences = preferences.node(DoclipsePlugin.class.getName());
-			}
+			if(!preferences.nodeExists(DoclipsePlugin.class.getName())){
+				this.preferences=(ProjectPreferences) preferences.node(DoclipsePlugin.class.getName());
+				this.initProjectPreferences();
+				this.preferences.flush();
+			};
 		} catch (BackingStoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
