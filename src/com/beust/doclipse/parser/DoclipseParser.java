@@ -35,6 +35,7 @@ public class DoclipseParser extends antlr.LLkParser       implements DoclipsePar
         s = argv[0];
       }
       System.out.println("Parsing " + s);
+      
       {
 	      StringReader sr = new StringReader(s);
 	      DoclipseLexer dl = new DoclipseLexer(sr);
