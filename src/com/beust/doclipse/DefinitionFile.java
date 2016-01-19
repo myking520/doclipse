@@ -179,8 +179,9 @@ public class DefinitionFile {
   private String[] parseMultiString(Node node) {
     List vResult = new ArrayList();
     
-    if (null != node) {
-      StringTokenizer st = new StringTokenizer(node.getNodeValue());
+    if (null != node) { 
+      StringTokenizer st = new StringTokenizer(node.getNodeValue(),",");
+      
       while (st.hasMoreTokens()) {
         vResult.add(st.nextToken());
       }
