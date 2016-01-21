@@ -85,7 +85,7 @@ abstract public class DoclipseCompletionProposal
 	 * completions first :-)
 	 */
 	public int getRelevance() {
-		return 90;
+		return 1000;
 	}
 
 	/**
@@ -103,7 +103,6 @@ abstract public class DoclipseCompletionProposal
 		} catch (BadLocationException ex) {
 			ex.printStackTrace();
 		}
-
 		return result;
 	}
 

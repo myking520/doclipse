@@ -14,7 +14,8 @@ public class TagFragmentFactory {
    * @return
    */
   public static ITagFragment newTagFragment(String pref) {
-    return new TagFragmentAntlr(pref);
+//    return new TagFragmentAntlr(pref);
+    return new TagFragmentJavaCC(pref);
   }
 
 }

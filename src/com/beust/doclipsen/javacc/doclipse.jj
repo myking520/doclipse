@@ -1,0 +1,138 @@
+options {
+  STATIC = false ;
+  UNICODE_INPUT = true;
+}
+
+PARSER_BEGIN(DoclipseParser)
+package com.beust.doclipsen.javacc;
+import java.io.StringReader;
+
+/**
+* Defines a parser for the attribute grammar in order to
+* determine what we are trying to complete on.  Can be
+* either:
+* - Tag name
+* - attribute name
+* - attribute value
+*/
+  public class DoclipseParser {
+     public final static int completeOnTagName = 1;
+     public final static int completeOnAttributeName = 2;
+     public final static int completeOnAttributeValue = 4;
+     public int  completeOn=completeOnTagName;
+     public String fragment="";//尝试补全的字符
+     public String tagName;//tag名字
+	  static public void main(String[] args)
+
+        {
+                testOnTag();
+                testOnAttrName();
+                try {
+                	testOnAttrValue("@ej * aa=");
+                	testOnAttrValue("@ej aa=\"");
+					testOnAttrValue("@ej aa=\u005c"aaa");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        }
+
+        private static void testOnTag() {
+                String s = "@ej";
+                StringReader sr = new StringReader(s);
+                DoclipseParser parser = new DoclipseParser(sr);
+                try {
+                        parser.start();
+                } catch (ParseException e) {
+                }
+                System.out.println(parser.fragment + "--" + parser.completeOn);
+        }
+        private static void testOnAttrName(){
+                String s = "@ej aa";
+                StringReader sr = new StringReader(s);
+                DoclipseParser parser = new DoclipseParser(sr);
+                try {
+                        parser.start();
+                } catch (ParseException e) {
+                }
+                System.out.println(parser.fragment + "--" + parser.completeOn);
+        }
+        private static void testOnAttrValue(String s){
+                StringReader sr = new StringReader(s);
+                DoclipseParser parser = new DoclipseParser(sr);
+                try {
+                        try {
+							parser.start();
+						} catch (Exception e) {
+						}
+                } catch (Error e) {
+                }
+                System.out.println(parser.fragment + "--" + parser.completeOn);
+                
+        }
+
+	  }
+
+PARSER_END(DoclipseParser)
+
+
+SKIP :
+{
+  " " | "\t" | "\n" | "\r" | "\f" |"*"
+}
+
+TOKEN :
+{
+   < TAG : "@" (["a"-"z","A"-"Z", "_"] (["a"-"z","A"-"Z","0"-"9","_", "-"])*  )+  >
+| < IDENTIFIER: ["a"-"z","A"-"Z", "_"] (["a"-"z","A"-"Z","0"-"9","_", "-"])*  >
+| <STRING:
+      "\""
+      (   (~["\"","\\","\n","\r"])
+        | ("\\"
+            ( ["n","t","b","r","f","\\","'","\""]
+            | ["0"-"7"] ( ["0"-"7"] )?
+            | ["0"-"3"] ["0"-"7"] ["0"-"7"]
+            )
+          )
+      )*
+      "\""
+  >
+}
+
+void start() :
+{}
+{
+  tagName=tag()
+  {
+    fragment=tagName;
+    completeOn=completeOnTagName;
+  }( attr())* 
+}
+String tag():{
+  StringBuffer sb=new StringBuffer();}
+{
+  <TAG>  {
+    sb.append(token.image);
+     }( "." <IDENTIFIER >{
+    sb.append(".").append(token.image);
+  } )*  {
+    return sb.toString();  }}
+void attr():{}{
+  attrName()"="  {
+    completeOn= completeOnAttributeValue ;
+  }attrValue()  }
+void attrName():{}{ <IDENTIFIER> {
+  completeOn= completeOnAttributeName ;
+   fragment=token.image;
+ }
+}
+
+
+void attrValue():
+{}{
+ < STRING >
+ {
+  completeOn= completeOnAttributeName ;
+   fragment="";
+ }}
+

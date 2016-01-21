@@ -1,54 +1,61 @@
 package com.beust.doclipse.tag;
 
+import java.io.StringReader;
+
+import com.beust.doclipsen.javacc.DoclipseParser;
+
 /**
- * A convenience class to make parsing of tags easier.
+ * @author myking520
  *
- * @author Cedric Beust, Jun 17, 2004
- * 
  */
 public class TagFragmentJavaCC implements ITagFragment {
-	private String m_string = null;
-	private int m_index = 0;
-	private String m_tagName = null;
-	private String m_attributeName = null;
-	private String m_eq = null;
-	private String m_attributeValue = null;
-	private boolean m_completesOnAttribute = false;
-	private boolean m_completesOnTagName = true;
-	private String m_fragment = "";
+	private DoclipseParser tagFragmentJavaCC;
 	static final private String BLANKS = "* \t\n\r";
-
-	public TagFragmentJavaCC(String string) {
-		m_string = string;
-		parseFragment();
+	public TagFragmentJavaCC(String s){
+		tagFragmentJavaCC =new DoclipseParser(new StringReader(s));
+		try {
+			tagFragmentJavaCC.start();
+		} catch (Exception e) {
+		}catch(Error error){
+		}
+		if(this.completesOnTagName()){
+			if(s!=null&&s.length()>0&&this.isSeparator(s.charAt(s.length()-1))){
+				tagFragmentJavaCC.completeOn=DoclipseParser.completeOnAttributeName;
+				tagFragmentJavaCC.fragment="";
+			}
+		}
 	}
-
-	private void parseFragment() {
+	private boolean isSeparator(char c) {
+		return isBlank(c) || c == '=';
 	}
-
-	private void setCompletes(boolean tag, boolean attribute) {
-		m_completesOnTagName = tag;
-		m_completesOnAttribute = attribute;
+	private boolean isBlank(char c) {
+		return -1 != BLANKS.indexOf(c);
 	}
-
-	public String getTagName() {
-		return m_tagName;
-	}
-
-	public String getAttributeName() {
-		return m_attributeName;
-	}
-
-	public boolean completesOnTagName() {
-		return m_completesOnTagName;
-	}
-
-	public boolean completesOnAttribute() {
-		return m_completesOnAttribute;
-	}
-
+	@Override
 	public String getFragment() {
-		return m_fragment;
+		return tagFragmentJavaCC.fragment;
 	}
+
+	@Override
+	public String getTagName() {
+		return tagFragmentJavaCC.tagName;
+	}
+
+	@Override
+	public String getAttributeName() {
+		return this.completesOnAttributeValue()?tagFragmentJavaCC.fragment:null;
+	}
+	@Override
+	public boolean completesOnTagName() {
+		return tagFragmentJavaCC.completeOn==DoclipseParser.completeOnTagName;
+	}
+	public boolean completesOnAttributeValue(){
+		return tagFragmentJavaCC.completeOn==DoclipseParser.completeOnAttributeValue;
+	}
+	@Override
+	public boolean completesOnAttribute() {
+		return tagFragmentJavaCC.completeOn==DoclipseParser.completeOnAttributeName;
+	}
+	
 
 }

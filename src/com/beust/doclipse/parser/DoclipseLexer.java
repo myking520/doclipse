@@ -45,7 +45,6 @@ public DoclipseLexer(LexerSharedInputState state) {
 	literals = new Hashtable();
 	literals.put(new ANTLRHashString("\"", this), new Integer(7));
 }
-
 public Token nextToken() throws TokenStreamException {
 	Token theRetToken=null;
 tryAgain:
