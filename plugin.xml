@@ -35,6 +35,17 @@
 		     </adapt>         
          </enabledWhen>
       </page>
+      <page
+            category="Page1"
+            class="com.beust.doclipse.preferences.template.TemplatePage"
+            id="Page4"
+            name="templete">
+             <enabledWhen>
+		     <adapt type="org.eclipse.core.resources.IProject">
+		          <test property="org.eclipse.core.resources.projectNature" value="org.eclipse.jdt.core.javanature"/>
+		     </adapt>         
+         </enabledWhen>
+      </page>
  </extension>
  <extension
        id="doclipse_doc"
