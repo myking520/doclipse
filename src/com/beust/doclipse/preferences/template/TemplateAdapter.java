@@ -1,16 +1,11 @@
 package com.beust.doclipse.preferences.template;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.dom.AST;
-import org.eclipse.jdt.core.dom.ASTNode;
-import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.jdt.internal.compiler.env.ICompilationUnit;
 import org.eclipse.jdt.internal.ui.wizards.dialogfields.ITreeListAdapter;
 import org.eclipse.jdt.internal.ui.wizards.dialogfields.TreeListDialogField;
 import org.eclipse.jface.window.Window;
@@ -18,6 +13,7 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.widgets.Display;
 
 import com.beust.doclipse.DoclipseProject;
+import com.beust.doclipse.preferences.template.dialog.TemplateDialog;
 
 /**
  * 模版页
@@ -35,40 +31,89 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 
 	@Override
 	public void customButtonPressed(TreeListDialogField<TemplateElement> field, int index) {
-		IProject project = DoclipseProject.getCurrentProject();
 		if (index == 0) {// add javaFile
-			List<Object> elements = field.getSelectedElements();
-			TemplateElement templateElement = (TemplateElement) elements.get(0);
-			if (templateElement.getKind() == IClasspathEntry.CPE_PROJECT) {// 给项目添加java文件
-
-			}
-			final ResourcesSelectionDialog dialog = new ResourcesSelectionDialog(Display.getCurrent().getActiveShell(),
-					true, project, IResource.FILE, new FileExtensionFilter("java"));
-			final int resultCode = dialog.open();
-			final Object[] result = dialog.getResult();
-			if (resultCode != Window.OK || result == null) {
-				return;
-			}
-			
-			for (int i = 0; i < result.length; i++) {
-				IResource resource = (IResource) result[i];
-				IJavaElement javafile = JavaCore.create(resource);
-				ICompilationUnit compilationUnit = (ICompilationUnit) javafile;
-				ASTParser parser = ASTParser.newParser(AST.JLS8);
-				parser.setSource(compilationUnit.getContents());
-				org.eclipse.jdt.core.dom.CompilationUnit astnode = (org.eclipse.jdt.core.dom.CompilationUnit) parser
-						.createAST(null);
-				TemplateElement pakage=this.getOrCreatePackageElement(templateElement,astnode.getPackage().getName().toString());
-				TemplateElement file=new TemplateElement();
-				file.setText(resource.getName());
-				file.setKind(TemplateElement.CPE_JAVA);
-				pakage.getChildren().add(file);
-			}
-
-			field.refresh();
+			this.addJavaFile(field);
+			return;
+		}
+		if(index==1){
+			this.addTemplate(field);
+			return;
+		}
+		if(index==2){
+			this.edit(field);
+		}
+		if(index==3){
+			this.del(field);
+			return;
 		}
 	}
+	private void edit(TreeListDialogField<TemplateElement> field){
+		List<Object> elements = field.getSelectedElements();
+		TemplateElement element=(TemplateElement) elements.get(0);
+		TemplateElement engine=null;
+		TemplateElement javefile=null;
+		if(element.getKind()==TemplateElement.CPE_ENGINE||element.getKind()==TemplateElement.CPE_EXPORT){
+			engine=templatePage.getTemplateElementProvider().getElementRoot().getParent(element);
+		}
+		if(element.getKind()==TemplateElement.CPE_IMPORT){
+			engine=element;	
+		}
+		javefile=templatePage.getTemplateElementProvider().getElementRoot().getParent(engine);
+		TemplateDialog dialog=new TemplateDialog(Display.getCurrent().getActiveShell(),javefile,engine);
+		int code=dialog.open();
+		field.refresh();
+	}
+	private void addTemplate(TreeListDialogField<TemplateElement> field){
+		List<Object> elements = field.getSelectedElements();
+		TemplateElement element=(TemplateElement) elements.get(0);
+		TemplateDialog dialog=new TemplateDialog(Display.getCurrent().getActiveShell(),element,null);
+		int code=dialog.open();
+		field.refresh();
+	}
+	private void del(TreeListDialogField<TemplateElement> field){
+		List<Object> elements = field.getSelectedElements();
+		for(int i=0;i<elements.size();i++){
+			TemplateElement element=	(TemplateElement) elements.get(i);
+			templatePage.getTemplateElementProvider().getElementRoot().remove(element);
+		}
+		templatePage.getTemplateElementProvider().saveOrUpdate();
+		field.refresh();
+	}
+	private void addJavaFile(TreeListDialogField<TemplateElement> field){
+		IProject project = DoclipseProject.getCurrentProject();
+		final ResourcesSelectionDialog dialog = new ResourcesSelectionDialog(Display.getCurrent().getActiveShell(),
+				true, project, IResource.FILE, new FileExtensionFilter("java",templatePage));
+		final int resultCode = dialog.open();
+		final Object[] result = dialog.getResult();
+		if (resultCode != Window.OK || result == null) {
+			return;
+		}
+		TemplateElement root=templatePage.getTemplateElementProvider().getElementRoot();
+		for(int i=0;i<result.length;i++){
+			IResource resource = (IResource) result[i];
+			String text=resource.getFullPath().toString();
+			if(root.getByText(text)!=null){
+				continue;
+			}
+			TemplateElement fileElement=new TemplateElement(text);
+			fileElement.setKind(TemplateElement.CPE_JAVA);
+			TemplateDialog templateDialog=new TemplateDialog(Display.getCurrent().getActiveShell(), fileElement,null);
+			if(templateDialog.open()!=Window.OK){
+				continue;
+			}
+			String folder=resource.getParent().getFullPath().makeRelative().toString();
+			TemplateElement folderElement=root.getChildren(folder);
+			if(folderElement==null){
+				folderElement=new TemplateElement(folder);
+				folderElement.setKind(TemplateElement.CPE_PACKAGE);
+				root.getChildren().add(folderElement);
+			}
 
+			folderElement.getChildren().add(fileElement);
+		}
+		templatePage.getTemplateElementProvider().saveOrUpdate();
+		field.refresh();
+	}
 	public TemplateElement getOrCreatePackageElement(TemplateElement templateElement, String packageName) {
 		if (templateElement.getKind() == TemplateElement.CPE_PROJECT) {
 			return getOrCreatePackageElementOnProject(templateElement, packageName);
@@ -102,11 +147,30 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 		}
 		if (elements.size() == 1) {
 			TemplateElement templateElement = (com.beust.doclipse.preferences.template.TemplateElement) elements.get(0);
-			if (templateElement.getKind() == IClasspathEntry.CPE_PROJECT) {// 选中project
-																			// 那么添加类有效
+			if (templateElement.getKind() == TemplateElement.CPE_PROJECT||templateElement.getKind() == TemplateElement.CPE_PACKAGE) {
 				field.enableButton(0, true);
+				if(templateElement.getKind()==TemplateElement.CPE_PROJECT){
+					return;
+				}
+				field.enableButton(3, true);
+				return;
 			}
+			
+			if (templateElement.getKind() == TemplateElement.CPE_JAVA) {
+				field.enableButton(1, true);
+				field.enableButton(3, true);
+			}
+			if(templateElement.getKind()==TemplateElement.CPE_IMPORT){
+				field.enableButton(2, true);
+				field.enableButton(3, true);
+				return;
+			}
+			if(templateElement.getKind()==TemplateElement.CPE_ENGINE||templateElement.getKind()==TemplateElement.CPE_EXPORT){
+				field.enableButton(2, true);
+			}
+			return;
 		}
+		field.enableButton(4, true);
 	}
 
 	@Override
@@ -132,7 +196,6 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 
 	@Override
 	public Object getParent(TreeListDialogField<TemplateElement> field, Object element) {
-
 		return null;
 	}
 

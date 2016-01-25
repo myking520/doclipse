@@ -6,15 +6,19 @@ import org.eclipse.jface.viewers.ViewerFilter;
 
 public class FileExtensionFilter extends ViewerFilter{
 	private String extension;
-	
-	public FileExtensionFilter(String extension) {
+	private TemplatePage templatePage;
+	public FileExtensionFilter(String extension,TemplatePage templatePage) {
 		super();
 		this.extension = extension;
+		this.templatePage=templatePage;
 	}
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
 		if(element instanceof IFile){
 			IFile file=(IFile)element;
+			if(templatePage.getTemplateElementProvider().elementRoot.getByText(file.getFullPath().toString())!=null){
+				return false;
+			}
 			return extension.equals(file.getFileExtension());
 		}
 		return false;
