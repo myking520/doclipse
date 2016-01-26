@@ -28,7 +28,7 @@ public class TemplateDialog extends Dialog {
 	private Text output;
 	private TemplateElement javaElement;
 	private TemplateElement engineElement;
-	private final static String[] engines = new String[] { "jetty", "freemarkder", "velocity" };
+	private final static String[] engines = new String[] { TemplateElement.ENGINE_JELLY, TemplateElement.ENGINE_FREEMARKER,TemplateElement.ENGINE_VELOCITY };
 
 	public TemplateDialog(Shell parentShell, TemplateElement javaElement, TemplateElement engineElement) {
 		super(parentShell);

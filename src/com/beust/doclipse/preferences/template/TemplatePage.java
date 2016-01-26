@@ -11,13 +11,12 @@ import org.eclipse.jdt.internal.ui.wizards.dialogfields.DialogField;
 import org.eclipse.jdt.internal.ui.wizards.dialogfields.LayoutUtil;
 import org.eclipse.jdt.internal.ui.wizards.dialogfields.TreeListDialogField;
 import org.eclipse.jface.layout.PixelConverter;
-import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.dialogs.PropertyPage;
 
+import com.beust.doclipse.DoclipsePlugin;
 import com.beust.doclipse.DoclipseProject;
 
 /**
@@ -27,8 +26,10 @@ import com.beust.doclipse.DoclipseProject;
  */
 public class TemplatePage extends PropertyPage implements IStatusChangeListener {
 	private TreeListDialogField<TemplateElement> treeListDialogField;
-	private TemplateElementProvider templateElementProvider=null;
-
+	private DoclipseProject doclipseProject;
+	public DoclipseProject getDoclipseProject() {
+		return doclipseProject;
+	}
 	public static String[] buttonLabels= new String[] {
 			"add JavaFile",
 			"add Template",
@@ -38,16 +39,13 @@ public class TemplatePage extends PropertyPage implements IStatusChangeListener 
 	@Override
 	public void statusChanged(IStatus status) {
 	}
-	public TemplateElementProvider getTemplateElementProvider() {
-		return templateElementProvider;
-	}
 	@Override
 	protected Control createContents(Composite parent) {
-		templateElementProvider=new TemplateElementProvider();
 		TemplateAdapter adapter=new TemplateAdapter(this);
 		treeListDialogField=new ElementsListDialogField<TemplateElement>(adapter, buttonLabels, new TemplateLabelProvider());
 		List<TemplateElement> elements=new ArrayList<TemplateElement>();
-		TemplateElement project=templateElementProvider.getElementRoot();
+		doclipseProject=DoclipsePlugin.getDoclipseProject();
+		TemplateElement project=doclipseProject.getTemplateElementProvider().getElementRoot();
 		project.setText(DoclipseProject.getCurrentProject().getName());
 		project.setKind(IClasspathEntry.CPE_PROJECT);
 		elements.add(project);

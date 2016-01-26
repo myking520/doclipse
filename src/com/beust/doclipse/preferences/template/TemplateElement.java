@@ -22,6 +22,9 @@ public class TemplateElement implements Serializable{
 	private int kind;
 	private String text;
 	private List<TemplateElement> children=new ArrayList<>();
+	public final static String ENGINE_JELLY="jelly";
+	public final static String ENGINE_FREEMARKER="FreeMarker";
+	public final static String ENGINE_VELOCITY="Velocity";
 	public List<TemplateElement> getChildren() {
 		return children;
 	}
@@ -53,7 +56,7 @@ public class TemplateElement implements Serializable{
 		}
 		for(int i=0;i<this.children.size();i++){
 			TemplateElement tmel=this.children.get(i);
-			if(tmel.getText().equals("text")){
+			if(tmel.getText().equals(text)){
 				return tmel;
 			}
 			tmel=tmel.getByText(text);
@@ -93,6 +96,15 @@ public class TemplateElement implements Serializable{
 			}
 			tmel=tmel.getParent(text);
 			if(tmel!=null){
+				return tmel;
+			}
+		}
+		return null;
+	}
+	public TemplateElement getChildrenByKind(int kind){
+		for(int i=0;i<this.children.size();i++){
+			TemplateElement tmel=this.children.get(i);
+			if(tmel.getKind()==kind){
 				return tmel;
 			}
 		}

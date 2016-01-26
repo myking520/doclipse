@@ -10,23 +10,23 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ProjectScope;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
-import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.internal.ui.packageview.PackageFragmentRootContainer;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.internal.Workbench;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 
+import com.beust.doclipse.builder.DoclipseNature;
+import com.beust.doclipse.preferences.template.TemplateElementProvider;
 import com.beust.doclipse.tag.Tag;
 
 public class DoclipseProject {
@@ -49,6 +49,10 @@ public class DoclipseProject {
 	private Map allTags = new HashMap();
 	private IProject project;
 	private Preferences preferences;
+	private TemplateElementProvider templateElementProvider;
+	public TemplateElementProvider getTemplateElementProvider() {
+		return templateElementProvider;
+	}
 
 	public Preferences getPreferences() {
 		return preferences;
@@ -58,8 +62,35 @@ public class DoclipseProject {
 		super();
 		this.project = project;
 		this.initTags();
+		this.initBuilder();
+		this.initTemplateElementProvider();
 	}
-
+	private void initTemplateElementProvider(){
+		templateElementProvider=new TemplateElementProvider(this.project);
+	}
+	private void initBuilder(){
+//		try {
+//			String[] natureIds=project.getDescription().getNatureIds();
+//			IProjectNature projectNature=project.getNature(SampleNature.NATURE_ID);
+//			
+//			if(projectNature==null){
+//				projectNature=new SampleNature();
+//				projectNature.setProject(project);
+//				projectNature.configure();
+//				ProjectInfo info = (ProjectInfo) ((Project)project).getResourceInfo(false,false);
+//				info.setNature(SampleNature.NATURE_ID, projectNature);
+//			}
+//		} catch (CoreException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		try {
+			DoclipseNature.add2Project(project);
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * @return 当前项目
 	 */
@@ -123,9 +154,7 @@ public class DoclipseProject {
 
 	private void initProjectPreferences() {
 		String checkedFiles = "";
-//		String checkedFiles = "ejbgen.xml hibernate.xml";
 		String[] checkedFilesArray = { };
-//		String[] checkedFilesArray = { "ejbgen.xml", "hibernate.xml", };
 		this.preferences.put(SPACES_AROUND_EQUAL_SIGNS, "True");
 		this.preferences.put(SURROUND_WITH_DOUBLE_QUOTES, "True");
 		this.preferences.put(INTERNAL_CHECKED_FILES, checkedFiles);

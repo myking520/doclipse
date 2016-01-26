@@ -58,4 +58,30 @@
       </partition>
    </javaCompletionProposalComputer>
  </extension>
+ <extension
+       id="com.beust.doclipse.builder.DoclipseBuilder"
+       name="DoclipseBuilder"
+       point="org.eclipse.core.resources.builders">
+    <builder
+          hasNature="true"
+          isConfigurable="true">
+       <run
+             class="com.beust.doclipse.builder.DoclipseBuilder">
+       </run>
+    </builder>
+ </extension>
+ <extension
+       id="com.beust.doclipse.builder.DoclipseNature"
+       name="DoclipseNature"
+       point="org.eclipse.core.resources.natures">
+    <runtime>
+       <run
+             class="com.beust.doclipse.builder.DoclipseNature">
+       </run>
+    </runtime>
+    <builder
+          id="com.beust.doclipse.builder.DoclipseBuilder">
+    </builder>
+ </extension>
+ 
 </plugin>

@@ -53,12 +53,12 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 		TemplateElement engine=null;
 		TemplateElement javefile=null;
 		if(element.getKind()==TemplateElement.CPE_ENGINE||element.getKind()==TemplateElement.CPE_EXPORT){
-			engine=templatePage.getTemplateElementProvider().getElementRoot().getParent(element);
+			engine=templatePage.getDoclipseProject().getTemplateElementProvider().getElementRoot().getParent(element);
 		}
 		if(element.getKind()==TemplateElement.CPE_IMPORT){
 			engine=element;	
 		}
-		javefile=templatePage.getTemplateElementProvider().getElementRoot().getParent(engine);
+		javefile=templatePage.getDoclipseProject().getTemplateElementProvider().getElementRoot().getParent(engine);
 		TemplateDialog dialog=new TemplateDialog(Display.getCurrent().getActiveShell(),javefile,engine);
 		int code=dialog.open();
 		field.refresh();
@@ -74,9 +74,9 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 		List<Object> elements = field.getSelectedElements();
 		for(int i=0;i<elements.size();i++){
 			TemplateElement element=	(TemplateElement) elements.get(i);
-			templatePage.getTemplateElementProvider().getElementRoot().remove(element);
+			templatePage.getDoclipseProject().getTemplateElementProvider().getElementRoot().remove(element);
 		}
-		templatePage.getTemplateElementProvider().saveOrUpdate();
+		templatePage.getDoclipseProject().getTemplateElementProvider().saveOrUpdate();
 		field.refresh();
 	}
 	private void addJavaFile(TreeListDialogField<TemplateElement> field){
@@ -88,7 +88,7 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 		if (resultCode != Window.OK || result == null) {
 			return;
 		}
-		TemplateElement root=templatePage.getTemplateElementProvider().getElementRoot();
+		TemplateElement root=templatePage.getDoclipseProject().getTemplateElementProvider().getElementRoot();
 		for(int i=0;i<result.length;i++){
 			IResource resource = (IResource) result[i];
 			String text=resource.getFullPath().toString();
@@ -111,7 +111,7 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 
 			folderElement.getChildren().add(fileElement);
 		}
-		templatePage.getTemplateElementProvider().saveOrUpdate();
+		templatePage.getDoclipseProject().getTemplateElementProvider().saveOrUpdate();
 		field.refresh();
 	}
 	public TemplateElement getOrCreatePackageElement(TemplateElement templateElement, String packageName) {

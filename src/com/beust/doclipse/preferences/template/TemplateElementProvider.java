@@ -22,8 +22,7 @@ import com.beust.doclipse.DoclipseProject;
 public class TemplateElementProvider {
 	TemplateElement elementRoot=new TemplateElement();
 	private  ProjectPreferences preferences;
-	public  TemplateElementProvider(){
-		IProject project=	DoclipseProject.getCurrentProject();
+	public  TemplateElementProvider(IProject project){
 		IEclipsePreferences eclipsePreferences = Platform.getPreferencesService().getRootNode();
 		ProjectPreferences preferences = (ProjectPreferences) eclipsePreferences.node(ProjectScope.SCOPE);
 		preferences = (ProjectPreferences) preferences.node(project.getName());

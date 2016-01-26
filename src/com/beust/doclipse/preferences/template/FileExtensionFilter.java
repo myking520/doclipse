@@ -16,7 +16,7 @@ public class FileExtensionFilter extends ViewerFilter{
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
 		if(element instanceof IFile){
 			IFile file=(IFile)element;
-			if(templatePage.getTemplateElementProvider().elementRoot.getByText(file.getFullPath().toString())!=null){
+			if(templatePage.getDoclipseProject().getTemplateElementProvider().getElementRoot().getByText(file.getFullPath().toString())!=null){
 				return false;
 			}
 			return extension.equals(file.getFileExtension());
