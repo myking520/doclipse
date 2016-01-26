@@ -73,8 +73,8 @@ public class DoclipseBuilder extends IncrementalProjectBuilder implements IResou
 		if(javaFile==null){
 			return;
 		}
-		TemplateElement importTemplete=javaFile.getChildrenByKind(TemplateElement.CPE_IMPORT);
-		QDoxPlugin qoxPlugin=PluginManager.getQDoxPlugin(doclipseProject, importTemplete);
+		
+		QDoxPlugin qoxPlugin=PluginManager.getQDoxPlugin(doclipseProject, javaFile);
 		qoxPlugin.start();
 	}
 

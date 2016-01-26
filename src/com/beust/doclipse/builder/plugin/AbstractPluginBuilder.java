@@ -16,27 +16,28 @@ import com.beust.doclipse.preferences.template.TemplateElement;
 
 public abstract class AbstractPluginBuilder {
 	public QDoxPlugin build(DoclipseProject doclipseProject, TemplateElement element){
-		
-		String input = element.getText();
-		TemplateElement outputElement = element.getChildrenByKind(TemplateElement.CPE_EXPORT);
+		String javaFile = element.getText();
+		TemplateElement importTemplete=element.getChildrenByKind(TemplateElement.CPE_IMPORT);
+		String importTempleteName=importTemplete.getText();
+		TemplateElement outputElement = importTemplete.getChildrenByKind(TemplateElement.CPE_EXPORT);
 		if (outputElement == null) {
 			throw new RuntimeException("no out put dir");
 		}
 		String outFileName=null;
-		int s = input.lastIndexOf(File.separatorChar);
+		int s = importTempleteName.lastIndexOf(File.separatorChar);
 		if (s != -1) {
-			outFileName=input.substring(s + 1);
+			outFileName=importTempleteName.substring(s + 1);
 		} else {
-			outFileName= input;
+			outFileName= importTempleteName;
 		}
 		FileWriterMapper fileWriterMapper=new FileWriterMapper(outputElement.getText(),outFileName);
 		PropertiesQDoxPropertyExpander expander = new PropertiesQDoxPropertyExpander();
 		Properties props = new Properties();
 		props.setProperty("value", "props-test-value");
 		expander.addProperties("props", props);
-		QDoxMetadataProvider metadataProvider = new QDoxMetadataProvider(new File(input), expander);
-		return this.build(metadataProvider, fileWriterMapper);
+		QDoxMetadataProvider metadataProvider = new QDoxMetadataProvider(new File(javaFile), expander);
+		return this.build(metadataProvider, fileWriterMapper,importTemplete.getText());
 	}
 	public abstract QDoxPlugin build(QDoxCapableMetadataProvider metadataProvider,
-			WriterMapper writerMapper);
+			WriterMapper writerMapper,String temlate);
 }

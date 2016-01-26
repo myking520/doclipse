@@ -11,8 +11,8 @@ import com.beust.doclipse.builder.plugin.NormalQDoxPlugin;
 
 public class JellyPluginBuilder extends AbstractPluginBuilder {
 	@Override
-	public QDoxPlugin build(QDoxCapableMetadataProvider metadataProvider, WriterMapper writerMapper) {
-		File file=new FIle("D:/runtime-EclipseApplication/A/src/D.java");
+	public QDoxPlugin build(QDoxCapableMetadataProvider metadataProvider, WriterMapper writerMapper,String temlate) {
+		File file=new File(temlate);
 		return new NormalQDoxPlugin(new JellyTemplateEngine(file), metadataProvider, writerMapper);
 	}
 

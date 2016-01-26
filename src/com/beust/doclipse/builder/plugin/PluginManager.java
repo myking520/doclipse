@@ -16,7 +16,8 @@ public class PluginManager {
 		System.setProperty("file.encoding", "UTF-8");
 	}
 	public final static QDoxPlugin getQDoxPlugin(DoclipseProject doclipseProject, TemplateElement element){
-		TemplateElement engine=element.getChildrenByKind(TemplateElement.CPE_ENGINE);
+		TemplateElement importTemplete=element.getChildrenByKind(TemplateElement.CPE_IMPORT);
+		TemplateElement engine=importTemplete.getChildrenByKind(TemplateElement.CPE_ENGINE);
 		AbstractPluginBuilder builder=plugins.get(engine.getText());
 		return builder.build(doclipseProject, element);
 	}

@@ -48,6 +48,10 @@ public class DoclipseProject {
 	private Map internalTags = new HashMap();
 	private Map allTags = new HashMap();
 	private IProject project;
+	public IProject getProject() {
+		return project;
+	}
+
 	private Preferences preferences;
 	private TemplateElementProvider templateElementProvider;
 	public TemplateElementProvider getTemplateElementProvider() {
