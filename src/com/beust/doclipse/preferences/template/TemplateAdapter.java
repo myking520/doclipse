@@ -61,14 +61,20 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 		javefile=templatePage.getDoclipseProject().getTemplateElementProvider().getElementRoot().getParent(engine);
 		TemplateDialog dialog=new TemplateDialog(Display.getCurrent().getActiveShell(),javefile,engine);
 		int code=dialog.open();
+		if(code==Window.OK){
+		templatePage.getDoclipseProject().getTemplateElementProvider().saveOrUpdate();
 		field.refresh();
+		}
 	}
 	private void addTemplate(TreeListDialogField<TemplateElement> field){
 		List<Object> elements = field.getSelectedElements();
 		TemplateElement element=(TemplateElement) elements.get(0);
 		TemplateDialog dialog=new TemplateDialog(Display.getCurrent().getActiveShell(),element,null);
 		int code=dialog.open();
-		field.refresh();
+		if(code==Window.OK){
+			templatePage.getDoclipseProject().getTemplateElementProvider().saveOrUpdate();
+			field.refresh();
+			}
 	}
 	private void del(TreeListDialogField<TemplateElement> field){
 		List<Object> elements = field.getSelectedElements();
