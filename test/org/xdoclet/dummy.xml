@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doclipse>
+ <description>测试</description>
+<tag target="class" name="@dummy.class" doc="用于测试">
+<attribute name="name" required="true" allowed="key1,key2" doc="测试选项"/>
+<attribute name="value" doc="值"/>
+<attribute name="extra"  doc="扩展参数"/>
+</tag>
+</doclipse>

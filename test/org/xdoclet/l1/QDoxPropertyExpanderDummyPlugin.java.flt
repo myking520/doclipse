@@ -1,0 +1,7 @@
+<#list metadata as jClass>
+	<#list jClass.getTagByName('dummy.class').getParameters() as jTagClass>
+	 <dummy-tag
+	    dummy="${jTagClass}"
+	   />
+	</#list>
+</#list>
