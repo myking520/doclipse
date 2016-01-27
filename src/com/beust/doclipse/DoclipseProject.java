@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 import org.eclipse.core.internal.resources.ProjectPreferences;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
@@ -73,23 +74,11 @@ public class DoclipseProject {
 		templateElementProvider=new TemplateElementProvider(this.project);
 	}
 	private void initBuilder(){
-//		try {
-//			String[] natureIds=project.getDescription().getNatureIds();
-//			IProjectNature projectNature=project.getNature(SampleNature.NATURE_ID);
-//			
-//			if(projectNature==null){
-//				projectNature=new SampleNature();
-//				projectNature.setProject(project);
-//				projectNature.configure();
-//				ProjectInfo info = (ProjectInfo) ((Project)project).getResourceInfo(false,false);
-//				info.setNature(SampleNature.NATURE_ID, projectNature);
-//			}
-//		} catch (CoreException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		try {
-			DoclipseNature.add2Project(project);
+			IProjectNature projectNature=project.getNature(DoclipseNature.NATURE_ID);
+			if(projectNature==null){
+				DoclipseNature.add2Project(project);
+			}
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

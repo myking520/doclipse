@@ -2,11 +2,11 @@ package org.xdoclet.l1;
 
 import java.io.File;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import org.generama.JellyTemplateEngine;
-import org.generama.QDoxCapableMetadataProvider;
-import org.generama.WriterMapper;
 import org.generama.defaults.FileWriterMapper;
 import org.generama.defaults.QDoxPlugin;
 import org.xdoclet.QDoxMetadataProvider;
@@ -17,6 +17,7 @@ public class Main {
 	public static void main(String[] args) {
 		Main m=new Main();
 		m.excute();
+	
 	}
 	public void excute(){
 		QDoxPlugin pl=new QDoxPropertyExpanderDummyPlugin(new JellyTemplateEngine(), this.getQDoxMetadataProvider(), new FileWriterMapper());

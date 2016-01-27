@@ -6,7 +6,8 @@ options {
 PARSER_BEGIN(DoclipseParser)
 package com.beust.doclipsen.javacc;
 import java.io.StringReader;
-
+import java.util.HashMap;
+import java.util.Map;
 /**
 * Defines a parser for the attribute grammar in order to
 * determine what we are trying to complete on.  Can be
@@ -15,6 +16,10 @@ import java.io.StringReader;
 * - attribute name
 * - attribute value
 */
+ /**
+ * @author myking520
+ *
+ */
   public class DoclipseParser {
      public final static int completeOnTagName = 1;
      public final static int completeOnAttributeName = 2;
@@ -22,6 +27,8 @@ import java.io.StringReader;
      public int  completeOn=completeOnTagName;
      public String fragment="";//尝试补全的字符
      public String tagName;//tag名字
+     public final static Object defaultValue=new Object();//默认值
+     public Map<String,Object> hasAttrs=new HashMap<String,Object>();//已经添加的属性
 	  static public void main(String[] args)
 
         {
@@ -117,22 +124,29 @@ String tag():{
     sb.append(".").append(token.image);
   } )*  {
     return sb.toString();  }}
-void attr():{}{
-  attrName()"="  {
+void attr():{
+  String attrName;
+  String attrValue;
+}{
+  attrName=attrName()"="  {
     completeOn= completeOnAttributeValue ;
-  }attrValue()  }
-void attrName():{}{ <IDENTIFIER> {
+    hasAttrs.put(attrName,defaultValue);
+  }attrValue=attrValue()  {
+     hasAttrs.put(attrName,attrValue);  }}
+String attrName():{}{ <IDENTIFIER> {
   completeOn= completeOnAttributeName ;
    fragment=token.image;
+   return fragment;
  }
 }
 
 
-void attrValue():
+String attrValue():
 {}{
  < STRING >
  {
   completeOn= completeOnAttributeName ;
    fragment="";
+   return token.image;
  }}
 

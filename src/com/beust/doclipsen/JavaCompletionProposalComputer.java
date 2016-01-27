@@ -84,40 +84,19 @@ public class JavaCompletionProposalComputer implements IJavaCompletionProposalCo
 			//
 			ITagFragment tf = TagFragmentFactory.newTagFragment(pref);
 			String fragment = tf.getFragment();
-
-			// Tag?
-			//
 			if (tf.completesOnTagName()) {
 				for (Iterator it = tags.values().iterator(); it.hasNext();) {
 					Tag tag = (Tag) it.next();
-
-					//
-					// Only add a proposal if it has the same prefix as what has
-					// already been typed
-					//
 					String tagName = tag.getName();
 					boolean starts = tagName.startsWith(fragment);
 					boolean matchTarget = matchTarget(tag, element);
 					if (starts && matchTarget) {
 						vResult.add(new TagCompletionProposal(tag.getName(), tag.getDoc()));
-					} else {
-						// ppp("SKIPPING " + tag.getName() + " BECAUSE starts:"
-						// + starts + " matchTarget:" + matchTarget);
 					}
 				}
 
 			}
-
-			//
-			// Complete on an attribute
-			//
 			else if (tf.completesOnAttribute()) {
-				// Find out what the tag and the incomplete attribute are
-
-				//
-				// Add all the attributes that start with the same prefix as
-				// proposals.
-				//
 				String tagName = tf.getTagName();
 				Tag tag = (Tag) tags.get(tagName);
 				if (null != tag) {
@@ -125,19 +104,17 @@ public class JavaCompletionProposalComputer implements IJavaCompletionProposalCo
 					for (Iterator it = attributes.iterator(); it.hasNext();) {
 						Attribute a = (Attribute) it.next();
 						String attributeName = a.getName();
+						if(tf.hasAttr(attributeName)){
+							continue;
+						}
 						String doc = a.getDoc();
 						if (attributeName.startsWith(fragment)) {
 							vResult.add(new AttributeCompletionProposal(tagName, attributeName, doc));
 						}
 					}
-				} else {
-					ppp("Couldn't find tag " + tagName + " while trying to complete on its attributes");
 				}
 			}
 
-			//
-			// Complete on an attribute value
-			//
 			else {
 				String tagName = tf.getTagName();
 				Tag tag = (Tag) tags.get(tagName);

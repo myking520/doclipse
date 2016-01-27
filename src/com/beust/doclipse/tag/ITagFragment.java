@@ -18,5 +18,5 @@ public interface ITagFragment {
   public boolean completesOnTagName();
   
   public boolean completesOnAttribute();
-
+  public boolean hasAttr(String attrName);
 }

@@ -56,6 +56,8 @@ public class TagFragmentJavaCC implements ITagFragment {
 	public boolean completesOnAttribute() {
 		return tagFragmentJavaCC.completeOn==DoclipseParser.completeOnAttributeName;
 	}
-	
+	public boolean hasAttr(String attrName){
+		return tagFragmentJavaCC.hasAttrs.get(attrName)!=null;
+	}
 
 }
