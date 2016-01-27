@@ -17,6 +17,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @author myking520
+ *
+ */
 public class JellyTemplateEngine implements TemplateEngine {
 	private File temlate;
 	public JellyTemplateEngine(File temlate) {
@@ -32,16 +36,12 @@ public class JellyTemplateEngine implements TemplateEngine {
 	            Object value = contextObjects.get(key);
 	            context.setVariable(key, value);
 	        }
-
 	        OutputFormat format = OutputFormat.createPrettyPrint();
 	        format.setEncoding(encoding);
 	        final XMLWriter xmlWriter = new XMLWriter(out, format);
 	        xmlWriter.setEscapeText(false);
-	        // Create the output
 	        XMLOutput xmlOutput = new XMLOutput();
-
 	        SAXContentHandler saxHandler = new SAXContentHandler();
-
 	        xmlOutput.setContentHandler(saxHandler);
 	        xmlOutput.setLexicalHandler(saxHandler);
 

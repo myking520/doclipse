@@ -12,6 +12,10 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.Workbench;
 
+/**
+ * @author myking520
+ *
+ */
 public class TemplateLabelProvider implements ILabelProvider{
 
 	@Override

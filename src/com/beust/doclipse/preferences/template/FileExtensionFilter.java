@@ -4,6 +4,10 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 
+/**
+ * @author myking520
+ *
+ */
 public class FileExtensionFilter extends ViewerFilter{
 	private String extension;
 	private TemplatePage templatePage;
@@ -16,7 +20,7 @@ public class FileExtensionFilter extends ViewerFilter{
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
 		if(element instanceof IFile){
 			IFile file=(IFile)element;
-			if(templatePage.getDoclipseProject().getTemplateElementProvider().getElementRoot().getByText(file.getFullPath().toString())!=null){
+			if(templatePage.getDoclipseProject().getTemplateElementProvider().getElementRoot().getByText(file.getProjectRelativePath().toString())!=null){
 				return false;
 			}
 			return extension.equals(file.getFileExtension());

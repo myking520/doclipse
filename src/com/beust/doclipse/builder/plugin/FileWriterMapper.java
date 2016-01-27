@@ -9,6 +9,10 @@ import org.generama.Plugin;
 import org.generama.WriterMapper;
 import org.generama.defaults.Outcome;
 
+/**
+ * @author myking520
+ *
+ */
 public class FileWriterMapper implements WriterMapper {
 	private String outDir;
 	private String outFile;

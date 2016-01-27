@@ -91,7 +91,7 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 		TemplateElement root=templatePage.getDoclipseProject().getTemplateElementProvider().getElementRoot();
 		for(int i=0;i<result.length;i++){
 			IResource resource = (IResource) result[i];
-			String text=resource.getFullPath().toString();
+			String text=resource.getProjectRelativePath().toString();
 			if(root.getByText(text)!=null){
 				continue;
 			}

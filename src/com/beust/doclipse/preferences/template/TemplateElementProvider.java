@@ -19,6 +19,10 @@ import org.osgi.service.prefs.BackingStoreException;
 
 import com.beust.doclipse.DoclipseProject;
 
+/**
+ * @author myking520
+ *
+ */
 public class TemplateElementProvider {
 	TemplateElement elementRoot=new TemplateElement();
 	private  ProjectPreferences preferences;

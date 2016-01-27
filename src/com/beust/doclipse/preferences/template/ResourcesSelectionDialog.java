@@ -6,6 +6,10 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog;
 
+/**
+ * @author myking520
+ *
+ */
 public class ResourcesSelectionDialog extends FilteredResourcesSelectionDialog {
 
 	public ResourcesSelectionDialog(Shell shell, boolean multi, IContainer container, int typesMask,ViewerFilter... viewerFilters) {

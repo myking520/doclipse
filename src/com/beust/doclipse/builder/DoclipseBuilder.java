@@ -1,5 +1,6 @@
 package com.beust.doclipse.builder;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
@@ -17,6 +18,10 @@ import com.beust.doclipse.DoclipseProject;
 import com.beust.doclipse.builder.plugin.PluginManager;
 import com.beust.doclipse.preferences.template.TemplateElement;
 
+/**
+ * @author myking520
+ *
+ */
 public class DoclipseBuilder extends IncrementalProjectBuilder implements IResourceVisitor ,IResourceDeltaVisitor{
 	public static final String BUILDER_ID = "com.beust.doclipse.builder.DoclipseBuilder";
 
@@ -55,7 +60,6 @@ public class DoclipseBuilder extends IncrementalProjectBuilder implements IResou
 			return false;
 		}
 		final String ext = resource.getFileExtension();
-		System.out.println(resource.getFullPath().toString());
 		if (!"java".equals(ext)) {
 			return true;
 		}
@@ -69,13 +73,12 @@ public class DoclipseBuilder extends IncrementalProjectBuilder implements IResou
 	}
 	private void buildResource(IResource resource){
 		DoclipseProject doclipseProject=DoclipsePlugin.getDoclipseProject(this.getProject());
-		TemplateElement javaFile= doclipseProject.getTemplateElementProvider().getElementRoot().getByText(resource.getFullPath().toString());
+		TemplateElement javaFile= doclipseProject.getTemplateElementProvider().getElementRoot().getByText(resource.getProjectRelativePath().toString());
 		if(javaFile==null){
 			return;
 		}
+		PluginManager.process(doclipseProject, javaFile);
 		
-		QDoxPlugin qoxPlugin=PluginManager.getQDoxPlugin(doclipseProject, javaFile);
-		qoxPlugin.start();
 	}
 
 }

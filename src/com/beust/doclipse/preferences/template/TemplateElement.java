@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author myking520
+ *
+ */
 public class TemplateElement implements Serializable{
 	/**
 	 * 

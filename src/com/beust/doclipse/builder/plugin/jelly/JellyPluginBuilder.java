@@ -9,6 +9,10 @@ import org.generama.defaults.QDoxPlugin;
 import com.beust.doclipse.builder.plugin.AbstractPluginBuilder;
 import com.beust.doclipse.builder.plugin.NormalQDoxPlugin;
 
+/**
+ * @author myking520
+ *
+ */
 public class JellyPluginBuilder extends AbstractPluginBuilder {
 	@Override
 	public QDoxPlugin build(QDoxCapableMetadataProvider metadataProvider, WriterMapper writerMapper,String temlate) {
