@@ -50,7 +50,7 @@ public class Utils {
 	}
 
 	public static DefinitionFile[] readInternalFiles(Map fileNames) {
-		Shell parent = DoclipsePlugin.getDefault().getWorkbench().getDisplay().getActiveShell();
+		
 		List vResult = new ArrayList();
 		for (int i = 0; i < Constants.INTERNAL_FILES.length; i++) {
 			String file = Constants.INTERNAL_FILES[i];
@@ -60,10 +60,13 @@ public class Utils {
 					DefinitionFile df = new DefinitionFile(file, is);
 					vResult.add(df);
 				} catch (ParserConfigurationException ex) {
+					Shell parent = DoclipsePlugin.getDefault().getWorkbench().getDisplay().getActiveShell();
 					showError(parent, ex, file);
 				} catch (SAXException ex) {
+					Shell parent = DoclipsePlugin.getDefault().getWorkbench().getDisplay().getActiveShell();
 					showError(parent, ex, file);
 				} catch (IOException ex) {
+					Shell parent = DoclipsePlugin.getDefault().getWorkbench().getDisplay().getActiveShell();
 					showError(parent, ex, file);
 				}
 			}

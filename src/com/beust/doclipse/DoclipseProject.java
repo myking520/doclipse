@@ -139,8 +139,8 @@ public class DoclipseProject {
 			internalTags = (parseTags(internalFiles));
 			refreshAllTags();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			throw new RuntimeException(e);
 		}
 
 	}
