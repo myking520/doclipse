@@ -63,18 +63,19 @@ public class JavaCompletionProposalComputer implements IJavaCompletionProposalCo
 		try {
 			element = javadoc.getCompilationUnit().getElementAt(offset);
 		} catch (JavaModelException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new ArrayList<ICompletionProposal>();
 		}
 		m_document = context.getDocument();
 		try {
 			// Locate if we are on a method, a class, etc...
-
+			
 			// Let's see if we are trying to complete on a tag or on
 			// an attribute. First, locate where the @ sign started.
 			String pref = Utils.locateWordThatStartsWithAt(m_document, offset);
-
+			if(pref==null){
+				return new ArrayList<ICompletionProposal>();
+			}
 			//
 			// Determine what the user is trying to complete on:
 			// - tag name
@@ -82,6 +83,7 @@ public class JavaCompletionProposalComputer implements IJavaCompletionProposalCo
 			// - attribute value
 			// TagFragment will do all the dirty parsing for us.
 			//
+			
 			ITagFragment tf = TagFragmentFactory.newTagFragment(pref);
 			String fragment = tf.getFragment();
 			if (tf.completesOnTagName()) {

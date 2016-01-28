@@ -72,7 +72,8 @@ public class DoclipseBuilder extends IncrementalProjectBuilder implements IResou
 		return this.visit(delta.getResource());
 	}
 	private void buildResource(IResource resource){
-		DoclipseProject doclipseProject=DoclipsePlugin.getDoclipseProject(this.getProject());
+		IProject project=resource.getProject();
+		DoclipseProject doclipseProject=DoclipsePlugin.getDoclipseProject(project);
 		TemplateElement javaFile= doclipseProject.getTemplateElementProvider().getElementRoot().getByText(resource.getProjectRelativePath().toString());
 		if(javaFile==null){
 			return;
