@@ -64,7 +64,8 @@
        point="org.eclipse.core.resources.builders">
     <builder
           hasNature="true"
-          isConfigurable="true">
+          isConfigurable="true"
+          callOnEmptyDelta="true">
        <run
              class="com.beust.doclipse.builder.DoclipseBuilder">
        </run>
@@ -83,5 +84,42 @@
           id="com.beust.doclipse.builder.DoclipseBuilder">
     </builder>
  </extension>
- 
+ <extension
+       point="org.eclipse.ui.handlers">
+    <handler
+          class="com.beust.doclipse.command.handler.BuildHandler"
+          commandId="doclipse.command.build">
+    </handler>
+ </extension>
+ <extension
+       id="goclipse.build"
+       name="build"
+       point="org.eclipse.ui.commands">
+    <command
+          id="doclipse.command.build"
+          name="doclipseBuild">
+    </command>
+ </extension>
+ <extension
+       point="org.eclipse.ui.menus">
+    <menuContribution
+          allPopups="false"
+          locationURI="popup:org.eclipse.ui.popup.any">
+       <menu
+             label="doclipse">
+             <visibleWhen>
+              <iterate ifEmpty="false">
+                 <adapt type="org.eclipse.jdt.core.IJavaElement">
+                   <instanceof value="org.eclipse.jdt.core.IJavaElement" />
+                 </adapt>
+              </iterate>
+          </visibleWhen>
+           <command
+              commandId="doclipse.command.build"
+              label="build"
+              style="push">
+          </command>
+       </menu>
+    </menuContribution>
+ </extension>
 </plugin>

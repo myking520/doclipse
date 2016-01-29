@@ -25,10 +25,17 @@ public class TemplateElement implements Serializable{
 	public static final int CPE_ENGINE = 7;//引擎
 	private int kind;
 	private String text;
+	private long updateTime;
 	private List<TemplateElement> children=new ArrayList<>();
 	public final static String ENGINE_JELLY="jelly";
 	public final static String ENGINE_FREEMARKER="FreeMarker";
 	public final static String ENGINE_VELOCITY="Velocity";
+	public long getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(long updateTime) {
+		this.updateTime = updateTime;
+	}
 	public List<TemplateElement> getChildren() {
 		return children;
 	}

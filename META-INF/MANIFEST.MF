@@ -19,7 +19,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.workbench,
  org.eclipse.jface,
  org.eclipse.swt,
- org.eclipse.equinox.registry
+ org.eclipse.equinox.registry,
+ org.eclipse.core.commands
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
