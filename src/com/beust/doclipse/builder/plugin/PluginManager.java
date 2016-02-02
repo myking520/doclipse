@@ -6,6 +6,7 @@ import java.util.Map;
 import com.beust.doclipse.DoclipseProject;
 import com.beust.doclipse.builder.plugin.freeMarker.FreeMarkerBuilder;
 import com.beust.doclipse.builder.plugin.jelly.JellyPluginBuilder;
+import com.beust.doclipse.builder.plugin.velocity.VelocityPluginBuilder;
 import com.beust.doclipse.preferences.template.TemplateElement;
 
 /**
@@ -17,6 +18,7 @@ public class PluginManager {
 	static{
 		plugins.put(TemplateElement.ENGINE_JELLY, new JellyPluginBuilder());
 		plugins.put(TemplateElement.ENGINE_FREEMARKER, new FreeMarkerBuilder());
+		plugins.put(TemplateElement.ENGINE_VELOCITY, new VelocityPluginBuilder());
 		System.setProperty("file.encoding", "UTF-8");
 	}
 	public final static void process(DoclipseProject doclipseProject, TemplateElement element){
