@@ -9,7 +9,7 @@
 	        </j:forEach>
 	        <j:set var="jTagClass" value="${jClass.getTagByName('dummy.class')}"/>
 	            <dummy-map
-	            name="${jTagClass.getNamedParameter('name')}"
+	            name="${jTagClass.getNamedPrameter('name')}"
 	            value="${jTagClass.getNamedParameter('value')}"
 	            extra="${jTagClass.getNamedParameter('extra')}"
 	            />

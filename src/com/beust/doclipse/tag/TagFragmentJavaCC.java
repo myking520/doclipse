@@ -16,9 +16,7 @@ public class TagFragmentJavaCC implements ITagFragment {
 		try {
 			tagFragmentJavaCC.start();
 		} catch (Exception e) {
-			e.printStackTrace();
 		}catch(Error error){
-			error.printStackTrace();
 		}
 		if(this.completesOnTagName()){
 			if(s!=null&&s.length()>0&&this.isSeparator(s.charAt(s.length()-1))){

@@ -26,12 +26,27 @@ public class TemplateElement implements Serializable{
 	private int kind;
 	private String text;
 	private long updateTime;
+	private String id;
+	private String parentId;
 	private List<TemplateElement> children=new ArrayList<>();
 	public final static String ENGINE_JELLY="jelly";
 	public final static String ENGINE_FREEMARKER="FreeMarker";
 	public final static String ENGINE_VELOCITY="Velocity";
 	public long getUpdateTime() {
 		return updateTime;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getParentId() {
+		return parentId;
+	}
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 	public void setUpdateTime(long updateTime) {
 		this.updateTime = updateTime;
@@ -121,4 +136,5 @@ public class TemplateElement implements Serializable{
 		}
 		return null;
 	}
+
 }

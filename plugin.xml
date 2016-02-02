@@ -101,25 +101,34 @@
     </command>
  </extension>
  <extension
-       point="org.eclipse.ui.menus">
-    <menuContribution
-          allPopups="false"
-          locationURI="popup:org.eclipse.ui.popup.any">
-       <menu
-             label="doclipse">
-             <visibleWhen>
-              <iterate ifEmpty="false">
-                 <adapt type="org.eclipse.jdt.core.IJavaElement">
-                   <instanceof value="org.eclipse.jdt.core.IJavaElement" />
-                 </adapt>
-              </iterate>
-          </visibleWhen>
-           <command
-              commandId="doclipse.command.build"
-              label="build"
-              style="push">
-          </command>
-       </menu>
-    </menuContribution>
+       point="org.eclipse.debug.ui.launchShortcuts">
+    <shortcut
+          class="com.beust.doclipse.shortcut.DoclipseLaunchShortcut"
+          icon="icon/goclipse.ico"
+          id="doclipse.shortcut1"
+          label="doclipse"
+          modes="run">
+       <contextualLaunch>
+          <contextLabel
+                label="goclipse Build"
+                mode="run">
+          </contextLabel>
+         <enablement>
+    <with variable="selection">
+     <count value="1"/>
+      <iterate>
+       <or>
+        <test property="org.eclipse.jdt.launching.hasMain"/>
+         <and>
+          <test property="org.eclipse.jdt.launching.isContainer"/>
+          <test property="org.eclipse.jdt.launching.hasProjectNature" args="com.beust.doclipse.builder.DoclipseNature"/>
+         </and>
+        </or>
+      </iterate>
+     </with>
+  </enablement>
+       </contextualLaunch>
+    </shortcut>
+
  </extension>
 </plugin>

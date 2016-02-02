@@ -61,7 +61,6 @@ public class TemplateLabelProvider implements ILabelProvider{
 	}
 	@Override
 	public String getText(Object element) {
-		
 		if(element instanceof TemplateElement){
 			TemplateElement e=(TemplateElement) element;
 			if((e.getText()==null||e.getText().length()==0)){
