@@ -5,22 +5,22 @@ import java.io.Writer;
 import java.util.Map;
 
 import org.generama.GeneramaException;
-import org.generama.TemplateEngine;
+
+import com.beust.doclipse.builder.plugin.AbstractTemplateEngine;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
-public class FreeMarkerTemplateEngine implements TemplateEngine {
-	private File temlate;
+public class FreeMarkerTemplateEngine  extends AbstractTemplateEngine {
 	private Configuration cfg = new Configuration();
 
 	public FreeMarkerTemplateEngine(File temlate) {
-		super();
-		this.temlate = temlate;
+		super(temlate);
 	}
 
+
 	@Override
-	public void generate(Writer out, Map contextObjects, String encoding, Class pluginClass) throws GeneramaException {
+	public void generate(Writer out, Map contextObjects) {
 		try {
 			cfg.setDirectoryForTemplateLoading(temlate.getParentFile());
 			Template template = cfg.getTemplate(temlate.getName());
@@ -29,7 +29,7 @@ public class FreeMarkerTemplateEngine implements TemplateEngine {
 		} catch (Exception e) {
 			throw new GeneramaException("Exception occurred when running FreeMarker", e);
 		}
-
+		
 	}
 
 }

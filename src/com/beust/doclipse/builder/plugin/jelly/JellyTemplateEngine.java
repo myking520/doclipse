@@ -11,6 +11,8 @@ import org.generama.TemplateEngine;
 import org.generama.jelly.GeneramaJellyContext;
 import org.xml.sax.SAXException;
 
+import com.beust.doclipse.builder.plugin.AbstractTemplateEngine;
+
 import java.io.File;
 import java.io.Writer;
 import java.util.Iterator;
@@ -21,44 +23,43 @@ import java.util.Set;
  * @author myking520
  *
  */
-public class JellyTemplateEngine implements TemplateEngine {
-	private File temlate;
+public class JellyTemplateEngine extends AbstractTemplateEngine {
 	public JellyTemplateEngine(File temlate) {
-		super();
-		this.temlate = temlate;
+		super(temlate);
 	}
-	@Override
-	public void generate(Writer out, Map contextObjects, String encoding, Class pluginClass) throws GeneramaException {
-		 JellyContext context = new GeneramaJellyContext();
-	        Set keys = contextObjects.keySet();
-	        for (Iterator iterator = keys.iterator(); iterator.hasNext();) {
-	            String key = (String) iterator.next();
-	            Object value = contextObjects.get(key);
-	            context.setVariable(key, value);
-	        }
-	        OutputFormat format = OutputFormat.createPrettyPrint();
-	        format.setEncoding(encoding);
-	        final XMLWriter xmlWriter = new XMLWriter(out, format);
-	        xmlWriter.setEscapeText(false);
-	        XMLOutput xmlOutput = new XMLOutput();
-	        SAXContentHandler saxHandler = new SAXContentHandler();
-	        xmlOutput.setContentHandler(saxHandler);
-	        xmlOutput.setLexicalHandler(saxHandler);
 
-	        try {
-	            xmlOutput.startDocument();
-	            context.runScript(temlate, xmlOutput);
-	            xmlOutput.endDocument();
-	            xmlWriter.write(saxHandler.getDocument());
-	            xmlWriter.flush();
-	            xmlWriter.close();
-	        } catch (SAXException e) {
-	            throw new GeneramaException("Exception occurred when running Jelly", e);
-	        } catch (JellyException e) {
-	            throw new GeneramaException("Exception occurred when running Jelly", e);
-	        } catch (Exception e) {
-	            throw new GeneramaException("Exception occurred when running Jelly", e);
-	        }
+	@Override
+	public void generate(Writer out, Map contextObjects) {
+		JellyContext context = new GeneramaJellyContext();
+		Set keys = contextObjects.keySet();
+		for (Iterator iterator = keys.iterator(); iterator.hasNext();) {
+			String key = (String) iterator.next();
+			Object value = contextObjects.get(key);
+			context.setVariable(key, value);
+		}
+		OutputFormat format = OutputFormat.createPrettyPrint();
+		format.setEncoding("UTF-8");
+		final XMLWriter xmlWriter = new XMLWriter(out, format);
+		xmlWriter.setEscapeText(false);
+		XMLOutput xmlOutput = new XMLOutput();
+		SAXContentHandler saxHandler = new SAXContentHandler();
+		xmlOutput.setContentHandler(saxHandler);
+		xmlOutput.setLexicalHandler(saxHandler);
+
+		try {
+			xmlOutput.startDocument();
+			context.runScript(temlate, xmlOutput);
+			xmlOutput.endDocument();
+			xmlWriter.write(saxHandler.getDocument());
+			xmlWriter.flush();
+			xmlWriter.close();
+		} catch (SAXException e) {
+			throw new GeneramaException("Exception occurred when running Jelly", e);
+		} catch (JellyException e) {
+			throw new GeneramaException("Exception occurred when running Jelly", e);
+		} catch (Exception e) {
+			throw new GeneramaException("Exception occurred when running Jelly", e);
+		}
 	}
 
 }
