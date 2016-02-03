@@ -24,14 +24,21 @@ import com.beust.doclipse.preferences.template.TemplateElement;
  */
 public class DoclipseBuilder extends IncrementalProjectBuilder implements IResourceVisitor ,IResourceDeltaVisitor{
 	public static final String BUILDER_ID = "com.beust.doclipse.builder.DoclipseBuilder";
-
+	private static ClassManager classManager=new ClassManager();
+	public ClassManager getClassManager() {
+		return classManager;
+	}
+	public DoclipseBuilder(){
+	}
 	@Override
 	protected IProject[] build(int kind, Map<String, String> args, IProgressMonitor monitor) throws CoreException {
 		if (kind == FULL_BUILD) {
 			this.fullBuild(monitor);
+			this.buildTemplete();
 		} else if (kind == IncrementalProjectBuilder.INCREMENTAL_BUILD
 				|| kind == IncrementalProjectBuilder.AUTO_BUILD) {
 			incrementalBuild(monitor);
+			this.buildTemplete();
 		} else if (kind == IncrementalProjectBuilder.CLEAN_BUILD) {
 			clean(monitor);
 		}
@@ -78,8 +85,19 @@ public class DoclipseBuilder extends IncrementalProjectBuilder implements IResou
 		if(javaFile==null){
 			return;
 		}
-		PluginManager.process(doclipseProject, javaFile);
+		PluginManager.process(doclipseProject, javaFile,classManager);
 		
 	}
 
+	/**
+	 * 最终调用
+	 * 
+	 */
+	public void buildTemplete(){
+		List<QDoxPlugin> lt=classManager.getTobeBuild();
+		for(int i=0;i<lt.size();){
+			QDoxPlugin qDoxPlugin=lt.remove(i);
+			qDoxPlugin.start();
+		}
+	}
 }

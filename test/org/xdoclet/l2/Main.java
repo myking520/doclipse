@@ -6,6 +6,7 @@ import java.util.Properties;
 import org.xdoclet.QDoxMetadataProvider;
 import org.xdoclet.tools.PropertiesQDoxPropertyExpander;
 
+import com.beust.doclipse.builder.ClassManager;
 import com.beust.doclipse.builder.plugin.FileWriterMapper;
 import com.beust.doclipse.builder.plugin.NormalQDoxPlugin;
 import com.beust.doclipse.builder.plugin.PluginManager;
@@ -22,7 +23,7 @@ public class Main {
 		expander.addProperties("props", props);
 		
 		QDoxMetadataProvider metadataProvider = new QDoxMetadataProvider(new File("D:/eclipseplugin/doclipse/test/org/xdoclet/l1/QDoxPropertyExpanderDummyPlugin.jelly"), expander);
-		NormalQDoxPlugin qp=new NormalQDoxPlugin(new JellyTemplateEngine(file), metadataProvider, fileWriterMapper);
+		NormalQDoxPlugin qp=new NormalQDoxPlugin(new JellyTemplateEngine(file,new ClassManager()), metadataProvider, fileWriterMapper);
 		qp.start();
 	}
 }

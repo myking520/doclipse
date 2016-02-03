@@ -11,6 +11,7 @@ import org.generama.TemplateEngine;
 import org.generama.jelly.GeneramaJellyContext;
 import org.xml.sax.SAXException;
 
+import com.beust.doclipse.builder.ClassManager;
 import com.beust.doclipse.builder.plugin.AbstractTemplateEngine;
 
 import java.io.File;
@@ -24,8 +25,8 @@ import java.util.Set;
  *
  */
 public class JellyTemplateEngine extends AbstractTemplateEngine {
-	public JellyTemplateEngine(File temlate) {
-		super(temlate);
+	public JellyTemplateEngine(File temlate,ClassManager classManager) {
+		super(temlate,classManager);
 	}
 
 	@Override

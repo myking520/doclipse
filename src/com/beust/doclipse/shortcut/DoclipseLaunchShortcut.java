@@ -21,6 +21,7 @@ public class DoclipseLaunchShortcut implements ILaunchShortcut {
 
 	@Override
 	public void launch(ISelection selection, String mode) {
+		DoclipseBuilder builder=new DoclipseBuilder();
 		if(selection instanceof TreeSelection){
 			TreeSelection tree=(TreeSelection)selection;
 			Iterator lt=tree.iterator();
@@ -31,7 +32,7 @@ public class DoclipseLaunchShortcut implements ILaunchShortcut {
 					res=((IJavaElement)obj).getResource();
 				}
 				try {
-					res.accept(new DoclipseBuilder());
+					res.accept(builder);
 				} catch (CoreException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -40,6 +41,7 @@ public class DoclipseLaunchShortcut implements ILaunchShortcut {
 		}
 		try {
 			DoclipseProject.getCurrentProject().refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+			builder.buildTemplete();
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,10 +53,12 @@ public class DoclipseLaunchShortcut implements ILaunchShortcut {
 		if(!(editor instanceof CompilationUnitEditor)){
 			return;
 		}
+		DoclipseBuilder builder=new DoclipseBuilder();
 		CompilationUnitEditor compilationUnitEditor=(CompilationUnitEditor) editor;
 		FileEditorInput fileEditorInput=(FileEditorInput) compilationUnitEditor.getEditorInput();
 		try {
-			fileEditorInput.getFile().accept(new DoclipseBuilder());
+			fileEditorInput.getFile().accept(builder);
+			builder.buildTemplete();
 			DoclipseProject.getCurrentProject().refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block

@@ -11,11 +11,12 @@ import org.xdoclet.QDoxMetadataProvider;
 import org.xdoclet.tools.PropertiesQDoxPropertyExpander;
 
 import com.beust.doclipse.DoclipseProject;
+import com.beust.doclipse.builder.ClassManager;
 import com.beust.doclipse.console.ConsoleFactory;
 import com.beust.doclipse.preferences.template.TemplateElement;
 
 public abstract class AbstractPluginBuilder {
-	public QDoxPlugin build(DoclipseProject doclipseProject, TemplateElement java,TemplateElement importTemplete){
+	public QDoxPlugin build(DoclipseProject doclipseProject, TemplateElement java,TemplateElement importTemplete,ClassManager classManager){
 		String importTempleteName=importTemplete.getText();
 		TemplateElement outputElement = importTemplete.getChildrenByKind(TemplateElement.CPE_EXPORT);
 		if (outputElement == null) {
@@ -39,9 +40,10 @@ public abstract class AbstractPluginBuilder {
 		Properties props = new Properties();
 //		props.setProperty("value", "props-test-value");
 		expander.addProperties("props", props);
-		QDoxMetadataProvider metadataProvider = new QDoxMetadataProvider(doclipseProject.getProject().getFile(java.getText()).getLocation().toFile(), expander);
-		return this.build(metadataProvider, fileWriterMapper,importTemplete.getText());
+//		QDoxMetadataProvider metadataProvider = new QDoxMetadataProvider(doclipseProject.getProject().getFile(java.getText()).getLocation().toFile(), expander);
+		DefaultQDoxCapableMetadataProvider metadataProvider = new DefaultQDoxCapableMetadataProvider(doclipseProject.getProject().getFile(java.getText()).getLocation().toFile(), expander,classManager);
+		return this.build(metadataProvider, fileWriterMapper,importTemplete.getText(),classManager);
 	}
 	public abstract QDoxPlugin build(QDoxCapableMetadataProvider metadataProvider,
-			WriterMapper writerMapper,String temlate);
+			WriterMapper writerMapper,String temlate,ClassManager classManager);
 }

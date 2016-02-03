@@ -12,6 +12,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.app.VelocityEngine;
 
+import com.beust.doclipse.builder.ClassManager;
 import com.beust.doclipse.builder.plugin.AbstractTemplateEngine;
 
 /**
@@ -19,8 +20,8 @@ import com.beust.doclipse.builder.plugin.AbstractTemplateEngine;
  *
  */
 public class VelocityTemplateEngine extends AbstractTemplateEngine {
-	public VelocityTemplateEngine(File temlate) {
-		super(temlate);
+	public VelocityTemplateEngine(File temlate,ClassManager classManager) {
+		super(temlate,classManager);
 	}
 
 	@Override

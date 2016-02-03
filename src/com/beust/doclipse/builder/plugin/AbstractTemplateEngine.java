@@ -10,18 +10,21 @@ import org.eclipse.ui.console.MessageConsoleStream;
 import org.generama.GeneramaException;
 import org.generama.TemplateEngine;
 
+import com.beust.doclipse.builder.ClassManager;
 import com.beust.doclipse.console.ConsoleFactory;
 
 public abstract class AbstractTemplateEngine implements TemplateEngine {
 	protected File temlate;
-	public AbstractTemplateEngine(File temlate) {
+	protected ClassManager classManager;
+	public AbstractTemplateEngine(File temlate,ClassManager classManager) {
 		super();
 		this.temlate = temlate;
+		this.classManager=classManager;
 	}
 	@Override
 	public void generate(Writer out, Map contextObjects, String encoding, Class pluginClass) throws GeneramaException {
-		Collection collection=(Collection) contextObjects.get("metadata");
-		contextObjects.put("javaClass", collection.iterator().next());
+		contextObjects.put("classMap", classManager.getClass());
+		contextObjects.put("javaClass",  contextObjects.remove("metadata"));
 		try {
 			this.generate(out, contextObjects);
 		} catch (Exception e) {

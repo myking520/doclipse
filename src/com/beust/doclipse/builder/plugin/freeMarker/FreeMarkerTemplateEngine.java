@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.generama.GeneramaException;
 
+import com.beust.doclipse.builder.ClassManager;
 import com.beust.doclipse.builder.plugin.AbstractTemplateEngine;
 
 import freemarker.template.Configuration;
@@ -14,8 +15,8 @@ import freemarker.template.Template;
 public class FreeMarkerTemplateEngine  extends AbstractTemplateEngine {
 	private Configuration cfg = new Configuration();
 
-	public FreeMarkerTemplateEngine(File temlate) {
-		super(temlate);
+	public FreeMarkerTemplateEngine(File temlate,ClassManager classManager) {
+		super(temlate, classManager);
 	}
 
 
