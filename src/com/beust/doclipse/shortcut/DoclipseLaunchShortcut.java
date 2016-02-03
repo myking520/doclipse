@@ -40,8 +40,8 @@ public class DoclipseLaunchShortcut implements ILaunchShortcut {
 			}
 		}
 		try {
-			DoclipseProject.getCurrentProject().refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 			builder.buildTemplete();
+			DoclipseProject.getCurrentProject().refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
