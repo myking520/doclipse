@@ -129,6 +129,13 @@
   </enablement>
        </contextualLaunch>
     </shortcut>
-
+ </extension>
+ <!--  控制台 -->
+ <extension
+       point="org.eclipse.ui.console.consoleFactories">
+    <consoleFactory
+          class="com.beust.doclipse.console.ConsoleFactory"
+          label="goclipse">
+    </consoleFactory>
  </extension>
 </plugin>

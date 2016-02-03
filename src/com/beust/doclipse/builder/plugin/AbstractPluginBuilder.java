@@ -3,6 +3,7 @@ package com.beust.doclipse.builder.plugin;
 import java.io.File;
 import java.util.Properties;
 
+import org.eclipse.ui.console.MessageConsoleStream;
 import org.generama.QDoxCapableMetadataProvider;
 import org.generama.WriterMapper;
 import org.generama.defaults.QDoxPlugin;
@@ -10,6 +11,7 @@ import org.xdoclet.QDoxMetadataProvider;
 import org.xdoclet.tools.PropertiesQDoxPropertyExpander;
 
 import com.beust.doclipse.DoclipseProject;
+import com.beust.doclipse.console.ConsoleFactory;
 import com.beust.doclipse.preferences.template.TemplateElement;
 
 public abstract class AbstractPluginBuilder {
@@ -30,6 +32,8 @@ public abstract class AbstractPluginBuilder {
 		if (s != -1) {
 			outFileName=outFileName.substring(0,s);
 		} 
+		MessageConsoleStream message=ConsoleFactory.getMessageConsole().newMessageStream();
+		message.println("output:\n"+outputElement.getText()+File.pathSeparator+outFileName);
 		FileWriterMapper fileWriterMapper=new FileWriterMapper(outputElement.getText(),outFileName);
 		PropertiesQDoxPropertyExpander expander = new PropertiesQDoxPropertyExpander();
 		Properties props = new Properties();

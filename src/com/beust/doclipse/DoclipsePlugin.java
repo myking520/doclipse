@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -22,7 +24,6 @@ public class DoclipsePlugin extends AbstractUIPlugin {
 	private static DoclipsePlugin plugin;
 	// Resource bundle.
 	private ResourceBundle resourceBundle;
-
 	/**
 	 * The constructor.
 	 */
