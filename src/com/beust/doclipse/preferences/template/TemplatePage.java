@@ -41,6 +41,7 @@ public class TemplatePage extends PropertyPage implements IStatusChangeListener 
 	}
 	@Override
 	protected Control createContents(Composite parent) {
+		
 		TemplateAdapter adapter=new TemplateAdapter(this);
 		treeListDialogField=new ElementsListDialogField<TemplateElement>(adapter, buttonLabels, new TemplateLabelProvider());
 		List<TemplateElement> elements=new ArrayList<TemplateElement>();

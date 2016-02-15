@@ -1,5 +1,8 @@
 package com.beust.doclipse.preferences;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
@@ -27,18 +30,22 @@ import com.beust.doclipse.DoclipseProject;
 public class MainPage extends DoclipsePreferencePage implements IWorkbenchPreferencePage {
 	private Button m_surroundWithDoubleQuotesB = null;
 	private Button m_insertSpacesB = null;
-
+	private boolean file;
 	protected Control createContents(Composite parent) {
 		super.createContents(parent);
 		Composite result = new Composite(parent, SWT.NONE);
 		GridLayout gl = new GridLayout();
 		gl.numColumns = 1;
 		result.setLayout(gl);
+		IResource resource = getElement().getAdapter(IResource.class);
+		file=resource instanceof IFile;
+		if(!file){
 		m_surroundWithDoubleQuotesB = new Button(result, SWT.CHECK);
 		m_surroundWithDoubleQuotesB.setText("Surround values with double quotes");
 		m_insertSpacesB = new Button(result, SWT.CHECK);
 		m_insertSpacesB.setText("Insert spaces around the equal sign");
 		initializeValues();
+		}
 		return result;
 	}
 
@@ -92,8 +99,10 @@ public class MainPage extends DoclipsePreferencePage implements IWorkbenchPrefer
 		//
 		// Save the current values to the IPreferenceStore
 		//
-		doclipseProject.saveSurroundWithDoubleQuotes(m_surroundWithDoubleQuotesB.getSelection());
-		doclipseProject.saveInsertSpacesAroundEqual(m_insertSpacesB.getSelection());
+		if(!file){
+			doclipseProject.saveSurroundWithDoubleQuotes(m_surroundWithDoubleQuotesB.getSelection());
+			doclipseProject.saveInsertSpacesAroundEqual(m_insertSpacesB.getSelection());
+		}
 	}
 
 	protected void performApply() {

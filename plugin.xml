@@ -118,11 +118,14 @@
      <count value="1"/>
       <iterate>
        <or>
-        <test property="org.eclipse.jdt.launching.hasMain"/>
-         <and>
-          <test property="org.eclipse.jdt.launching.isContainer"/>
+         <test
+              property="doclipse.propertyTester1.isDoclipse" forcePluginActivation="true">
+        </test>
+        <and>
+         <test property="org.eclipse.jdt.launching.isContainer"/>
           <test property="org.eclipse.jdt.launching.hasProjectNature" args="com.beust.doclipse.builder.DoclipseNature"/>
-         </and>
+        </and>
+        
         </or>
       </iterate>
      </with>
@@ -137,5 +140,15 @@
           class="com.beust.doclipse.console.ConsoleFactory"
           label="goclipse">
     </consoleFactory>
+ </extension>
+ <extension
+       point="org.eclipse.core.expressions.propertyTesters">
+    <propertyTester
+          class="com.beust.doclipse.launch.tester.PropertyTester1"
+          id="doclipse.propertyTester1"
+          namespace="doclipse.propertyTester1"
+          properties="isDoclipse"
+           type="org.eclipse.core.runtime.IAdaptable">
+    </propertyTester>
  </extension>
 </plugin>
