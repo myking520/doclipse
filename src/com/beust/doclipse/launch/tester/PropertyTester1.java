@@ -33,8 +33,12 @@ public class PropertyTester1 extends PropertyTester {
 						e.printStackTrace();
 						return false;
 					}
+					String text=javaElement.getResource().getProjectRelativePath().toString();
+					if(javaElement.getElementType()==IJavaElement.PACKAGE_FRAGMENT){
+						text=javaElement.getResource().getFullPath().makeRelative().toString();
+					}
 					DoclipseProject doclipseProject=DoclipsePlugin.getDoclipseProject(javaElement.getJavaProject().getProject());
-					TemplateElement element=	doclipseProject.getTemplateElementProvider().getElementRoot().getByText(javaElement.getResource().getProjectRelativePath().toString());
+					TemplateElement element=	doclipseProject.getTemplateElementProvider().getElementRoot().getByText(text);
 					return element!=null;
 				}
 			}
