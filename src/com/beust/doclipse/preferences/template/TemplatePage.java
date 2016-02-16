@@ -3,6 +3,8 @@ package com.beust.doclipse.preferences.template;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.internal.ui.wizards.IStatusChangeListener;
@@ -11,6 +13,8 @@ import org.eclipse.jdt.internal.ui.wizards.dialogfields.DialogField;
 import org.eclipse.jdt.internal.ui.wizards.dialogfields.LayoutUtil;
 import org.eclipse.jdt.internal.ui.wizards.dialogfields.TreeListDialogField;
 import org.eclipse.jface.layout.PixelConverter;
+import org.eclipse.jface.viewers.AbstractTreeViewer;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -59,7 +63,11 @@ public class TemplatePage extends PropertyPage implements IStatusChangeListener 
 		treeListDialogField.setButtonsMinWidth(buttonBarWidth);
 		this.diableButtons();
 		treeListDialogField.setViewerComparator(new CPListElementSorter());
-	
+		IResource resource = getElement().getAdapter(IResource.class);
+		if(resource instanceof IFile){
+			TemplateElement element=	doclipseProject.getTemplateElementProvider().getElementRoot().getByText(resource.getProjectRelativePath().toString());
+			treeListDialogField.getTreeViewer().expandToLevel(element,AbstractTreeViewer.ALL_LEVELS);
+		}
 		treeListDialogField.getTreeViewer().refresh();
 		return composite;
 	}

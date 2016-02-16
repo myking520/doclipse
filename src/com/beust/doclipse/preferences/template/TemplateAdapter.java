@@ -202,6 +202,10 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 
 	@Override
 	public Object getParent(TreeListDialogField<TemplateElement> field, Object element) {
+		if(element instanceof TemplateElement){
+			element=templatePage.getDoclipseProject().getTemplateElementProvider().getElementRoot().getParent((TemplateElement)element);
+			return element;
+		}
 		return null;
 	}
 

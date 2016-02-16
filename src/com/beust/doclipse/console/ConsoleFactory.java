@@ -12,6 +12,9 @@ public class ConsoleFactory implements IConsoleFactory {
 	private final  static MessageConsole console=new MessageConsole("", null);
 	@Override
 	public void openConsole() {
+		showConsole();
+	}
+	private final static void showConsole(){
 		IConsole[] existing = consoleManager.getConsoles();
 		boolean exists = false;
 		for (int i = 0; i < existing.length; i++) {
@@ -23,7 +26,7 @@ public class ConsoleFactory implements IConsoleFactory {
 		consoleManager.showConsoleView(console);
 	}
 	public final static MessageConsole getMessageConsole(){
-		
+		showConsole();
 		return console;
 	}
 }
