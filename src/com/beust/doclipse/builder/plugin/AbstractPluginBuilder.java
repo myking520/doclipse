@@ -34,7 +34,7 @@ public abstract class AbstractPluginBuilder {
 			outFileName=outFileName.substring(0,s);
 		} 
 		MessageConsoleStream message=ConsoleFactory.getMessageConsole().newMessageStream();
-		message.println("output:\n"+outputElement.getText()+File.pathSeparator+outFileName);
+		message.println("output:\n"+outputElement.getText()+File.separatorChar+outFileName);
 		FileWriterMapper fileWriterMapper=new FileWriterMapper(outputElement.getText(),outFileName);
 		PropertiesQDoxPropertyExpander expander = new PropertiesQDoxPropertyExpander();
 		Properties props = new Properties();

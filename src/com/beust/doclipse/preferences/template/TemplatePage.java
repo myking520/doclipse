@@ -67,7 +67,7 @@ public class TemplatePage extends PropertyPage implements IStatusChangeListener 
 		IResource resource = getElement().getAdapter(IResource.class);
 		if(resource instanceof IFile){
 			TemplateElement element=	doclipseProject.getTemplateElementProvider().getElementRoot().getByText(resource.getProjectRelativePath().toString());
-			treeListDialogField.getTreeViewer().expandToLevel(element,3);
+			treeListDialogField.getTreeViewer().expandToLevel(element,1);
 		}else if(resource instanceof IFolder){
 			TemplateElement element=	doclipseProject.getTemplateElementProvider().getElementRoot().getByText(resource.getFullPath().makeRelative().toString());
 			treeListDialogField.getTreeViewer().expandToLevel(element,1);

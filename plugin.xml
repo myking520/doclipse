@@ -43,12 +43,12 @@
              <enabledWhen>
              <or>
              <test
-              property="doclipse.propertyTester1.isDoclipse" forcePluginActivation="true">
+              property="doclipse.propertyTester1.hasDoclipse" forcePluginActivation="true">
        			 </test>
        			 <and>
        			  <adapt type="org.eclipse.core.resources.IProject">
 		          <test property="org.eclipse.core.resources.projectNature" value="org.eclipse.jdt.core.javanature"/>
-		     </adapt>   
+		    	 </adapt>   
        			 </and>
        			   
              </or>
@@ -156,7 +156,7 @@
           class="com.beust.doclipse.launch.tester.PropertyTester1"
           id="doclipse.propertyTester1"
           namespace="doclipse.propertyTester1"
-          properties="isDoclipse"
+          properties="isDoclipse,hasDoclipse"
            type="org.eclipse.core.runtime.IAdaptable">
     </propertyTester>
  </extension>

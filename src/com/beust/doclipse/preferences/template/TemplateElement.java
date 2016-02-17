@@ -77,6 +77,9 @@ public class TemplateElement implements Serializable{
 		this.text = text;
 	}
 	public TemplateElement getByText(String text){
+		if(this.text==null){
+			return null;
+		}
 		if(this.text.equals(text)){
 			return this;
 		}

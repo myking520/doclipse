@@ -114,10 +114,11 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 				folderElement.setKind(TemplateElement.CPE_PACKAGE);
 				root.getChildren().add(folderElement);
 			}
-
 			folderElement.getChildren().add(fileElement);
+			field.expandElement(fileElement, 1);
 		}
 		templatePage.getDoclipseProject().getTemplateElementProvider().saveOrUpdate();
+		
 		field.refresh();
 	}
 	public TemplateElement getOrCreatePackageElement(TemplateElement templateElement, String packageName) {
