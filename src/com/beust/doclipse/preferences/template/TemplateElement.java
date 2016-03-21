@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * @author myking520
  *
@@ -23,11 +25,17 @@ public class TemplateElement implements Serializable{
 	public static final int CPE_IMPORT = 5;//输入
 	public static final int CPE_EXPORT = 6;//输出
 	public static final int CPE_ENGINE = 7;//引擎
+	@JSONField(name="k")
 	private int kind;
+	@JSONField(name="t")
 	private String text;
+	@JSONField(name="u")
 	private long updateTime;
+	@JSONField(name="i")
 	private String id;
+	@JSONField(name="p")
 	private String parentId;
+	@JSONField(name="c")
 	private List<TemplateElement> children=new ArrayList<>();
 	public final static String ENGINE_JELLY="jelly";
 	public final static String ENGINE_FREEMARKER="FreeMarker";
