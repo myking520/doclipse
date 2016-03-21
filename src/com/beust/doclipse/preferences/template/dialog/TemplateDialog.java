@@ -13,7 +13,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
@@ -91,7 +90,7 @@ public class TemplateDialog extends Dialog {
 		btn.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				DirectoryDialog fdialog = new DirectoryDialog(Display.getCurrent().getActiveShell());
+				FileDialog fdialog = new FileDialog(Display.getCurrent().getActiveShell(),SWT.SAVE);
 				String file = fdialog.open();
 				output.setText(file);
 				output.setToolTipText(file);
