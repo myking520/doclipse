@@ -37,6 +37,12 @@ public class DefaultQDoxCapableMetadataProvider extends QDoxMetadataProvider{
 			lt.add(javaClass);
 			return lt;
 		}
+		this.javaClass=this.classManager.getJavaClassByFile(this.javaFile);
+		if(this.javaClass!=null){
+			List<JavaClass> lt=new ArrayList<JavaClass>();
+			lt.add(javaClass);
+			return lt;
+		}
 		Collection coll= super.getMetadata();
 		Iterator lterator=coll.iterator();
 		if(lterator.hasNext()){

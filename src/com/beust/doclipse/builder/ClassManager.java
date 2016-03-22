@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.core.IJavaProject;
 import org.generama.defaults.QDoxPlugin;
 
 import com.beust.doclipse.builder.plugin.DefaultQDoxCapableMetadataProvider;
@@ -18,7 +19,14 @@ public class ClassManager {
 	//路劲,JavaClass
 	private Map<String,JavaClass> fileJavas=new HashMap<String,JavaClass>();
 	private List<QDoxPlugin> tobeBuild=new ArrayList<QDoxPlugin>();
+	private IJavaProject javaProject;
+	
+	public ClassManager(IJavaProject javaProject) {
+		super();
+		this.javaProject = javaProject;
+	}
 	public List<QDoxPlugin> getTobeBuild() {
+		
 		return tobeBuild;
 	}
 	public JavaClass getJavaClassByName(String className){
@@ -27,6 +35,7 @@ public class ClassManager {
 	public JavaClass getJavaClassByFile(File file){
 		return fileJavas.get(file.getAbsolutePath());
 	}
+	
 	public void save(DefaultQDoxCapableMetadataProvider metadataProvider){
 		this.javaClass.put(metadataProvider.getJavaClass().getFullyQualifiedName(), metadataProvider.getJavaClass());
 		this.fileJavas.put(metadataProvider.getJavaFile().getAbsolutePath(), metadataProvider.getJavaClass());

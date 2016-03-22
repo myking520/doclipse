@@ -34,7 +34,7 @@ public class PluginManager {
 			AbstractPluginBuilder builder=plugins.get(engine.getText());
 			message.println("engine:\n"+engine.getText());
 			message.println("Templete:\n"+importTemplete.getText());
-			classManager.add2bBuild(builder.build(doclipseProject, element,importTemplete,classManager));
+			builder.build(doclipseProject, element,importTemplete,classManager).start();
 		}
 	}
 }

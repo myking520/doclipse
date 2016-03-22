@@ -27,10 +27,10 @@ public class DoclipseLaunchShortcut implements ILaunchShortcut {
 			Iterator lt=tree.iterator();
 			while(lt.hasNext()){
 				Object obj=lt.next();
-				IResource res=null;
-				if(obj instanceof IJavaElement){
-					res=((IJavaElement)obj).getResource();
+				if(!(obj instanceof IJavaElement)){
+					continue;
 				}
+				IResource res=((IJavaElement)obj).getResource();
 				try {
 					res.accept(builder);
 				} catch (CoreException e) {
@@ -40,7 +40,7 @@ public class DoclipseLaunchShortcut implements ILaunchShortcut {
 			}
 		}
 		try {
-			builder.buildTemplete();
+			builder.buildTemplete(DoclipseProject.getCurrentProject());
 			DoclipseProject.getCurrentProject().refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
@@ -58,7 +58,7 @@ public class DoclipseLaunchShortcut implements ILaunchShortcut {
 		FileEditorInput fileEditorInput=(FileEditorInput) compilationUnitEditor.getEditorInput();
 		try {
 			fileEditorInput.getFile().accept(builder);
-			builder.buildTemplete();
+			builder.buildTemplete(DoclipseProject.getCurrentProject());
 			DoclipseProject.getCurrentProject().refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block

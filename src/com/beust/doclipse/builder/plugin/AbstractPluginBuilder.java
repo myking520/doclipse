@@ -22,25 +22,16 @@ public abstract class AbstractPluginBuilder {
 		if (outputElement == null) {
 			throw new RuntimeException("no out put dir");
 		}
-		String outFileName=null;
-		int s = importTempleteName.lastIndexOf(File.separatorChar);
-		if (s != -1) {
-			outFileName=importTempleteName.substring(s + 1);
-		} else {
-			outFileName= importTempleteName;
-		}
-		s = outFileName.lastIndexOf(".");
-		if (s != -1) {
-			outFileName=outFileName.substring(0,s);
-		} 
+
+		int lastsp=outputElement.getText().lastIndexOf(File.separatorChar);
+		String outdir=outputElement.getText().substring(0, lastsp+1);
+		String outFile=outputElement.getText().substring(lastsp+1);
 		MessageConsoleStream message=ConsoleFactory.getMessageConsole().newMessageStream();
-		message.println("output:\n"+outputElement.getText()+File.separatorChar+outFileName);
-		FileWriterMapper fileWriterMapper=new FileWriterMapper(outputElement.getText(),outFileName);
+		message.println("output:\n"+outputElement.getText());
+		FileWriterMapper fileWriterMapper=new FileWriterMapper(outdir,outFile);
 		PropertiesQDoxPropertyExpander expander = new PropertiesQDoxPropertyExpander();
 		Properties props = new Properties();
-//		props.setProperty("value", "props-test-value");
 		expander.addProperties("props", props);
-//		QDoxMetadataProvider metadataProvider = new QDoxMetadataProvider(doclipseProject.getProject().getFile(java.getText()).getLocation().toFile(), expander);
 		DefaultQDoxCapableMetadataProvider metadataProvider = new DefaultQDoxCapableMetadataProvider(doclipseProject.getProject().getFile(java.getText()).getLocation().toFile(), expander,classManager);
 		return this.build(metadataProvider, fileWriterMapper,importTemplete.getText(),classManager);
 	}

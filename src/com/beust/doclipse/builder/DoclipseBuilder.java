@@ -1,8 +1,10 @@
 package com.beust.doclipse.builder;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.internal.resources.Project;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
@@ -11,6 +13,8 @@ import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.generama.defaults.QDoxPlugin;
 
 import com.beust.doclipse.DoclipsePlugin;
@@ -24,9 +28,21 @@ import com.beust.doclipse.preferences.template.TemplateElement;
  */
 public class DoclipseBuilder extends IncrementalProjectBuilder implements IResourceVisitor ,IResourceDeltaVisitor{
 	public static final String BUILDER_ID = "com.beust.doclipse.builder.DoclipseBuilder";
-	private static ClassManager classManager=new ClassManager();
-	public ClassManager getClassManager() {
-		return classManager;
+	private static Map<Project,ClassManager> classManagers=new HashMap<Project,ClassManager>(){
+		@Override
+		public ClassManager get(Object key) {
+			ClassManager cm= super.get(key);
+			if(cm==null){
+				Project project=(Project)key;
+				cm=new ClassManager(JavaCore.create(project));
+				this.put((Project) key, cm);
+			}
+			return cm;
+		}
+		
+	};
+	public ClassManager getClassManager(IProject project){
+		return classManagers.get(project);
 	}
 	public DoclipseBuilder(){
 	}
@@ -34,11 +50,11 @@ public class DoclipseBuilder extends IncrementalProjectBuilder implements IResou
 	protected IProject[] build(int kind, Map<String, String> args, IProgressMonitor monitor) throws CoreException {
 		if (kind == FULL_BUILD) {
 			this.fullBuild(monitor);
-			this.buildTemplete();
+			this.buildTemplete(null);
 		} else if (kind == IncrementalProjectBuilder.INCREMENTAL_BUILD
 				|| kind == IncrementalProjectBuilder.AUTO_BUILD) {
 			incrementalBuild(monitor);
-			this.buildTemplete();
+			this.buildTemplete(null);
 		} else if (kind == IncrementalProjectBuilder.CLEAN_BUILD) {
 			clean(monitor);
 		}
@@ -85,6 +101,7 @@ public class DoclipseBuilder extends IncrementalProjectBuilder implements IResou
 		if(javaFile==null){
 			return;
 		}
+		ClassManager classManager=classManagers.get(project);
 		PluginManager.process(doclipseProject, javaFile,classManager);
 		
 	}
@@ -93,11 +110,14 @@ public class DoclipseBuilder extends IncrementalProjectBuilder implements IResou
 	 * 最终调用
 	 * 
 	 */
-	public void buildTemplete(){
-		List<QDoxPlugin> lt=classManager.getTobeBuild();
-		for(int i=0;i<lt.size();){
-			QDoxPlugin qDoxPlugin=lt.remove(i);
-			qDoxPlugin.start();
+	public void buildTemplete(IProject project){
+		if(project==null){
+			project=this.getProject();
+			if(project==null){
+				return ;
+			}
 		}
+		ClassManager classManager=classManagers.remove(project);
+		
 	}
 }
