@@ -23,7 +23,7 @@ public abstract class AbstractTemplateEngine implements TemplateEngine {
 	}
 	@Override
 	public void generate(Writer out, Map contextObjects, String encoding, Class pluginClass) throws GeneramaException {
-		contextObjects.put("classMap", classManager.getClass());
+		contextObjects.put("project", classManager);
 		contextObjects.put("javaClass",  contextObjects.remove("metadata"));
 		try {
 			this.generate(out, contextObjects);
