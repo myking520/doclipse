@@ -31,7 +31,9 @@ public abstract class AbstractPluginBuilder {
 		FileWriterMapper fileWriterMapper=new FileWriterMapper(outdir,outFile);
 		PropertiesQDoxPropertyExpander expander = new PropertiesQDoxPropertyExpander();
 		Properties props = new Properties();
+//		props.setProperty("value", "props-test-value");
 		expander.addProperties("props", props);
+//		QDoxMetadataProvider metadataProvider = new QDoxMetadataProvider(doclipseProject.getProject().getFile(java.getText()).getLocation().toFile(), expander);
 		DefaultQDoxCapableMetadataProvider metadataProvider = new DefaultQDoxCapableMetadataProvider(doclipseProject.getProject().getFile(java.getText()).getLocation().toFile(), expander,classManager);
 		return this.build(metadataProvider, fileWriterMapper,importTemplete.getText(),classManager);
 	}
