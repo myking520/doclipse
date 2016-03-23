@@ -29,7 +29,7 @@ public class FileWriterMapper implements WriterMapper {
 			  dir.mkdirs();
 		  }
 		  File out = new File(dir, outFile);
-		  OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(out), plugin.getEncoding());
+		  OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(out),/* plugin.getEncoding()*/"UTF-8");
           return new Outcome(writer, out.toURL());
 	}
 
