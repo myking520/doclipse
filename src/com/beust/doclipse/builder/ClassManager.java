@@ -46,6 +46,9 @@ public class ClassManager {
 		expander.addProperties("props", props);
 		try {
 			IType type=	javaProject.findType(className);
+			if(type==null){
+				throw new ClassNotFoundException(className);
+			}
 			IJavaElement javaelement=type.getParent();
 			DefaultQDoxCapableMetadataProvider metadataProvider = new DefaultQDoxCapableMetadataProvider(javaelement.getResource().getLocation().toFile(), expander,this);
 			return metadataProvider.getJavaClass();
