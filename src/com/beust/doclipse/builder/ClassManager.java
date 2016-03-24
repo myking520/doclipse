@@ -14,7 +14,7 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.generama.defaults.QDoxPlugin;
 import org.xdoclet.tools.PropertiesQDoxPropertyExpander;
 
-import com.beust.doclipse.builder.plugin.DefaultQDoxCapableMetadataProvider;
+import com.beust.doclipse.doclet.DefaultQDoxCapableMetadataProvider;
 import com.thoughtworks.qdox.model.JavaClass;
 
 public class ClassManager {

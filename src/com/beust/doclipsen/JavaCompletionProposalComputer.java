@@ -6,35 +6,30 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAssistInvocationContext;
-import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jdt.ui.text.java.ContentAssistInvocationContext;
-import org.eclipse.jdt.ui.text.java.IJavaCompletionProposal;
 import org.eclipse.jdt.ui.text.java.IJavaCompletionProposalComputer;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ContextInformation;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContextInformation;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.part.FileEditorInput;
 
 import com.beust.doclipse.Attribute;
 import com.beust.doclipse.AttributeCompletionProposal;
 import com.beust.doclipse.AttributeValueCompletionProposal;
 import com.beust.doclipse.DoclipsePlugin;
-import com.beust.doclipse.DoclipseProject;
 import com.beust.doclipse.Utils;
 import com.beust.doclipse.tag.ITagFragment;
 import com.beust.doclipse.tag.Tag;
 import com.beust.doclipse.tag.TagCompletionProposal;
 import com.beust.doclipse.tag.TagFragmentFactory;
+import com.thoughtworks.qdox.model.Annotation;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaMethod;
 
 /**
  * 
@@ -181,6 +176,12 @@ public class JavaCompletionProposalComputer implements IJavaCompletionProposalCo
 	}
 
 	private static void ppp(String s) {
+		JavaClass jc=null;
+//		jc.getMethods()[0].getParameters()[0].getType().getGenericValue()
+//		jc.getFields()[0].getTagByName("").getParameters()
+//		jc.getFullyQualifiedName()
+		JavaMethod jm=null;
+		jm.getTagsByName("aa");
 		System.out.println("[DoclipseJavaDocProcessor] " + s);
 	}
 

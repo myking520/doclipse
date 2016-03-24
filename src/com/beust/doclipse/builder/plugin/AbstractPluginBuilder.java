@@ -13,6 +13,7 @@ import org.xdoclet.tools.PropertiesQDoxPropertyExpander;
 import com.beust.doclipse.DoclipseProject;
 import com.beust.doclipse.builder.ClassManager;
 import com.beust.doclipse.console.ConsoleFactory;
+import com.beust.doclipse.doclet.DefaultQDoxCapableMetadataProvider;
 import com.beust.doclipse.preferences.template.TemplateElement;
 
 public abstract class AbstractPluginBuilder {
