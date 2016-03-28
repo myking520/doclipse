@@ -1,7 +1,6 @@
 package com.beust.doclipse.doclet;
 
 import java.io.IOException;
-import java.io.StreamTokenizer;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +9,6 @@ import java.util.Map;
 
 import com.thoughtworks.qdox.model.AbstractBaseJavaEntity;
 import com.thoughtworks.qdox.model.DocletTag;
-import com.thoughtworks.qdox.model.util.TagParser;
 
 public class DefaultXDocletTag implements DocletTag {
 
