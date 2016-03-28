@@ -1,7 +1,7 @@
 package com.beust.doclipse;
 
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -45,9 +45,9 @@ public class DoclipseProject {
 
 	private static final String ALL = "<all>";
 	private static final String hasinit = "init";
-	private Map externalTags = new HashMap();
-	private Map internalTags = new HashMap();
-	private Map allTags = new HashMap();
+	private Map externalTags = new LinkedHashMap();
+	private Map internalTags = new LinkedHashMap();
+	private Map allTags = new LinkedHashMap();
 	private IProject project;
 	public IProject getProject() {
 		return project;
@@ -151,7 +151,7 @@ public class DoclipseProject {
 		this.preferences.put(SPACES_AROUND_EQUAL_SIGNS, "True");
 		this.preferences.put(SURROUND_WITH_DOUBLE_QUOTES, "True");
 		this.preferences.put(INTERNAL_CHECKED_FILES, checkedFiles);
-		Map internalFiles = new HashMap();
+		Map internalFiles = new LinkedHashMap();
 		for (int i = 0; i < checkedFilesArray.length; i++) {
 			internalFiles.put(checkedFilesArray[i], checkedFilesArray[i]);
 		}
@@ -173,7 +173,7 @@ public class DoclipseProject {
 	}
 
 	private void refreshAllTags() {
-		Map allTags = new HashMap();
+		Map allTags = new LinkedHashMap();
 		allTags.putAll(externalTags);
 		allTags.putAll(internalTags);
 		this.allTags = allTags;
@@ -197,7 +197,7 @@ public class DoclipseProject {
 	}
 
 	private Map parseTags(DefinitionFile[] files) {
-		Map result = new HashMap();
+		Map result = new LinkedHashMap();
 		for (int i = 0; i < files.length; i++) {
 			Map tags = files[i].getTags();
 			for (Iterator it = tags.keySet().iterator(); it.hasNext();) {
@@ -213,7 +213,7 @@ public class DoclipseProject {
 		String strResult = (String) preferences.get(key, null);
 		Map result = null;
 		if (!ALL.equals(strResult)) {
-			result = new HashMap();
+			result = new LinkedHashMap();
 			StringTokenizer st = new StringTokenizer(strResult);
 			while (st.hasMoreElements()) {
 				String f = st.nextToken();
@@ -248,7 +248,7 @@ public class DoclipseProject {
 	}
 
 	public void setInternalTags(Map tags) {
-		internalTags=new HashMap();
+		internalTags=new LinkedHashMap();
 		internalTags.putAll(tags);
 	}
 
