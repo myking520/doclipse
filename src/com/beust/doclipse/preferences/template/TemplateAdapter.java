@@ -59,7 +59,7 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 			engine=element;	
 		}
 		javefile=templatePage.getDoclipseProject().getTemplateElementProvider().getElementRoot().getParent(engine);
-		TemplateDialog dialog=new TemplateDialog(Display.getCurrent().getActiveShell(),javefile,engine);
+		TemplateDialog dialog=new TemplateDialog(Display.getCurrent().getActiveShell(),javefile,engine,templatePage.getDoclipseProject().getProject());
 		int code=dialog.open();
 		if(code==Window.OK){
 		templatePage.getDoclipseProject().getTemplateElementProvider().saveOrUpdate();
@@ -69,7 +69,7 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 	private void addTemplate(TreeListDialogField<TemplateElement> field){
 		List<Object> elements = field.getSelectedElements();
 		TemplateElement element=(TemplateElement) elements.get(0);
-		TemplateDialog dialog=new TemplateDialog(Display.getCurrent().getActiveShell(),element,null);
+		TemplateDialog dialog=new TemplateDialog(Display.getCurrent().getActiveShell(),element,null,templatePage.getDoclipseProject().getProject());
 		int code=dialog.open();
 		if(code==Window.OK){
 			templatePage.getDoclipseProject().getTemplateElementProvider().saveOrUpdate();
@@ -103,7 +103,7 @@ public class TemplateAdapter implements ITreeListAdapter<TemplateElement> {
 			}
 			TemplateElement fileElement=new TemplateElement(text);
 			fileElement.setKind(TemplateElement.CPE_JAVA);
-			TemplateDialog templateDialog=new TemplateDialog(Display.getCurrent().getActiveShell(), fileElement,null);
+			TemplateDialog templateDialog=new TemplateDialog(Display.getCurrent().getActiveShell(), fileElement,null,project);
 			if(templateDialog.open()!=Window.OK){
 				continue;
 			}

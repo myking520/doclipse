@@ -22,6 +22,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.ISelectionService;
+import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.internal.Workbench;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
@@ -107,6 +108,7 @@ public class DoclipseProject {
 		if (project == null) {
 			project = getProjectByEditorInput();
 		}
+		
 		return project;
 	}
 

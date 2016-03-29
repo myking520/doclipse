@@ -1,8 +1,14 @@
 package com.beust.doclipse.preferences.template.dialog;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -14,10 +20,13 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
 
 import com.beust.doclipse.preferences.template.TemplateElement;
 
@@ -28,11 +37,12 @@ public class TemplateDialog extends Dialog {
 	private TemplateElement javaElement;
 	private TemplateElement engineElement;
 	private final static String[] engines = new String[] { TemplateElement.ENGINE_JELLY, TemplateElement.ENGINE_FREEMARKER,TemplateElement.ENGINE_VELOCITY };
-
-	public TemplateDialog(Shell parentShell, TemplateElement javaElement, TemplateElement engineElement) {
+	private IProject project;
+	public TemplateDialog(Shell parentShell, TemplateElement javaElement, TemplateElement engineElement,IProject project) {
 		super(parentShell);
 		this.javaElement = javaElement;
 		this.engineElement=engineElement;
+		this.project=project;
 	}
 
 	@Override
@@ -90,12 +100,18 @@ public class TemplateDialog extends Dialog {
 		btn.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				FileDialog fdialog = new FileDialog(Display.getCurrent().getActiveShell(),SWT.SAVE);
-				String file = fdialog.open();
-				output.setText(file);
-				output.setToolTipText(file);
+//				FileDialog fdialog = new FileDialog(Display.getCurrent().getActiveShell(),SWT.SAVE);
+//				String file = fdialog.open();
+//				output.setText(file);
+//				output.setToolTipText(file);
+				ProjectFolderDialog dilaog=new ProjectFolderDialog(Display.getCurrent().getActiveShell());
+				if(dilaog.open()==Window.OK){
+					output.setText(dilaog.getPath().toString());
+					output.setToolTipText(dilaog.getPath().toString());
+				}
 			}
 		});
+	
 		return contents;
 	}
 
@@ -169,5 +185,6 @@ public class TemplateDialog extends Dialog {
 		element.setText(output.getText());
 		super.okPressed();
 	}
+
 
 }
