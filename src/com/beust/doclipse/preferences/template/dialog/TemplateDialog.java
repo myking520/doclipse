@@ -100,15 +100,15 @@ public class TemplateDialog extends Dialog {
 		btn.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-//				FileDialog fdialog = new FileDialog(Display.getCurrent().getActiveShell(),SWT.SAVE);
-//				String file = fdialog.open();
-//				output.setText(file);
-//				output.setToolTipText(file);
-				ProjectFolderDialog dilaog=new ProjectFolderDialog(Display.getCurrent().getActiveShell());
-				if(dilaog.open()==Window.OK){
-					output.setText(dilaog.getPath().toString());
-					output.setToolTipText(dilaog.getPath().toString());
-				}
+				FileDialog fdialog = new FileDialog(Display.getCurrent().getActiveShell(),SWT.SAVE);
+				String file = fdialog.open();
+				output.setText(file);
+				output.setToolTipText(file);
+//				ProjectFolderDialog dilaog=new ProjectFolderDialog(Display.getCurrent().getActiveShell());
+//				if(dilaog.open()==Window.OK){
+//					output.setText(dilaog.getPath().toString());
+//					output.setToolTipText(dilaog.getPath().toString());
+//				}
 			}
 		});
 	
